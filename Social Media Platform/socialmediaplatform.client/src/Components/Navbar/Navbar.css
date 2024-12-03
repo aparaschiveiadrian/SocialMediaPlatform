@@ -1,0 +1,72 @@
+﻿nav {
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-color: var(--primaryColor);
+    transition: 0.4s;
+    padding: 1.5rem 0;
+    box-shadow: 2px 2px 2px #f1ecf7;
+}
+
+nav.sticky {
+    position: fixed;
+    background-color: aqua;
+    z-index: 2000;
+    transition: 0.4s;
+}
+
+.mainNav {
+    max-width: 1070px;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--textColor);
+}
+
+.navbar {
+    display: flex;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.menuItem {
+    padding: 0 5px;
+}
+
+.menuLinks {
+    font-size: 1rem;
+    color: var(--textColor);
+    padding: 0 0.5rem;
+    font-weight: 300;
+}
+
+/* Content Section */
+.content {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primaryColor);
+}
+
+
+.menuLink{
+    color:var(--secondaryColor);
+}
+/* About Section */
+#about {
+    padding-top: 150px;
+}
