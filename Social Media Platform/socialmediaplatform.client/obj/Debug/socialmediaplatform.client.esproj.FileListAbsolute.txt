@@ -1,2 +1,3 @@
 C:\Users\amito\Desktop\.NetSocialMedia\SocialMediaPlatform\socialmediaplatform.client\obj\Debug\socialmediaplatform.client.esproj.CoreCompileInputs.cache
 D:\Info\Proiecte\Social Media Platform\socialmediaplatform.client\obj\Debug\socialmediaplatform.client.esproj.CoreCompileInputs.cache
+C:\Users\amito\Desktop\SMP\Social Media Platform\socialmediaplatform.client\obj\Debug\socialmediaplatform.client.esproj.CoreCompileInputs.cache

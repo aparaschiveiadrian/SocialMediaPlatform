@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "ovZ14wjZ9vAss4RSm87/CcByV8foF8nb1j/0IPmDbgQ=",
+  "Hash": "rgVhryRzXPQTp2oegn1xPIZy15zPQ/dLfxO4tLuyyC8=",
   "Source": "SocialMediaPlatform.Server",
   "BasePath": "_content/SocialMediaPlatform.Server",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "D:\\Info\\Proiecte\\Social Media Platform\\socialmediaplatform.client\\socialmediaplatform.client.esproj",
+      "Identity": "C:\\Users\\amito\\Desktop\\SMP\\Social Media Platform\\socialmediaplatform.client\\socialmediaplatform.client.esproj",
       "Version": 2,
       "Source": "socialmediaplatform.client",
       "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
@@ -19,6 +19,5 @@
     }
   ],
   "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "Assets": []
 }
