@@ -1,103 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dfb74a62-23c3-4c65-88d2-7d2d74236ad2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SocialMediaPlatform/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SocialMediaPlatform/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SocialMediaPlatform/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/config/applicationhost.config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/ProjectEvaluation/socialmediaplatform.metadata.v9.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/ProjectEvaluation/socialmediaplatform.projects.v9.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/ProjectEvaluation/socialmediaplatform.strings.v9.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/SocialMediaPlatform/v17/.futdcache.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/SocialMediaPlatform/v17/.suo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/SocialMediaPlatform/v17/DocumentLayout.backup.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/SocialMediaPlatform/v17/DocumentLayout.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/CHANGELOG.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/Controllers/WeatherForecastController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/Program.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/Properties/launchSettings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/SocialMediaPlatform.Server.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/SocialMediaPlatform.Server.csproj.user" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/SocialMediaPlatform.Server.http" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/WeatherForecast.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/appsettings.Development.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/appsettings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/bin/Debug/net8.0/Microsoft.AspNetCore.SpaProxy.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/bin/Debug/net8.0/Microsoft.OpenApi.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/bin/Debug/net8.0/SocialMediaPlatform.Server.deps.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/bin/Debug/net8.0/SocialMediaPlatform.Server.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/bin/Debug/net8.0/SocialMediaPlatform.Server.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/bin/Debug/net8.0/SocialMediaPlatform.Server.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/bin/Debug/net8.0/SocialMediaPlatform.Server.runtimeconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/bin/Debug/net8.0/appsettings.Development.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/bin/Debug/net8.0/appsettings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/bin/Debug/net8.0/spa.proxy.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/Debug/net8.0/SocialMe.456FCD10.Up2Date" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/Debug/net8.0/SocialMediaPlatform.Server.AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/Debug/net8.0/SocialMediaPlatform.Server.AssemblyInfoInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/Debug/net8.0/SocialMediaPlatform.Server.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/Debug/net8.0/SocialMediaPlatform.Server.GlobalUsings.g.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/Debug/net8.0/SocialMediaPlatform.Server.MvcApplicationPartsAssemblyInfo.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/Debug/net8.0/SocialMediaPlatform.Server.MvcApplicationPartsAssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/Debug/net8.0/SocialMediaPlatform.Server.assets.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/Debug/net8.0/SocialMediaPlatform.Server.csproj.AssemblyReference.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/Debug/net8.0/SocialMediaPlatform.Server.csproj.CoreCompileInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/Debug/net8.0/SocialMediaPlatform.Server.csproj.FileListAbsolute.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/Debug/net8.0/SocialMediaPlatform.Server.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/Debug/net8.0/SocialMediaPlatform.Server.genruntimeconfig.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/Debug/net8.0/SocialMediaPlatform.Server.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/Debug/net8.0/apphost.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/Debug/net8.0/ref/SocialMediaPlatform.Server.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/Debug/net8.0/refint/SocialMediaPlatform.Server.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/Debug/net8.0/spa.proxy.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/Debug/net8.0/staticwebassets.build.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/Debug/net8.0/staticwebassets/msbuild.build.SocialMediaPlatform.Server.props" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.SocialMediaPlatform.Server.props" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.SocialMediaPlatform.Server.props" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/SocialMediaPlatform.Server.csproj.nuget.dgspec.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/SocialMediaPlatform.Server.csproj.nuget.g.props" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/SocialMediaPlatform.Server.csproj.nuget.g.targets" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/project.assets.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/project.nuget.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/project.packagespec.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/rider.project.model.nuget.info" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.Server/obj/rider.project.restore.info" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialMediaPlatform.sln" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialmediaplatform.client/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialmediaplatform.client/CHANGELOG.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialmediaplatform.client/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialmediaplatform.client/eslint.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialmediaplatform.client/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialmediaplatform.client/nuget.config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialmediaplatform.client/obj/Debug/package.g.props" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialmediaplatform.client/obj/Debug/socialmediaplatform.client.esproj.CoreCompileInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialmediaplatform.client/obj/Debug/socialmediaplatform.client.esproj.FileListAbsolute.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialmediaplatform.client/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialmediaplatform.client/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialmediaplatform.client/public/vite.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialmediaplatform.client/socialmediaplatform.client.esproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialmediaplatform.client/src/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialmediaplatform.client/src/App.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialmediaplatform.client/src/assets/react.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialmediaplatform.client/src/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialmediaplatform.client/src/main.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialmediaplatform.client/vite.config.js" beforeDir="false" />
-    </list>
+    <list default="true" id="dfb74a62-23c3-4c65-88d2-7d2d74236ad2" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2pi5Ql3FOONXh6A8PrRTOkxFC0w" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -105,9 +20,12 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Node.js.vite.config.js.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "last_opened_file_path": "D:/Info/Proiecte/Social Media Platform",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
