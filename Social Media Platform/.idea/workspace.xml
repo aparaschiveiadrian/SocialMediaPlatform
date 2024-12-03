@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="dfb74a62-23c3-4c65-88d2-7d2d74236ad2" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,7 +25,6 @@
   "keyToString": {
     "Node.js.vite.config.js.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
     "last_opened_file_path": "D:/Info/Proiecte/Social Media Platform",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.tslint": "(autodetect)",
