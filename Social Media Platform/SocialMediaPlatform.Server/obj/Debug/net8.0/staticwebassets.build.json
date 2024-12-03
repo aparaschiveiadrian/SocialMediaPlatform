@@ -1,0 +1,24 @@
+{
+  "Version": 1,
+  "Hash": "ovZ14wjZ9vAss4RSm87/CcByV8foF8nb1j/0IPmDbgQ=",
+  "Source": "SocialMediaPlatform.Server",
+  "BasePath": "_content/SocialMediaPlatform.Server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "D:\\Info\\Proiecte\\Social Media Platform\\socialmediaplatform.client\\socialmediaplatform.client.esproj",
+      "Version": 2,
+      "Source": "socialmediaplatform.client",
+      "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
