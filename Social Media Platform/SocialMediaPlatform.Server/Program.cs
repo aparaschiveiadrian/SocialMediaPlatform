@@ -15,7 +15,19 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()  // Allow requests from any origin
+            .AllowAnyMethod()  // Allow any HTTP method (GET, POST, etc.)
+            .AllowAnyHeader(); // Allow any header
+    });
+});
+
 var app = builder.Build();
+app.UseCors("AllowAll");
 
 using (var scope = app.Services.CreateScope())
 {
