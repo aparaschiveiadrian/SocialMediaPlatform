@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\amito\\Desktop\\SMP\\Social Media Platform\\SocialMediaPlatform.Server\\SocialMediaPlatform.Server.csproj": {}
+    "D:\\Info\\Proiecte\\Social Media Platform\\SocialMediaPlatform.Server\\SocialMediaPlatform.Server.csproj": {}
   },
   "projects": {
-    "C:\\Users\\amito\\Desktop\\SMP\\Social Media Platform\\SocialMediaPlatform.Server\\SocialMediaPlatform.Server.csproj": {
+    "D:\\Info\\Proiecte\\Social Media Platform\\SocialMediaPlatform.Server\\SocialMediaPlatform.Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\amito\\Desktop\\SMP\\Social Media Platform\\SocialMediaPlatform.Server\\SocialMediaPlatform.Server.csproj",
+        "projectUniqueName": "D:\\Info\\Proiecte\\Social Media Platform\\SocialMediaPlatform.Server\\SocialMediaPlatform.Server.csproj",
         "projectName": "SocialMediaPlatform.Server",
-        "projectPath": "C:\\Users\\amito\\Desktop\\SMP\\Social Media Platform\\SocialMediaPlatform.Server\\SocialMediaPlatform.Server.csproj",
-        "packagesPath": "C:\\Users\\amito\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\amito\\Desktop\\SMP\\Social Media Platform\\SocialMediaPlatform.Server\\obj\\",
+        "projectPath": "D:\\Info\\Proiecte\\Social Media Platform\\SocialMediaPlatform.Server\\SocialMediaPlatform.Server.csproj",
+        "packagesPath": "C:\\Users\\DrDes\\.nuget\\packages\\",
+        "outputPath": "D:\\Info\\Proiecte\\Social Media Platform\\SocialMediaPlatform.Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\amito\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\DrDes\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,7 +39,7 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "direct"
+          "auditMode": "all"
         }
       },
       "frameworks": {
@@ -102,6 +102,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.11, 8.0.11]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[8.0.11, 8.0.11]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.11, 8.0.11]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.11, 8.0.11]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -110,7 +128,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
