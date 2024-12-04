@@ -7,8 +7,7 @@ const App =()=> {
         <>
             <Navbar />
             <Feed/>
-            <section style={{paddingTop: '60rem'}}>
-            </section>
+            
             <Footer />
         </>
     )
