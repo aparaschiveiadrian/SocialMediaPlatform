@@ -1,23 +1,24 @@
 {
   "Version": 1,
-  "Hash": "/KG3zBrs6r3K1pCttcfKpf8KLjwmnipsA+kslNZAQcc=",
+  "Hash": "ovZ14wjZ9vAss4RSm87/CcByV8foF8nb1j/0IPmDbgQ=",
   "Source": "SocialMediaPlatform.Server",
   "BasePath": "_content/SocialMediaPlatform.Server",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "C:\\Users\\amito\\Desktop\\SMP\\Social Media Platform\\socialmediaplatform.client\\socialmediaplatform.client.esproj",
+      "Identity": "D:\\Info\\Proiecte\\Social Media Platform\\socialmediaplatform.client\\socialmediaplatform.client.esproj",
       "Version": 2,
       "Source": "socialmediaplatform.client",
       "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
-      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishProperties": "",
       "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
       "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
-      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildProperties": "",
       "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
     }
   ],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }
