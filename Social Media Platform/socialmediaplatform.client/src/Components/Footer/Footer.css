@@ -1,5 +1,6 @@
 ﻿
 .footer {
+    margin-top: 20rem;
     background-color: var(--primaryColor);
     color: var(--textColor);
     text-align: center;
@@ -13,7 +14,7 @@
 
 .footer-logo h2 {
     font-size: 1.2rem;
-    color: var(--primaryColor);
+    color: var(--textColor);
     font-weight: bold;
 }
 
