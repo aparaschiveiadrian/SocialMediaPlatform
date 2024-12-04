@@ -338,3 +338,9 @@ C:\Users\amito\Desktop\SMP\Social Media Platform\SocialMediaPlatform.Server\obj\
 C:\Users\amito\Desktop\SMP\Social Media Platform\SocialMediaPlatform.Server\obj\Debug\net8.0\SocialMediaPlatform.Server.pdb
 C:\Users\amito\Desktop\SMP\Social Media Platform\SocialMediaPlatform.Server\obj\Debug\net8.0\SocialMediaPlatform.Server.genruntimeconfig.cache
 C:\Users\amito\Desktop\SMP\Social Media Platform\SocialMediaPlatform.Server\obj\Debug\net8.0\ref\SocialMediaPlatform.Server.dll
+D:\Info\Proiecte\Social Media Platform\SocialMediaPlatform.Server\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Info\Proiecte\Social Media Platform\SocialMediaPlatform.Server\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\Info\Proiecte\Social Media Platform\SocialMediaPlatform.Server\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\Info\Proiecte\Social Media Platform\SocialMediaPlatform.Server\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\Info\Proiecte\Social Media Platform\SocialMediaPlatform.Server\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+D:\Info\Proiecte\Social Media Platform\SocialMediaPlatform.Server\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
