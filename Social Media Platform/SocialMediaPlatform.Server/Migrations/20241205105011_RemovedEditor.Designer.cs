@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SocialMediaPlatform.Server.Data;
@@ -11,9 +12,11 @@ using SocialMediaPlatform.Server.Data;
 namespace SocialMediaPlatform.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241205105011_RemovedEditor")]
+    partial class RemovedEditor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,13 +53,13 @@ namespace SocialMediaPlatform.Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "da7e6c22-c68c-4711-a833-ff988c92986e",
+                            Id = "b4b79d16-5151-4d0b-97cf-03cf9d3d4bc0",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "b381a0b2-76a2-4753-bad5-ea60625b45d8",
+                            Id = "9fcfa14c-e964-4e7d-b2fd-02a86bb2c77e",
                             Name = "User",
                             NormalizedName = "USER"
                         });

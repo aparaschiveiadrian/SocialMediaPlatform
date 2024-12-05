@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SocialMediaPlatform.Server.Models;
 
@@ -9,7 +10,6 @@ public class Post
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public string Content { get; set; } = string.Empty;
     public string? MediaUrl { get; set; }
-
 
     // o sa aiba si user
 }

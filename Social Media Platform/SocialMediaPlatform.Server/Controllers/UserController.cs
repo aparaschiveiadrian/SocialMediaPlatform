@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Azure.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SocialMediaPlatform.Server.Dtos.Account;
 using SocialMediaPlatform.Server.Models;
+using SocialMediaPlatform.Server.Services;
 
 namespace SocialMediaPlatform.Server.Controllers;
 
@@ -9,11 +12,17 @@ namespace SocialMediaPlatform.Server.Controllers;
 public class UserController : ControllerBase
 {
     private readonly UserManager<ApplicationUser> _userManager;
-    
-    public UserController(UserManager<ApplicationUser> userManager)
+    private readonly TokenService _tokenService;
+    private readonly SignInManager<ApplicationUser> _signInManager;
+
+    public UserController(UserManager<ApplicationUser> userManager, TokenService tokenService,
+        SignInManager<ApplicationUser> signInManager)
     {
         _userManager = userManager;
+        _tokenService = tokenService;
+        _signInManager = signInManager;
     }
+
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
     {
@@ -27,7 +36,9 @@ public class UserController : ControllerBase
             var applicationUser = new ApplicationUser
             {
                 UserName = registerDto.Username,
-                Email = registerDto.Email
+                Email = registerDto.Email,
+                FirstName = registerDto.FirstName,
+                LastName = registerDto.LastName
             };
 
             // Attempt to create the user
@@ -39,7 +50,14 @@ public class UserController : ControllerBase
                 var roleResult = await _userManager.AddToRoleAsync(applicationUser, "User");
                 if (roleResult.Succeeded)
                 {
-                    return Ok("User created");
+                    return Ok(new NewUserDto
+                    {
+                        Username = applicationUser.UserName,
+                        Email = applicationUser.Email,
+                        FirstName = applicationUser.FirstName,
+                        LastName = applicationUser.LastName,
+                        Token = _tokenService.CreateToken(applicationUser)
+                    });
                 }
                 else
                 {
@@ -60,4 +78,34 @@ public class UserController : ControllerBase
         }
     }
 
+    [HttpPost("login")]
+    public async Task<IActionResult> Login(LoginDto loginDto)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+        var user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName.ToLower() == loginDto.Username.ToLower());
+
+        if (user == null)
+            return Unauthorized("Invalid username!");
+        
+        var isPasswordValid = await _userManager.CheckPasswordAsync(user, loginDto.Password);
+        if(!isPasswordValid)
+            return Unauthorized("Invalid password!");
+        
+        var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
+
+        if (!result.Succeeded)
+        {
+            return Unauthorized("Username or password is incorrect!");
+        }
+
+        return Ok(new NewUserDto
+        {
+            Username = user.UserName,
+            Email = user.Email,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Token = _tokenService.CreateToken(user)
+        });
+    }
 }
