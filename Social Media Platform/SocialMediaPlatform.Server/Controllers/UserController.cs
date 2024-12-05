@@ -109,4 +109,22 @@ public class UserController : ControllerBase
             Token = _tokenService.CreateToken(user)
         });
     }
+
+    [HttpGet]
+    [Route("/user/{userId}")]
+    public IActionResult GetUser([FromRoute] string userId)
+    {
+        var user = _userManager.Users.FirstOrDefault(x => x.Id == userId);
+        if (user == null)
+        {
+            return NotFound("User not found!");
+        }
+        return Ok(new UserDetailsDto
+        {
+            Username = user.UserName,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Description = user.Description
+        });
+    }
 }
