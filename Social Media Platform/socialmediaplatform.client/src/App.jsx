@@ -9,12 +9,13 @@ import LoginPage from "@/Pages/LoginPage/LoginPage.jsx";
 
 
 const App = () => {
+    
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="register" element={<RegisterPage />} />
                 <Route path="login" element={<LoginPage/>}/>
-                <Route path="profile/:id" element={<ProfilePage />} /> {/* Dynamic Route */}
+                <Route path="profile/:username" element={<ProfilePage />} /> {/* Dynamic Route */}
                 <Route path="/" element={
                     <>
                         <Navbar />

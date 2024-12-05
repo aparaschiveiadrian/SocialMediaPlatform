@@ -2,12 +2,12 @@
 import {useParams} from "react-router";
 import Navbar from "@/Components/Navbar/Navbar.jsx";
 const ProfilePage = () => {
-    const {id} = useParams();
+    const {username} = useParams();
     return (
         <>
             <Navbar/>
             <div>
-                {id}
+                {username}
             </div>
         </>
     )
