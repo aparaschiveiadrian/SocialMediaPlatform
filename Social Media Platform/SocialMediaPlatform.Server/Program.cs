@@ -9,7 +9,7 @@ using SocialMediaPlatform.Server.Repository;
 using SocialMediaPlatform.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-
+//la post folosim mapper
 // Add services to the container.
 
 builder.Services.AddControllers();

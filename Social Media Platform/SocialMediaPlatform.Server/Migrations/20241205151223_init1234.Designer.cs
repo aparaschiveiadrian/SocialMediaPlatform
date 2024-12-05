@@ -12,8 +12,8 @@ using SocialMediaPlatform.Server.Data;
 namespace SocialMediaPlatform.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241205105011_RemovedEditor")]
-    partial class RemovedEditor
+    [Migration("20241205151223_init1234")]
+    partial class init1234
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,13 +53,13 @@ namespace SocialMediaPlatform.Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b4b79d16-5151-4d0b-97cf-03cf9d3d4bc0",
+                            Id = "aefff31e-2b5a-44a8-8e64-5f6f7043f5cb",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "9fcfa14c-e964-4e7d-b2fd-02a86bb2c77e",
+                            Id = "318d2a07-c755-4d0c-9053-3652baa851b5",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -269,7 +269,13 @@ namespace SocialMediaPlatform.Server.Migrations
                     b.Property<string>("MediaUrl")
                         .HasColumnType("text");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Posts");
                 });
@@ -323,6 +329,22 @@ namespace SocialMediaPlatform.Server.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("SocialMediaPlatform.Server.Models.Post", b =>
+                {
+                    b.HasOne("SocialMediaPlatform.Server.Models.ApplicationUser", "User")
+                        .WithMany("Posts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("SocialMediaPlatform.Server.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618
         }

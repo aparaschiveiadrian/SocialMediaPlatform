@@ -50,13 +50,13 @@ namespace SocialMediaPlatform.Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "da7e6c22-c68c-4711-a833-ff988c92986e",
+                            Id = "aefff31e-2b5a-44a8-8e64-5f6f7043f5cb",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "b381a0b2-76a2-4753-bad5-ea60625b45d8",
+                            Id = "318d2a07-c755-4d0c-9053-3652baa851b5",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -266,7 +266,13 @@ namespace SocialMediaPlatform.Server.Migrations
                     b.Property<string>("MediaUrl")
                         .HasColumnType("text");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Posts");
                 });
@@ -320,6 +326,22 @@ namespace SocialMediaPlatform.Server.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("SocialMediaPlatform.Server.Models.Post", b =>
+                {
+                    b.HasOne("SocialMediaPlatform.Server.Models.ApplicationUser", "User")
+                        .WithMany("Posts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("SocialMediaPlatform.Server.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618
         }
