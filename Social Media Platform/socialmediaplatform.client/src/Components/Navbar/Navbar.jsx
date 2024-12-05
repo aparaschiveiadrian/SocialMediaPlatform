@@ -33,7 +33,7 @@ const Navbar = () => {
         <header>
             <nav>
                 <div className="mainNav">
-                    <a href="/home" className="logo">Militan Media</a>
+                    <a href="/" className="logo">Militan Media</a>
                     <form className="searchBar" onSubmit={handleSearch}>
                         <input
                             type="text"
