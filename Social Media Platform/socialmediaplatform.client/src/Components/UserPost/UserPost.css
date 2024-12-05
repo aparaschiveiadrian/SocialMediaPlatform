@@ -57,5 +57,11 @@
 
 .svg:hover {
     cursor: pointer;
-
+}
+.btnDisable{
+    background: none;
+    border:none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

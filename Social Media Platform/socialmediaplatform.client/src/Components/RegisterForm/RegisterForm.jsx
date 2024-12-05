@@ -3,11 +3,11 @@ import { useState } from 'react';
 
 const RegisterForm = () => {
     const [formData, setFormData] = useState({
-        username: '',
-        first_name: '',
-        last_name: '',
-        email: '',
-        password: '',
+        Username: '',
+        FirstName: '',
+        LastName: '',
+        Email: '',
+        Password: '',
     });
     const [message, setMessage] = useState(null); 
     
@@ -21,7 +21,7 @@ const RegisterForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         setMessage(null);
-
+        console.log(formData);
         try {
             const response = await fetch('http://localhost:44354/registers', {
                 method: 'POST',
@@ -35,11 +35,11 @@ const RegisterForm = () => {
             console.log('Registration successful:', data);
             
             setFormData({
-                username: '',
-                first_name: '',
-                last_name: '',
-                email: '',
-                password: '',
+                Username: '',
+                FirstName: '',
+                LastName: '',
+                Email: '',
+                Password: '',
             });
         } catch (error) {
             setMessage({ type: 'error', text: error.message });
@@ -58,7 +58,7 @@ const RegisterForm = () => {
                     <input
                         type="text"
                         id="username"
-                        name="username"
+                        name="Username"
                         className="registerInput"
                         placeholder="Enter your username"
                         value={formData.username}
@@ -71,10 +71,10 @@ const RegisterForm = () => {
                     <input
                         type="text"
                         id="first_name"
-                        name="first_name"
+                        name="FirstName"
                         className="registerInput"
                         placeholder="Enter your first name"
-                        value={formData.first_name}
+                        value={formData.FirstName}
                         onChange={handleChange}
                         required
                     />
@@ -84,10 +84,10 @@ const RegisterForm = () => {
                     <input
                         type="text"
                         id="last_name"
-                        name="last_name"
+                        name="LastName"
                         className="registerInput"
                         placeholder="Enter your last name"
-                        value={formData.last_name}
+                        value={formData.LastName}
                         onChange={handleChange}
                         required
                     />
@@ -97,10 +97,10 @@ const RegisterForm = () => {
                     <input
                         type="email"
                         id="email"
-                        name="email"
+                        name="Email"
                         className="registerInput"
                         placeholder="Enter your email"
-                        value={formData.email}
+                        value={formData.Email}
                         onChange={handleChange}
                         required
                     />
@@ -110,10 +110,10 @@ const RegisterForm = () => {
                     <input
                         type="password"
                         id="password"
-                        name="password"
+                        name="Password"
                         className="registerInput"
                         placeholder="Enter your password"
-                        value={formData.password}
+                        value={formData.Password}
                         onChange={handleChange}
                         required
                     />
