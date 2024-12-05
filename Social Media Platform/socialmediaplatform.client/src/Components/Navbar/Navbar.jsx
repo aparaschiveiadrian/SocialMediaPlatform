@@ -51,8 +51,22 @@ const Navbar = () => {
                             <a href="/home" className="menuLink">Groups</a>
                         </li>
                         <li className="menuItem">
-                            <a href="/register" className="menuLink">Register</a>
+                            {
+                                localStorage.getItem('userId') ?
+                                    (
+                                        <a
+                                            href={`/profile/${localStorage.getItem('username')}`}
+                                            className="menuLink"
+                                        >
+                                            Your Account
+                                        </a>
+                                    )
+                                    : (
+                                        <a href="/register" className="menuLink">Register</a>
+                                    )
+                            }
                         </li>
+
                     </ul>
                 </div>
             </nav>

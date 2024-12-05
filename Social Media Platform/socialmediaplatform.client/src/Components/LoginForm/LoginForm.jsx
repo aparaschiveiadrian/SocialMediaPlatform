@@ -1,10 +1,11 @@
 ﻿import '../RegisterForm/RegisterForm.css'
 import { useState } from 'react';
-
+import {redirect} from "react-router";
+//import {jwtDecode} from "jwt-decode";
 const RegisterForm = () => {
     const [formData, setFormData] = useState({
-        Username: '',
-        Password: '',
+        username: '',
+        password: '',
     });
     const [message, setMessage] = useState(null);
 
@@ -17,27 +18,43 @@ const RegisterForm = () => {
     };
     const handleSubmit = async (event) => {
         event.preventDefault();
-        setMessage(null);
-        console.log(formData);
+        setMessage(null); // Reset the message initially
+        console.log("Submitting form data:", formData);
+
         try {
-            const response = await fetch('http://localhost:44354/registers', {
+            const response = await fetch('https://localhost:44354/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formData),
             });
-            const data = await response.json();
-            setMessage({ type: 'success', text: 'Registration successful!' });
-            console.log('Registration successful:', data);
-
+            // Check if the response status is not OK (status code 2xx)
+            if (!response.ok) {
+                const errorData = await response.json(); // Try to parse error response if available
+                throw new Error(
+                    errorData?.message || `HTTP error! status: ${response.status}`
+                );
+            }
+            if(response.ok) {
+                const data = await response.json(); // Parse successful response
+                setMessage({type: 'success', text: 'Registration successful!'});
+                console.log('Registration successful:', data);
+                const userId = data.id;
+                const username = data.username;
+                localStorage.setItem("userId", userId);
+                localStorage.setItem("username", username);
+                window.location.href = '/';
+            }
+            // Reset the form
             setFormData({
-                Username: '',
-                Password: '',
+                username: '',
+                password: '',
             });
         } catch (error) {
-            setMessage({ type: 'error', text: error.message });
-            console.error('Error registering user:', error);
+            // Log detailed error and set error message
+            console.error('Error during login:', error);
+            setMessage({ type: 'error', text: error.message || 'Something went wrong!' });
         }
     };
 
@@ -52,10 +69,10 @@ const RegisterForm = () => {
                         <input
                             type="text"
                             id="username"
-                            name="Username"
+                            name="username"
                             className="registerInput"
                             placeholder="Enter your username"
-                            value={formData.Username}
+                            value={formData.username}
                             onChange={handleChange}
                             required
                         />
@@ -65,10 +82,10 @@ const RegisterForm = () => {
                         <input
                             type="password"
                             id="password"
-                            name="Password"
+                            name="password"
                             className="registerInput"
                             placeholder="Enter your password"
-                            value={formData.Password}
+                            value={formData.password}
                             onChange={handleChange}
                             required
                         />
