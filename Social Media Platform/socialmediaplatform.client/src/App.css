@@ -1,9 +1,9 @@
 ﻿:root {
     --textColor: #e8eefc;
     --backgroundColor: #040c1c;
-    --primaryColor: #497cec;
-    --secondaryColor: #5a158e;
-    --accentColor: #ba23de;
+    --primaryColor: #0653F8FF;
+    --secondaryColor: #b4d2e4;
+    --accentColor: #9cc2ff;
 }
 * {
     margin: 0;
@@ -14,4 +14,26 @@ body {
     min-height: 100vh;
     background-color: var(--backgroundColor);
     font-family: "Roboto", sans-serif;
+}
+.headline{
+    color: var(--textColor);
+    font-weight: 500;
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+.btn {
+    font-size: 1.2rem;
+    border-radius: 0.1rem;
+    border: solid white 1px;
+    padding: 0.5rem 1rem;
+    background: none;
+    color: var(--textColor);
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    cursor: pointer;
+    background-color: var(--accentColor);
+    color: var(--backgroundColor);
+    transform: scale(1.05); 
 }

@@ -49,6 +49,9 @@ const RegisterForm = () => {
 
     return (
         <section className="registerForm">
+            <div className="registerContainer">
+            <span className="headline">Register</span>
+                <hr className="postDivider" />
             <form className="userInfoContainer" onSubmit={handleSubmit}>
                 <div className="userInfoItem">
                     <label htmlFor="username">Username</label>
@@ -56,7 +59,7 @@ const RegisterForm = () => {
                         type="text"
                         id="username"
                         name="username"
-                        className="postInput"
+                        className="registerInput"
                         placeholder="Enter your username"
                         value={formData.username}
                         onChange={handleChange}
@@ -69,7 +72,7 @@ const RegisterForm = () => {
                         type="text"
                         id="first_name"
                         name="first_name"
-                        className="postInput"
+                        className="registerInput"
                         placeholder="Enter your first name"
                         value={formData.first_name}
                         onChange={handleChange}
@@ -82,7 +85,7 @@ const RegisterForm = () => {
                         type="text"
                         id="last_name"
                         name="last_name"
-                        className="postInput"
+                        className="registerInput"
                         placeholder="Enter your last name"
                         value={formData.last_name}
                         onChange={handleChange}
@@ -95,7 +98,7 @@ const RegisterForm = () => {
                         type="email"
                         id="email"
                         name="email"
-                        className="postInput"
+                        className="registerInput"
                         placeholder="Enter your email"
                         value={formData.email}
                         onChange={handleChange}
@@ -108,14 +111,14 @@ const RegisterForm = () => {
                         type="password"
                         id="password"
                         name="password"
-                        className="postInput"
+                        className="registerInput"
                         placeholder="Enter your password"
                         value={formData.password}
                         onChange={handleChange}
                         required
                     />
                 </div>
-                <button type="submit" className="submitButton">
+                <button type="submit" className="btn">
                     Register
                 </button>
                 {message && (
@@ -128,6 +131,7 @@ const RegisterForm = () => {
                     </p>
                 )}
             </form>
+            </div>
         </section>
     );
 };

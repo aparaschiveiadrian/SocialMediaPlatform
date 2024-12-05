@@ -13,7 +13,7 @@
 
 nav.sticky {
     position: fixed;
-    background-color: rgb(4, 9, 34);
+    background-color: rgb(6, 83, 248);
     box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
 }
 
@@ -44,12 +44,15 @@ nav.sticky {
     display: flex;
     align-items: center;
     gap: 0.4rem;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.41);
     padding: 0.3rem 0.6rem;
     border-radius: 0.2rem;
     flex-grow: 1;
     max-width: 500px;
     min-width: 180px;
+}
+.searchInput::placeholder{
+    color: var(--backgroundColor);
 }
 
 .searchInput {
