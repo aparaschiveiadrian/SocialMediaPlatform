@@ -25,11 +25,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             },
             new IdentityRole
             {
-                Name = "Editor",
-                NormalizedName = "EDITOR"
-            },
-            new IdentityRole
-            {
                 Name = "User",
                 NormalizedName = "USER"
             }

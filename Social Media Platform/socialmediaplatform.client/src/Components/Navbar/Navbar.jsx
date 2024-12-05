@@ -45,13 +45,13 @@ const Navbar = () => {
                     </form>
                     <ul className="navbar">
                         <li className="menuItem">
-                            <a href="/home" className="menuLink">Feed</a>
+                            <a href="/" className="menuLink">Feed</a>
                         </li>
                         <li className="menuItem">
                             <a href="/home" className="menuLink">Groups</a>
                         </li>
                         <li className="menuItem">
-                            <a href="/home" className="menuLink">Register</a>
+                            <a href="/register" className="menuLink">Register</a>
                         </li>
                     </ul>
                 </div>
