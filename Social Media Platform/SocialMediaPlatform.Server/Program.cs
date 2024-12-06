@@ -9,7 +9,7 @@ using SocialMediaPlatform.Server.Repository;
 using SocialMediaPlatform.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-
+//la post folosim mapper
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -60,34 +60,39 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = options.DefaultChallengeScheme = options.DefaultForbidScheme =
-        options.DefaultScheme = options.DefaultSignInScheme =
+        options.DefaultScheme = options.DefaultSignInScheme = 
             options.DefaultSignOutScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
-        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidIssuer = builder.Configuration["JWT:Issuer"],
         ValidateAudience = true,
-        ValidAudience = builder.Configuration["Jwt:Audience"],
+        ValidateIssuerSigningKey = true,
+        ValidateLifetime = true,
+        ValidAudience = builder.Configuration["JWT:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(
-            System.Text.Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SigningKey"]))
+            System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"]))
     };
 });
 
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", policy =>
+    options.AddPolicy("AllowSpecificOrigin", builder =>
     {
-        policy.AllowAnyOrigin() // Allow requests from any origin
-            .AllowAnyMethod() // Allow any HTTP method (GET, POST, etc.)
-            .AllowAnyHeader(); // Allow any header
+        builder.WithOrigins("https://localhost:5174")  // Specify the frontend origin
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();  // Allow credentials (cookies)
     });
 });
 
 var app = builder.Build();
-app.UseCors("AllowAll");
+app.UseCors("AllowSpecificOrigin");
+
+
 
 using (var scope = app.Services.CreateScope())
 {
@@ -111,8 +116,9 @@ Console.WriteLine($"Issuer: {builder.Configuration["Jwt:Issuer"]}");
 Console.WriteLine($"Audience: {builder.Configuration["Jwt:Audience"]}");
 Console.WriteLine($"Key: {builder.Configuration["Jwt:SecurityKey"]}");
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
+
 
 
 app.MapControllers();

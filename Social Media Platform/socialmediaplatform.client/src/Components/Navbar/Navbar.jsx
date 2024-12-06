@@ -1,4 +1,6 @@
 ﻿import './Navbar.css';
+import Cookies from "js-cookie";
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const stickyNav = () => {
@@ -17,18 +19,18 @@ const Navbar = () => {
 
     const handleSearch = (e) => {
         e.preventDefault();
-        const searchTerm = e.target.value; 
-        console.log(`Searching for: ${searchTerm}`); 
+        const searchTerm = e.target.value;
+        console.log(`Searching for: ${searchTerm}`);
     };
 
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
-            e.preventDefault(); 
-            const searchTerm = e.target.value; 
-            console.log(`Searching for: ${searchTerm}`); 
+            e.preventDefault();
+            const searchTerm = e.target.value;
+            console.log(`Searching for: ${searchTerm}`);
         }
     };
-
+    const authToken = Cookies.get("authToken");
     return (
         <header>
             <nav>
@@ -51,20 +53,15 @@ const Navbar = () => {
                             <a href="/home" className="menuLink">Groups</a>
                         </li>
                         <li className="menuItem">
-                            {
-                                localStorage.getItem('userId') ?
-                                    (
-                                        <a
-                                            href={`/profile/${localStorage.getItem('username')}`}
-                                            className="menuLink"
-                                        >
-                                            Your Account
-                                        </a>
-                                    )
-                                    : (
-                                        <a href="/register" className="menuLink">Register</a>
-                                    )
-                            }
+                            {authToken ? (
+                                <Link to={`/profile/${authToken}`} className="menuLink">
+                                    Your Account
+                                </Link>
+                            ) : (
+                                <Link to="/register" className="menuLink">
+                                    Register
+                                </Link>
+                            )}
                         </li>
 
                     </ul>

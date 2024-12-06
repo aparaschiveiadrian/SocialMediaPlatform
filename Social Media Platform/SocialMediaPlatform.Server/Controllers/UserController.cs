@@ -81,6 +81,7 @@ public class UserController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginDto loginDto)
     {
+        
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         var user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName.ToLower() == loginDto.Username.ToLower());
@@ -98,7 +99,15 @@ public class UserController : ControllerBase
         {
             return Unauthorized("Username or password is incorrect!");
         }
-
+        var token = _tokenService.CreateToken(user);
+        HttpContext.Response.Cookies.Append("authToken", token, new CookieOptions
+        {
+            HttpOnly = false,
+            Secure = true,
+            SameSite = SameSiteMode.Strict,
+            Expires = DateTimeOffset.UtcNow.AddDays(1)
+        });
+        
         return Ok(new NewUserDto
         {
             Id = user.Id,
@@ -106,7 +115,6 @@ public class UserController : ControllerBase
             Email = user.Email,
             FirstName = user.FirstName,
             LastName = user.LastName,
-            Token = _tokenService.CreateToken(user)
         });
     }
 

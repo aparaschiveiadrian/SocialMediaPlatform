@@ -11,5 +11,6 @@ public class Post
     public string Content { get; set; } = string.Empty;
     public string? MediaUrl { get; set; }
 
-    // o sa aiba si user
+    public string UserId { get; set; }
+    public virtual ApplicationUser User { get; set; } 
 }

@@ -22,4 +22,11 @@ public class PostRepository
     {
         return _context.Posts;
     }
+
+    public Post? CreatePost(Post post)
+    {
+        _context.Posts.Add(post);
+        _context.SaveChanges();
+        return post;
+    }
 }

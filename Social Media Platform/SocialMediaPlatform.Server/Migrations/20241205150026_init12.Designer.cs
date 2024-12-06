@@ -12,8 +12,8 @@ using SocialMediaPlatform.Server.Data;
 namespace SocialMediaPlatform.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241204153316_SeedRole")]
-    partial class SeedRole
+    [Migration("20241205150026_init12")]
+    partial class init12
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,19 +53,13 @@ namespace SocialMediaPlatform.Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "56d7e5f5-9cab-4a2f-ac37-7f0809a3b348",
+                            Id = "b8a6447b-e6a0-4c7f-8ea1-18d54c06e6c5",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "cf00cc32-7cfd-4e2b-bd1b-c1d4c8e660bc",
-                            Name = "Editor",
-                            NormalizedName = "EDITOR"
-                        },
-                        new
-                        {
-                            Id = "1335da30-425d-4911-b114-acb6075b6629",
+                            Id = "f6f61bf7-dfa5-469e-9239-50e54288dcf2",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -189,12 +183,24 @@ namespace SocialMediaPlatform.Server.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("text");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("boolean");
@@ -263,7 +269,13 @@ namespace SocialMediaPlatform.Server.Migrations
                     b.Property<string>("MediaUrl")
                         .HasColumnType("text");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Posts");
                 });
@@ -317,6 +329,22 @@ namespace SocialMediaPlatform.Server.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("SocialMediaPlatform.Server.Models.Post", b =>
+                {
+                    b.HasOne("SocialMediaPlatform.Server.Models.ApplicationUser", "User")
+                        .WithMany("Posts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("SocialMediaPlatform.Server.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618
         }
