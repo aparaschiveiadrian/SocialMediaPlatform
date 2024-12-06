@@ -1,4 +1,6 @@
 ﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SocialMediaPlatform.Server.Dtos.Post;
@@ -43,9 +45,10 @@ public class PostController : ControllerBase
 
     [HttpPost]
     [Route("post/create")]
+    [Authorize]
     public IActionResult CreatePost([FromBody] CreatePostDto postDto)
     {
-        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var userId = _userManager.GetUserId(User);
         if (userId == null)
         {
             return Unauthorized(userId);

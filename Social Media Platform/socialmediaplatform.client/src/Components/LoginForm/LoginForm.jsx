@@ -1,5 +1,6 @@
 ﻿import '../RegisterForm/RegisterForm.css'
 import { useState } from 'react';
+import Cookies from 'js-cookie';
 import {redirect} from "react-router";
 //import {jwtDecode} from "jwt-decode";
 const RegisterForm = () => {
@@ -19,7 +20,6 @@ const RegisterForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         setMessage(null); // Reset the message initially
-        console.log("Submitting form data:", formData);
 
         try {
             const response = await fetch('https://localhost:44354/login', {
@@ -28,35 +28,38 @@ const RegisterForm = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formData),
+                credentials: 'include'
             });
-            // Check if the response status is not OK (status code 2xx)
+
             if (!response.ok) {
-                const errorData = await response.json(); // Try to parse error response if available
-                throw new Error(
-                    errorData?.message || `HTTP error! status: ${response.status}`
-                );
+                const errorData = await response.json();
+                throw new Error(errorData?.message || `HTTP error! status: ${response.status}`);
             }
-            if(response.ok) {
-                const data = await response.json(); // Parse successful response
-                setMessage({type: 'success', text: 'Registration successful!'});
-                console.log('Registration successful:', data);
-                const userId = data.id;
-                const username = data.username;
-                localStorage.setItem("userId", userId);
-                localStorage.setItem("username", username);
-                window.location.href = '/';
-            }
-            // Reset the form
-            setFormData({
-                username: '',
-                password: '',
-            });
+
+            const data = await response.json(); // Parse successful response
+            Cookies.set('userId', data.id, { expires: 1, secure: true, sameSite: 'Strict' });
+            Cookies.set('username', data.username, { expires: 1, secure: true, sameSite: 'Strict' });
+            Cookies.set('firstname', data.firstName, { expires: 1, secure: true, sameSite: 'Strict' }); // Expires in 1 day
+            Cookies.set('lastname', data.lastName, { expires: 1, secure: true, sameSite: 'Strict' });
+            Cookies.set('email', data.email, { expires: 1, secure: true, sameSite: 'Strict' });
+
+
+
+
+            console.log(data);
+
+            setMessage({ type: 'success', text: 'Login successful!' });
+            console.log('Login successful:', data);
+
+            // Redirect the user to another page (home or dashboard)
+            window.location.href = '/';
+
         } catch (error) {
-            // Log detailed error and set error message
             console.error('Error during login:', error);
             setMessage({ type: 'error', text: error.message || 'Something went wrong!' });
         }
     };
+
 
     return (
         <section className="registerForm">

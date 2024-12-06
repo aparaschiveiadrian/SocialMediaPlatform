@@ -7,8 +7,9 @@ const ProfilePage = () => {
     const getUser = async () => {
 
         const userId = localStorage.getItem("userId");
+        
         try {
-            const response = await fetch(`https://localhost:44354/user/${userId}`);
+            const response = await fetch(`https://localhost:44354/user/ee542cca-2d79-46bf-875d-2d9313f3ce43}`);
             if (!response.ok) {
                 const errorData = await response.json(); // Try to parse error response if available
                 throw new Error(

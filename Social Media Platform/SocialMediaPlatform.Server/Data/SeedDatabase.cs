@@ -20,6 +20,7 @@ public static class SeedDatabase
                  PasswordHash = "AQAAAAIAAYagAAAAEIH+Kcxg/qOA0mgJgrVb3NnEfoUaL5kvk3F/a7zXjr6WwaX6aYVYE8Tpkfeg+5AguA=="
             }
             );
+        context.SaveChanges();
         context.Posts.AddRange(
             new Post
             {
