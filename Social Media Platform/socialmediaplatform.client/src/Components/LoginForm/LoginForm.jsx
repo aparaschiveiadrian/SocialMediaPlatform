@@ -1,15 +1,19 @@
 ﻿import '../RegisterForm/RegisterForm.css'
 import { useState } from 'react';
 import Cookies from 'js-cookie';
-import {redirect} from "react-router";
+import { useNavigate } from 'react-router-dom';
 //import {jwtDecode} from "jwt-decode";
+
 const RegisterForm = () => {
     const [formData, setFormData] = useState({
         username: '',
         password: '',
     });
     const [message, setMessage] = useState(null);
-
+    const navigate = useNavigate();
+    const navigateTo =(path)=>{
+        navigate(path);
+    }
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData((prevData) => ({
@@ -33,26 +37,23 @@ const RegisterForm = () => {
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData?.message || `HTTP error! status: ${response.status}`);
+                console.log(errorData);
             }
+            if(response.ok) {
+                const data = await response.json();
+                Cookies.set('userId', data.id, { expires: 1, secure: true, sameSite: 'Strict' });
+                Cookies.set('username', data.username, { expires: 1, secure: true, sameSite: 'Strict' });
+                Cookies.set('firstname', data.firstName, { expires: 1, secure: true, sameSite: 'Strict' }); // Expires in 1 day
+                Cookies.set('lastname', data.lastName, { expires: 1, secure: true, sameSite: 'Strict' });
+                Cookies.set('email', data.email, { expires: 1, secure: true, sameSite: 'Strict' });
+                console.log(data);
 
-            const data = await response.json(); // Parse successful response
-            Cookies.set('userId', data.id, { expires: 1, secure: true, sameSite: 'Strict' });
-            Cookies.set('username', data.username, { expires: 1, secure: true, sameSite: 'Strict' });
-            Cookies.set('firstname', data.firstName, { expires: 1, secure: true, sameSite: 'Strict' }); // Expires in 1 day
-            Cookies.set('lastname', data.lastName, { expires: 1, secure: true, sameSite: 'Strict' });
-            Cookies.set('email', data.email, { expires: 1, secure: true, sameSite: 'Strict' });
+                setMessage({ type: 'success', text: 'Login successful!' });
+                console.log('Login successful:', data);
 
+                navigateTo('/');
 
-
-
-            console.log(data);
-
-            setMessage({ type: 'success', text: 'Login successful!' });
-            console.log('Login successful:', data);
-
-            // Redirect the user to another page (home or dashboard)
-            window.location.href = '/';
+            }
 
         } catch (error) {
             console.error('Error during login:', error);
@@ -98,11 +99,9 @@ const RegisterForm = () => {
                     </button>
                     {message && (
                         <p
-                            className={`message ${
-                                message.type === 'success' ? 'successMessage' : 'errorMessage'
-                            }`}
+                            className={`${message.type === 'success' ? 'successMessage' : 'errorMessage'}`}
                         >
-                            {message.text}
+                            {message.type === "success" ? message.text="Login successful!" : message.text="Username or password incorrect!"}
                         </p>
                     )}
                 </form>

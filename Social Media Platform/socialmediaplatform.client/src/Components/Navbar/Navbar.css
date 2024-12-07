@@ -44,7 +44,7 @@ nav.sticky {
     display: flex;
     align-items: center;
     gap: 0.4rem;
-    background-color: rgba(255, 255, 255, 0.41);
+    background-color: rgba(255, 255, 255, 0.84);
     padding: 0.3rem 0.6rem;
     border-radius: 0.2rem;
     flex-grow: 1;
@@ -59,10 +59,13 @@ nav.sticky {
     flex: 1;
     border: none;
     background: transparent;
-    color: var(--textColor);
+    color: var(--backgroundColor);
     font-size: 0.9rem;
     outline: none;
     font-style: italic;
+}
+.searchInput:focus {
+    font-style: normal;
 }
 
 .navbar {

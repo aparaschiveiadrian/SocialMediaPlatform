@@ -2,14 +2,17 @@
 import {useParams} from "react-router";
 import Navbar from "@/Components/Navbar/Navbar.jsx";
 import {useEffect} from "react";
+import Cookies from "js-cookie";
+import {jwtDecode} from "jwt-decode";
 const ProfilePage = () => {
     const {username} = useParams();
     const getUser = async () => {
-
-        const userId = localStorage.getItem("userId");
         
+        const token = Cookies.get("authToken");
         try {
-            const response = await fetch(`https://localhost:44354/user/ee542cca-2d79-46bf-875d-2d9313f3ce43}`);
+            const decoded = jwtDecode(token);
+            const userId = decoded.sub;
+            const response = await fetch(`https://localhost:44354/user/${userId}`);
             if (!response.ok) {
                 const errorData = await response.json(); // Try to parse error response if available
                 throw new Error(

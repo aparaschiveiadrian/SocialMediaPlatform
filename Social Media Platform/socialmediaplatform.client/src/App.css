@@ -3,7 +3,7 @@
     --backgroundColor: #040c1c;
     --primaryColor: #0653F8FF;
     --secondaryColor: #b4d2e4;
-    --accentColor: #9cc2ff;
+    --accentColor: #cbeae2;
 }
 * {
     margin: 0;
@@ -29,6 +29,7 @@ body {
     background: none;
     color: var(--textColor);
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    text-transform: uppercase;
 }
 
 .btn:hover {
@@ -36,4 +37,11 @@ body {
     background-color: var(--accentColor);
     color: var(--backgroundColor);
     transform: scale(1.05); 
+    font-weight: 600;
+}
+.errorMessage {
+    color: #f82828;
+}
+a{
+    cursor: pointer;
 }
