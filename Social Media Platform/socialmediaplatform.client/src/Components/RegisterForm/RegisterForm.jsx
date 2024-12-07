@@ -1,13 +1,14 @@
 ﻿import './RegisterForm.css';
 import { useState } from 'react';
+import {Link} from "react-router-dom";
 
 const RegisterForm = () => {
     const [formData, setFormData] = useState({
-        Username: '',
-        FirstName: '',
-        LastName: '',
-        Email: '',
-        Password: '',
+        username: '',
+        firstname: '',
+        lastname: '',
+        email: '',
+        password: '',
     });
     const [message, setMessage] = useState(null); 
     
@@ -23,7 +24,7 @@ const RegisterForm = () => {
         setMessage(null);
         console.log(formData);
         try {
-            const response = await fetch('http://localhost:44354/registers', {
+            const response = await fetch('https://localhost:44354/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -35,11 +36,11 @@ const RegisterForm = () => {
             console.log('Registration successful:', data);
             
             setFormData({
-                Username: '',
-                FirstName: '',
-                LastName: '',
-                Email: '',
-                Password: '',
+                username: '',
+                firstName: '',
+                lastName: '',
+                email: '',
+                password: '',
             });
         } catch (error) {
             setMessage({ type: 'error', text: error.message });
@@ -52,85 +53,90 @@ const RegisterForm = () => {
             <div className="registerContainer">
             <span className="headline">Register</span>
                 <hr className="postDivider" />
-            <form className="userInfoContainer" onSubmit={handleSubmit}>
-                <div className="userInfoItem">
-                    <label htmlFor="username">Username</label>
-                    <input
-                        type="text"
-                        id="username"
-                        name="Username"
-                        className="registerInput"
-                        placeholder="Enter your username"
-                        value={formData.username}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="userInfoItem">
-                    <label htmlFor="first_name">First Name</label>
-                    <input
-                        type="text"
-                        id="first_name"
-                        name="FirstName"
-                        className="registerInput"
-                        placeholder="Enter your first name"
-                        value={formData.FirstName}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="userInfoItem">
-                    <label htmlFor="last_name">Last Name</label>
-                    <input
-                        type="text"
-                        id="last_name"
-                        name="LastName"
-                        className="registerInput"
-                        placeholder="Enter your last name"
-                        value={formData.LastName}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="userInfoItem">
-                    <label htmlFor="email">Email Address</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="Email"
-                        className="registerInput"
-                        placeholder="Enter your email"
-                        value={formData.Email}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="userInfoItem">
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="Password"
-                        className="registerInput"
-                        placeholder="Enter your password"
-                        value={formData.Password}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <button type="submit" className="btn">
-                    Register
-                </button>
-                {message && (
-                    <p
-                        className={`message ${
-                            message.type === 'success' ? 'successMessage' : 'errorMessage'
-                        }`}
-                    >
-                        {message.text}
-                    </p>
-                )}
-            </form>
+                <form className="userInfoContainer" onSubmit={handleSubmit}>
+                    <div className="userInfoItem">
+                        <label htmlFor="username">Username</label>
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            className="registerInput"
+                            placeholder="Enter your username"
+                            value={formData.username}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className="userInfoItem">
+                        <label htmlFor="first_name">First Name</label>
+                        <input
+                            type="text"
+                            id="first_name"
+                            name="firstname"
+                            className="registerInput"
+                            placeholder="Enter your first name"
+                            value={formData.FirstName}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className="userInfoItem">
+                        <label htmlFor="last_name">Last Name</label>
+                        <input
+                            type="text"
+                            id="last_name"
+                            name="lastname"
+                            className="registerInput"
+                            placeholder="Enter your last name"
+                            value={formData.LastName}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className="userInfoItem">
+                        <label htmlFor="email">Email Address</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            className="registerInput"
+                            placeholder="Enter your email"
+                            value={formData.Email}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className="userInfoItem">
+                        <label htmlFor="password">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            className="registerInput"
+                            placeholder="Enter your password"
+                            value={formData.Password}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <hr className="postDivider"/>
+                    <Link to={`/login`} className="menuLink">
+                        Already have an account?
+                    </Link>
+                    <hr className="postDivider"/>
+                    <button type="submit" className="btn">
+                        Register
+                    </button>
+                    {message && (
+                        <p
+                            className={`message ${
+                                message.type === 'success' ? 'successMessage' : 'errorMessage'
+                            }`}
+                        >
+                            {message.text}
+                        </p>
+                    )}
+                </form>
             </div>
         </section>
     );

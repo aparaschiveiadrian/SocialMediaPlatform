@@ -1,69 +1,81 @@
 ﻿import './Navbar.css';
 import Cookies from "js-cookie";
 import { Link } from 'react-router-dom';
+import { useEffect } from "react";
 
 const Navbar = () => {
-    const stickyNav = () => {
-        let headerHeight = document.querySelector('header').offsetHeight;
-        let navbar = document.querySelector('nav');
-        let scrollValue = window.scrollY;
+    useEffect(() => {
+        const stickyNav = () => {
+            const headerHeight = document.querySelector("header")?.offsetHeight || 0;
+            const navbar = document.querySelector("nav");
+            if (window.scrollY > headerHeight) {
+                navbar?.classList.add("sticky");
+            } else {
+                navbar?.classList.remove("sticky");
+            }
+        };
 
-        if (scrollValue > headerHeight) {
-            navbar.classList.add('sticky');
-        } else {
-            navbar.classList.remove('sticky');
-        }
-    };
+        window.addEventListener("scroll", stickyNav);
 
-    window.addEventListener('scroll', stickyNav);
+        return () => {
+            window.removeEventListener("scroll", stickyNav);
+        };
+    }, []);
 
-    const handleSearch = (e) => {
-        e.preventDefault();
-        const searchTerm = e.target.value;
-        console.log(`Searching for: ${searchTerm}`);
-    };
-
-    const handleKeyPress = (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            const searchTerm = e.target.value;
-            console.log(`Searching for: ${searchTerm}`);
-        }
-    };
     const authToken = Cookies.get("authToken");
+    const userName = Cookies.get("username");
+
+    const logOut = () => {
+        Object.keys(Cookies.get()).forEach((cookie) => {
+            Cookies.remove(cookie);
+        });
+
+        window.location.reload();
+    };
+
     return (
         <header>
             <nav>
                 <div className="mainNav">
-                    <a href="/" className="logo">Militan Media</a>
-                    <form className="searchBar" onSubmit={handleSearch}>
+                    <Link to="/" className="logo">Militan Media</Link>
+
+                    <form className="searchBar">
                         <input
                             type="text"
                             name="searchInput"
                             placeholder="Search users..."
                             className="searchInput"
-                            onKeyDown={handleKeyPress}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    e.preventDefault();
+                                    console.log(`Searching for: ${e.target.value}`);
+                                }
+                            }}
                         />
                     </form>
+
                     <ul className="navbar">
                         <li className="menuItem">
-                            <a href="/" className="menuLink">Feed</a>
+                            <Link to="/" className="menuLink">Home</Link>
                         </li>
                         <li className="menuItem">
-                            <a href="/home" className="menuLink">Groups</a>
+                            <Link to="/home" className="menuLink">Groups</Link>
                         </li>
-                        <li className="menuItem">
-                            {authToken ? (
-                                <Link to={`/profile/${authToken}`} className="menuLink">
-                                    Your Account
-                                </Link>
-                            ) : (
-                                <Link to="/register" className="menuLink">
-                                    Register
-                                </Link>
-                            )}
-                        </li>
-
+                        {authToken ? (
+                            <>
+                                <li className="menuItem">
+                                    <Link to={`/profile/${userName}`} className="menuLink">{userName}</Link>
+                                </li>
+                                <li className="menuItem">
+                                    <a className="menuLink" onClick={logOut}>Logout
+                                    </a>
+                                </li>
+                            </>
+                        ) : (
+                            <li className="menuItem">
+                                <Link to="/register" className="menuLink">Sign in</Link>
+                            </li>
+                        )}
                     </ul>
                 </div>
             </nav>
