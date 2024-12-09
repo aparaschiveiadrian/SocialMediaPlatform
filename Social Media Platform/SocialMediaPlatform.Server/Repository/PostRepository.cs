@@ -1,4 +1,5 @@
 ﻿using SocialMediaPlatform.Server.Data;
+using SocialMediaPlatform.Server.Dtos.Post;
 using SocialMediaPlatform.Server.Models;
 
 namespace SocialMediaPlatform.Server.Repository;
@@ -18,9 +19,28 @@ public class PostRepository
         return post;
     }
 
-    public IEnumerable<Post> GetAllPosts()
+    // public IEnumerable<Post> GetAllPosts()
+    // {
+    //     return _context.Posts;
+    // }
+
+    public List<PostWithUserDto> GetAllPostsWithUsers()
     {
-        return _context.Posts;
+        var postsWithUsers = (from post in _context.Posts
+            join user in _context.Users
+                on post.UserId equals user.Id
+            select new PostWithUserDto
+            {
+                Id = post.Id,
+                ContentType = post.ContentType,
+                CreatedAt = post.CreatedAt,
+                Content = post.Content,
+                MediaUrl = post.MediaUrl,
+                UserId = post.UserId,
+                Username = user.UserName
+            }).ToList();
+
+        return postsWithUsers;
     }
 
     public Post? CreatePost(Post post)

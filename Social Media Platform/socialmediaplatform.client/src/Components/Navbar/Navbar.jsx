@@ -26,9 +26,10 @@ const Navbar = () => {
     const username = localStorage.getItem("username");
 
     const logOut = () => {
-        Object.keys(Cookies.get()).forEach((cookie) => {
-            Cookies.remove(cookie);
-        });
+            
+            Object.keys(localStorage).forEach((key) => {
+                localStorage.removeItem(key);
+            })
 
         window.location.reload();
     };

@@ -23,7 +23,7 @@ const RegisterForm = () => {
     };
     const handleSubmit = async (event) => {
         event.preventDefault();
-        setMessage(null); // Reset the message initially
+        setMessage(null); 
 
         try {
             const response = await fetch('https://localhost:44354/login', {
