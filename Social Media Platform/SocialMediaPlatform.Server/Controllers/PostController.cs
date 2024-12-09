@@ -39,7 +39,11 @@ public class PostController : ControllerBase
     [Route("posts")]
     public IActionResult GetPosts()
     {
-        var posts = _postRepo.GetAllPosts();
+        var posts = _postRepo.GetAllPostsWithUsers();
+        if (posts == null || !posts.Any())
+        {
+            return NotFound();
+        }
         return Ok(posts);
     }
 

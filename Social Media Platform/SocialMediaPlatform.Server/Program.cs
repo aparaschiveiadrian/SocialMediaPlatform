@@ -82,10 +82,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin", builder =>
     {
-        builder.WithOrigins("https://localhost:5174")  // Specify the frontend origin
+        builder.WithOrigins("https://localhost:5174")  
             .AllowAnyHeader()
             .AllowAnyMethod()
-            .AllowCredentials();  // Allow credentials (cookies)
+            .AllowCredentials();  
     });
 });
 

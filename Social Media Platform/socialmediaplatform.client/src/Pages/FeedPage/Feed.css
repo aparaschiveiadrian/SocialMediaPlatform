@@ -1,0 +1,126 @@
+.containerFeed {
+    padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.globalPostsInfo {
+    color: var(--textColor);
+    font-size: 1.4rem;
+}
+
+.containerPosts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+    max-width: 600px;
+}
+
+.post {
+    padding: 2rem;
+    border-radius: 0.5rem;
+    background: rgba(2, 38, 51, 0.56);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    transition:  box-shadow 0.3s ease-in-out;
+}
+.post:hover {
+    box-shadow: 0 0 18px 0 rgba(83, 133, 236, 0.87);
+}
+
+.postDate {
+    font-size: 0.8rem;
+    color: gray;
+}
+
+.postContent {
+    font-size: 1rem;
+    color: var(--textColor);
+    line-height: 1.5;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.postInput {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    resize: none;
+    margin-top: 10px;
+    font-family: inherit;
+    background: rgba(16, 150, 198, 0.07);
+    border: none;
+    color: var(--textColor);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.postInput:focus {
+    border-color: var(--accentColor);
+    outline: none;
+    box-shadow: 0 0 2px rgba(130, 166, 236, 0.5);
+}
+.userTag{
+    color: #5a8dfb;
+    display: inline;
+}
+.userTag:hover{
+    color: var(--textColor);
+}
+.postDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;  
+    gap: 0.2rem;
+}
+
+.commentAddContainer {
+    display: flex;
+    justify-content: space-between;  
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.postInputWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.submitCommentButton {
+    padding: 0.6rem 1.2rem; 
+    font-size: 1rem;
+    border-radius: 5px;
+    background-color: #1096C611;
+    color: #05edcf;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submitCommentButton:hover {
+    background-color: #5A8DFBFF;
+}
+
+
+.submitCommentButton:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(130, 166, 236, 0.5);
+}
+

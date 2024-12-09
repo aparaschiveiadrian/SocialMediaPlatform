@@ -2,7 +2,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "@/Components/Navbar/Navbar.jsx";
 import Footer from "@/Components/Footer/Footer.jsx";
-import Feed from "@/Components/Feed/Feed.jsx";
+import Feed from "@/Pages/FeedPage/Feed.jsx";
 import RegisterPage from "@/Pages/RegisterPage/RegisterPage.jsx";
 import ProfilePage from "@/Pages/ProfilePage/ProfilePage.jsx";
 import LoginPage from "@/Pages/LoginPage/LoginPage.jsx";

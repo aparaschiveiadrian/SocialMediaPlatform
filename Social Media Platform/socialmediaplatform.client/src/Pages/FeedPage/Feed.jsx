@@ -1,6 +1,7 @@
 ﻿import './Feed.css';
 import { useState, useEffect } from 'react';
 import UserPost from "@/Components/UserPost/UserPost.jsx";
+import Post from "@/Components/Post/Post.jsx";
 
 const Feed = () => {
     const [postList, setPostList] = useState([]);
@@ -26,42 +27,9 @@ const Feed = () => {
             });
     };
 
-
     useEffect(() => {
         fetchPosts();
     }, []);
-
-    const handleInputChange = (event, postId) => {
-        if (event.key === "Enter" && !event.shiftKey) {
-            event.preventDefault();
-            console.log(`Post ${postId} comment:`, event.target.value);
-            event.target.value = "";
-        }
-    };
-
-    const renderPost = (post) => (
-        <div key={post.id} className="post">
-            <small className="postDate">
-                {new Date(post.createdAt).toLocaleString()}
-            </small>
-            <p className="postContent">{post.content}</p>
-            {post.mediaUrl && renderMedia(post)}
-            <hr className="postDivider" />
-            <textarea
-                className="postInput"
-                placeholder="Add a comment..."
-                onKeyDown={(event) => handleInputChange(event, post.id)}
-            ></textarea>
-        </div>
-    );
-
-    const renderMedia = (post) => {
-        if (post.contentType === "photo") {
-            return <img src={post.mediaUrl} alt="Source" className="postMedia" />;
-        } else if (post.contentType === "video") {
-            return <video src={post.mediaUrl} controls className="postMedia" />;
-        }
-    };
 
     return (
         <section className="containerFeed">
@@ -71,7 +39,7 @@ const Feed = () => {
                 {loading ? (
                     <p>Loading posts...</p>
                 ) : postList.length > 0 ? (
-                    postList.map(renderPost)
+                    postList.map(post => <Post key={post.id} post={post} />)
                 ) : (
                     <p>No posts available</p>
                 )}

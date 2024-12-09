@@ -1,0 +1,134 @@
+﻿
+.profile-card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+    padding: 1rem;
+    width: 50%;
+}
+
+
+.profile-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(252, 253, 255, 0.84);
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.profile-header {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.profile-name {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0;
+}
+
+.profile-username {
+    font-size: 1rem;
+    color: #777;
+    margin: 5px 0 0;
+}
+
+
+.profile-body {
+    margin: 20px 0;
+    width: 100%;
+}
+
+
+.profile-description {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+
+.profile-input,
+.profile-textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    resize: none;
+}
+
+
+.profile-input:focus,
+.profile-textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+
+.save-button {
+    background: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    max-width: 250px;
+    margin-top: 15px;
+}
+
+.save-button:hover {
+    background: #218838;
+}
+
+.edit-button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    max-width: 250px;
+}
+
+.edit-button:hover {
+    background: #0056b3;
+}
+
+
+.profile-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    width: 100%;
+}
+.error-message {
+    margin-top: 80px;
+}
+.profileSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

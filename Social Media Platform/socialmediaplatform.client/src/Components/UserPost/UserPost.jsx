@@ -5,7 +5,8 @@ import SVGText from "@/Components/SVGs/SVGtext.jsx";
 import SVGImage from "@/Components/SVGs/SVGimage.jsx";
 
 const UserPost = () => {
-    const [inputValue, setInputValue] = useState(""); // To manage the input value
+    const [inputValue, setInputValue] = useState("");
+    const [selectedOption, setSelectedOption] = useState('text');
 
     const postOptions = [
         { id: 'text', Component: SVGText, label: 'Add Text' },
@@ -13,16 +14,48 @@ const UserPost = () => {
         { id: 'video', Component: SVGVideo, label: 'Add Video' },
     ];
 
-    const displayId = (id) => {
-        console.log(id);
+
+    const changePostType = (id) => {
+        setSelectedOption(id);
     };
+
 
     const handleKeyDown = (event) => {
         if (event.key === "Enter" && !event.shiftKey) {
             event.preventDefault();
-            console.log(inputValue); // Send or handle input value
-            setInputValue(""); // Clear the input
+            console.log(inputValue); 
+            setInputValue(""); 
         }
+    };
+
+    // Create post request
+    const createPost = () => {
+        const postData = {
+            content: inputValue,
+            contentType: selectedOption,  
+            createdAt: new Date().toISOString(),
+            mediaUrl: "string2"
+        };
+
+        fetch('https://localhost:44354/post/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                //autorizare dupa token
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            },
+            body: JSON.stringify(postData),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Post created successfully:', data);
+                setInputValue("");
+                setSelectedOption('text');
+                window.location.reload();
+            })
+            .catch((error) => {
+                window.alert("An error occurred. You have to be logged in.");
+            });
     };
 
     return (
@@ -47,8 +80,8 @@ const UserPost = () => {
                     {postOptions.map(({ id, Component, label }) => (
                         <button
                             key={id}
-                            className={"btnDisable svg"}
-                            onClick={() => displayId(id)}
+                            className={`btnDisable svg ${selectedOption === id ? 'selected' : ''}`} 
+                            onClick={() => changePostType(id)}
                             aria-label={label}
                         >
                             <Component hoverColor={"#82A6ECFF"}/>
@@ -57,7 +90,7 @@ const UserPost = () => {
                             </span>
                         </button>
                     ))}
-                    <button className={"btn"}>
+                    <button className={"btn"} onClick={createPost}>
                         Create Post
                     </button>
                 </div>

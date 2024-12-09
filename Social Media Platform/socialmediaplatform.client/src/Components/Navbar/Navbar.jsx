@@ -22,13 +22,14 @@ const Navbar = () => {
         };
     }, []);
 
-    const authToken = Cookies.get("authToken");
-    const userName = Cookies.get("username");
+    const authToken = localStorage.getItem("token");
+    const username = localStorage.getItem("username");
 
     const logOut = () => {
-        Object.keys(Cookies.get()).forEach((cookie) => {
-            Cookies.remove(cookie);
-        });
+            
+            Object.keys(localStorage).forEach((key) => {
+                localStorage.removeItem(key);
+            })
 
         window.location.reload();
     };
@@ -64,7 +65,7 @@ const Navbar = () => {
                         {authToken ? (
                             <>
                                 <li className="menuItem">
-                                    <Link to={`/profile/${userName}`} className="menuLink">{userName}</Link>
+                                    <Link to={`/profile/${username}`} className="menuLink">{username}</Link>
                                 </li>
                                 <li className="menuItem">
                                     <a className="menuLink" onClick={logOut}>Logout
