@@ -45,3 +45,8 @@ body {
 a{
     cursor: pointer;
 }
+.subtitle{
+    color: var(--textColor);
+    font-weight: 500;
+    font-size: 1.6rem;
+}

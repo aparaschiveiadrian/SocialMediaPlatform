@@ -53,7 +53,7 @@ const UserPost = () => {
                 setSelectedOption('text');
                 window.location.reload();
             })
-            .catch((error) => {
+            .catch(() => {
                 window.alert("An error occurred. You have to be logged in.");
             });
     };

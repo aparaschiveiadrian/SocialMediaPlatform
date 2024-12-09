@@ -79,6 +79,7 @@
     color: var(--textColor);
 }
 .postDetails {
+    width:600px;
     display: flex;
     flex-direction: column;
     justify-content: center;
