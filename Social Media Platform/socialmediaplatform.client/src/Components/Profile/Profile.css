@@ -10,10 +10,10 @@
 
 
 .profile-card {
-    background: #fff;
+    background: rgba(236, 241, 240, 0.97);
     border: 1px solid #ddd;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(252, 253, 255, 0.84);
+    /*box-shadow: 0 4px 6px rgba(252, 253, 255, 0.84);*/
     width: 100%;
     max-width: 400px;
     padding: 20px;
@@ -128,7 +128,16 @@
 }
 .profileSection{
     display: flex;
+    gap: 1rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+.postList{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
 }

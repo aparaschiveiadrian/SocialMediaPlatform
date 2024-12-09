@@ -36,11 +36,23 @@ public class PostController : ControllerBase
     }
 
     [HttpGet]
+    [Route("posts/{userName}")]
+    public IActionResult GetPostsByUser([FromRoute] string userName)
+    {
+        var posts = _postRepo.GetPostsByUsername(userName);
+        if (!posts.Any())
+        {
+            return NotFound();
+        }
+        return Ok(posts);
+    }
+
+    [HttpGet]
     [Route("posts")]
     public IActionResult GetPosts()
     {
         var posts = _postRepo.GetAllPostsWithUsers();
-        if (posts == null || !posts.Any())
+        if (!posts.Any())
         {
             return NotFound();
         }

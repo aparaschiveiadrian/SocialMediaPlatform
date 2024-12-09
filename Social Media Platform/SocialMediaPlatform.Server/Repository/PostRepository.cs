@@ -29,6 +29,7 @@ public class PostRepository
         var postsWithUsers = (from post in _context.Posts
             join user in _context.Users
                 on post.UserId equals user.Id
+            orderby post.CreatedAt descending
             select new PostWithUserDto
             {
                 Id = post.Id,
@@ -42,6 +43,27 @@ public class PostRepository
 
         return postsWithUsers;
     }
+    public List<PostWithUserDto> GetPostsByUsername(string username)
+    {
+        var postsByUser = (from post in _context.Posts
+                join user in _context.Users
+                    on post.UserId equals user.Id
+                where user.UserName == username 
+                select new PostWithUserDto
+                {
+                    Id = post.Id,
+                    ContentType = post.ContentType,
+                    CreatedAt = post.CreatedAt,
+                    Content = post.Content,
+                    MediaUrl = post.MediaUrl,
+                    UserId = post.UserId,
+                    Username = user.UserName
+                }).OrderByDescending(post => post.CreatedAt) 
+            .ToList();
+
+        return postsByUser;
+    }
+
 
     public Post? CreatePost(Post post)
     {

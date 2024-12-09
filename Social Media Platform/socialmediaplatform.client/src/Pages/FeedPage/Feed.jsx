@@ -41,7 +41,7 @@ const Feed = () => {
                 ) : postList.length > 0 ? (
                     postList.map(post => <Post key={post.id} post={post} />)
                 ) : (
-                    <p>No posts available</p>
+                    <p className={"errorMessage"}>No posts available</p>
                 )}
             </div>
         </section>
