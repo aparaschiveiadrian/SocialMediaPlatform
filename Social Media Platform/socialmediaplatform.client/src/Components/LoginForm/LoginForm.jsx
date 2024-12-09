@@ -31,8 +31,7 @@ const RegisterForm = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
-                credentials: 'include'
+                body: JSON.stringify(formData)
             });
 
             if (!response.ok) {
@@ -41,11 +40,16 @@ const RegisterForm = () => {
             }
             if(response.ok) {
                 const data = await response.json();
-                Cookies.set('userId', data.id, { expires: 1, secure: true, sameSite: 'Strict' });
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('username', data.username);
+                localStorage.setItem('firstname', data.firstName);
+                localStorage.setItem('lastname', data.lastName);
+                localStorage.setItem('email', data.email);
+               /* Cookies.set('userId', data.id, { expires: 1, secure: true, sameSite: 'Strict' });
                 Cookies.set('username', data.username, { expires: 1, secure: true, sameSite: 'Strict' });
                 Cookies.set('firstname', data.firstName, { expires: 1, secure: true, sameSite: 'Strict' }); // Expires in 1 day
                 Cookies.set('lastname', data.lastName, { expires: 1, secure: true, sameSite: 'Strict' });
-                Cookies.set('email', data.email, { expires: 1, secure: true, sameSite: 'Strict' });
+                Cookies.set('email', data.email, { expires: 1, secure: true, sameSite: 'Strict' });*/
                 console.log(data);
 
                 setMessage({ type: 'success', text: 'Login successful!' });

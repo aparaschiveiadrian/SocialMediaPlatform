@@ -100,14 +100,6 @@ public class UserController : ControllerBase
             return Unauthorized("Username or password is incorrect!");
         }
         var token = _tokenService.CreateToken(user);
-        HttpContext.Response.Cookies.Append("authToken", token, new CookieOptions
-        {
-            HttpOnly = false,
-            Secure = true,
-            SameSite = SameSiteMode.Strict,
-            Expires = DateTimeOffset.UtcNow.AddDays(1)
-        });
-        
         return Ok(new NewUserDto
         {
             Id = user.Id,
@@ -115,24 +107,42 @@ public class UserController : ControllerBase
             Email = user.Email,
             FirstName = user.FirstName,
             LastName = user.LastName,
+            Token = token
         });
     }
 
+    // [HttpGet]
+    // [Route("/user/{userId}")]
+    // public IActionResult GetUser([FromRoute] string userId)
+    // {
+    //     var user = _userManager.Users.FirstOrDefault(x => x.Id == userId);
+    //     if (user == null)
+    //     {
+    //         return NotFound("User not found!");
+    //     }
+    //     return Ok(new UserDetailsDto
+    //     {
+    //         Username = user.UserName,
+    //         FirstName = user.FirstName,
+    //         LastName = user.LastName,
+    //         Description = user.Description
+    //     });
+    // }
     [HttpGet]
-    [Route("/user/{userId}")]
-    public IActionResult GetUser([FromRoute] string userId)
+    [Route("/user/{username}")]
+    public IActionResult GetUser([FromRoute] string username)
     {
-        var user = _userManager.Users.FirstOrDefault(x => x.Id == userId);
+        var user = _userManager.Users.FirstOrDefault(x => x.UserName == username);
         if (user == null)
         {
-            return NotFound("User not found!");
-        }
+            return NotFound("A user with this username could not be found!");
+        } 
         return Ok(new UserDetailsDto
-        {
-            Username = user.UserName,
-            FirstName = user.FirstName,
-            LastName = user.LastName,
-            Description = user.Description
-        });
+             {
+                 Username = user.UserName,
+                 FirstName = user.FirstName,
+                 LastName = user.LastName,
+                 Description = user.Description
+             });
     }
 }
