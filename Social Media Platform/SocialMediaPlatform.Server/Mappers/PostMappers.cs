@@ -5,11 +5,11 @@ namespace SocialMediaPlatform.Server.Mappers;
 
 public static class PostMappers
 {
-    public static Post ToPostFromCreateDto(this CreatePostDto createPostDto)
+    public static Post ToPostFromCreateDto(this CreatePostDto createPostDto, string userId)
     {
         return new Post()
         {
-            UserId = "a",
+            UserId = userId,
             ContentType = createPostDto.ContentType,
             Content = createPostDto.Content,
             CreatedAt = createPostDto.CreatedAt,
