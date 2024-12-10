@@ -10,4 +10,6 @@ public class ApplicationUser : IdentityUser
     public string Description { get; set; } = string.Empty;
     
     public virtual ICollection<Post> Posts { get; set; }
+    
+    public virtual ICollection<Comment> Comments { get; set; }
 }

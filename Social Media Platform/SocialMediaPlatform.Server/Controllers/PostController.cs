@@ -69,8 +69,7 @@ public class PostController : ControllerBase
         {
             return Unauthorized(userId);
         }
-        var post = postDto.ToPostFromCreateDto();
-        post.UserId = userId;
+        var post = postDto.ToPostFromCreateDto(userId);
         _postRepo.CreatePost(post);
         return Ok(post);
     }
