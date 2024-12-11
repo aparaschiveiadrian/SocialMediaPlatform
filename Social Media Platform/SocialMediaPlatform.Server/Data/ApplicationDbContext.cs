@@ -13,10 +13,15 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
     public DbSet<Post> Posts { get; set; }
     public DbSet<Comment> Comments { get; set; }
+    public DbSet<Follow> Follows { get; set; }
+    
+    
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        
         base.OnModelCreating(builder);
+        
         List<IdentityRole> roles = new List<IdentityRole>
         {
             new IdentityRole
@@ -31,6 +36,21 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             }
         };
         builder.Entity<IdentityRole>().HasData(roles);
+        
+        builder.Entity<Follow>()
+            .HasKey(f => new { f.FollowerId, f.FollowingId }); 
+
+        builder.Entity<Follow>()
+            .HasOne(f => f.Follower)
+            .WithMany(u => u.Following)
+            .HasForeignKey(f => f.FollowerId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Entity<Follow>()
+            .HasOne(f => f.Following)
+            .WithMany(u => u.Followers)
+            .HasForeignKey(f => f.FollowingId)
+            .OnDelete(DeleteBehavior.Cascade);
     
     }
 }

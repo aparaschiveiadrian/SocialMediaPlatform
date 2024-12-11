@@ -46,6 +46,7 @@ builder.Services.AddSwaggerGen(option =>
 
 builder.Services.AddScoped<PostRepository>();
 builder.Services.AddScoped<CommentRepository>();
+builder.Services.AddScoped<FollowRepository>();
 
 builder.Services.AddScoped<TokenService>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
