@@ -1,4 +1,5 @@
 ﻿using Azure.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -144,5 +145,25 @@ public class UserController : ControllerBase
                  LastName = user.LastName,
                  Description = user.Description
              });
+    }
+
+    [HttpPut]
+    [Route("/changePrivacy")]
+    [Authorize]
+    public async Task<IActionResult> ChangePrivacy()
+    {
+        var userId = _userManager.GetUserId(User);
+        var user = _userManager.Users.FirstOrDefault(x => x.Id == userId);
+        if (user == null)
+        {
+            return NotFound("User could not be found!");
+        }
+        user.IsPrivate = !user.IsPrivate;
+        var result = await _userManager.UpdateAsync(user);
+        if (!result.Succeeded)
+        {
+            return BadRequest("Failed to update user privacy.");
+        }
+        return Ok(user);
     }
 }
