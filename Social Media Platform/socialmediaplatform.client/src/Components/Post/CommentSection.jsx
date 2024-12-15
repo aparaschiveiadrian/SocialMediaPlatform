@@ -1,14 +1,19 @@
 ﻿import React, {useEffect, useState} from 'react';
 
-const CommentSection = ({ postId }) => {
+const CommentSection = ({ postId, setReload }) => {
     
-    const [comment, setComment] = useState("");
+    const [comment, setComment] = useState(""); // the comment that is put into the CREATE COMMENT POST REQUEST
+    const [isWriting, setIsWriting] = useState(false); // used for highlighting the submit button
+    
     const handleInputChange = (event) => {
         if (event.key === "Enter" && !event.shiftKey) {
             event.preventDefault();
-            console.log(`Post ${postId} comment:`, comment);
+            //console.log(`Post ${postId} comment:`, comment);
             setComment("");
         }
+        const value = event.target.value;
+        setComment(value);
+        setIsWriting((value.trim().length > 0));
     };
     
     const submitComment = async(event) => {
@@ -28,7 +33,9 @@ const CommentSection = ({ postId }) => {
                     });
             if(response.ok)
             {
+                setIsWriting(false);
                 setComment("");
+                setReload((prev) => !prev);
             }
             else{
                 window.alert("You have to be logged in to be able to leave a comment");
@@ -54,9 +61,10 @@ const CommentSection = ({ postId }) => {
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 onKeyDown={handleInputChange}
+               
             ></textarea>
             <button
-                className="submitCommentButton"
+                className={`submitCommentButton ${isWriting ? "isWriting" : ""}`}
                 onClick={submitComment}
             >
                 >

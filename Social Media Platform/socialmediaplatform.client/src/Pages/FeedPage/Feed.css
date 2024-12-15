@@ -180,21 +180,29 @@
 
 .editButton,
 .deleteButton {
+    height: 30px; 
+    min-width: 50px; 
+    max-width: 100px; 
     background: none;
     border: 1px solid rgba(128, 128, 128, 0.56);
     padding: 0.3rem 0.6rem;
     border-radius: 0.3rem;
     color: var(--textColor);
-    font-size: 0.9rem;
+    
+    white-space: nowrap; 
+    text-align: center; 
+    line-height: 1.5;  
+   
 }
 
+
 .editButton:hover {
-    background-color: rgba(0, 128, 255, 0.2);
+    background-color: rgba(0, 128, 255, 0.62);
     cursor: pointer;
 }
 
 .deleteButton:hover {
-    background-color: rgba(255, 0, 0, 0.2);
+    background-color: rgba(255, 0, 0, 0.66);
     cursor: pointer;
 }
 
@@ -248,11 +256,10 @@
 
 .saveButton,
 .cancelButton {
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
     border-radius: 0.3rem;
     cursor: pointer;
     border: none;
+    padding: 0.3rem 0.6rem;
 }
 
 .saveButton {
@@ -272,5 +279,28 @@
 .cancelButton:hover {
     background-color: #e53935;
 }
+.isWriting{
+    box-shadow:  0 0 10px 2px rgba(255, 255, 255, 0.13);
+    background: rgba(194, 194, 230, 0.17);
+}
+.commentOptions {
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.threeDotsIcon {
+    transition: fill 0.3s ease, stroke 0.3s ease;
+    cursor: pointer;
+}
 
+.threeDotsIcon:hover {
+    fill: white;
+    stroke: white;
+}
+.dropdownMenu
+{
+    display: flex;
+    gap: 0.6rem;
+}
 
