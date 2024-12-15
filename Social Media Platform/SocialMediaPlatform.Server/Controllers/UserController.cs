@@ -143,7 +143,8 @@ public class UserController : ControllerBase
                  Username = user.UserName,
                  FirstName = user.FirstName,
                  LastName = user.LastName,
-                 Description = user.Description
+                 Description = user.Description,
+                 IsPrivate = user.IsPrivate,
              });
     }
 

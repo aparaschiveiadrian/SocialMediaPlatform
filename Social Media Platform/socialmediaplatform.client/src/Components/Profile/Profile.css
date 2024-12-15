@@ -99,7 +99,7 @@
     background: #218838;
 }
 
-.edit-button {
+.profile-button {
     background: #007bff;
     color: #fff;
     border: none;
@@ -112,7 +112,7 @@
     max-width: 250px;
 }
 
-.edit-button:hover {
+.profile-button:hover {
     background: #0056b3;
 }
 

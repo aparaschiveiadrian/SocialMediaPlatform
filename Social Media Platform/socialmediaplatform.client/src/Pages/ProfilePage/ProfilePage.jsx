@@ -64,15 +64,37 @@ const ProfilePage = () => {
                             lastName={profile.lastName}
                             username={profile.username}
                             initialDescription={profile.description}
+                            initialVisibility={profile.isPrivate}
                         />
                         <span className="subtitle">User's posts</span>
                         <div className="postList">
-                            {postList.length > 0 ? (
-                                postList.map((post) => <Post key={post.id} post={post} />)
-                            ) : (
-                                <p style={{ color: "white" }}>This user hasn't posted yet.</p>
-                            )}
+                            {
+                                (profile.isPrivate && username !== localStorage.getItem('username'))
+                                    ? (
+                                        <>
+                                            <p style={{color: "white"}}>This user's profile is private.</p>
+                                            <p style={{color: "white"}}>You have to be a follower in order to view posts.</p>
+                                        </>
+                                    )
+                                    : (
+                                        postList.length > 0
+                                            ? (
+                                                postList.map((post) => <Post key={post.id} post={post}/>)
+                                            )
+                                            : (
+                                                (username == localStorage.getItem('username'))
+                                                    ? (
+                                                        <p style={{color: "white"}}>You haven't posted yet.</p>
+                                                    ) 
+                                                    : (
+                                                        <p style = {{color: "white"}}>This user hasn't posted yet.</p>
+                                                    )
+                                            )
+                                    )
+                            }
                         </div>
+
+
                     </>
                 ) : (
                     <p>Loading...</p>

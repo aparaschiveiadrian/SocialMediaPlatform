@@ -1,62 +1,22 @@
 ﻿import React, { useState } from "react";
 import "./Profile.css";
 import SVGprofile from "@/Components/SVGs/SVGprofile.jsx";
+import ProfileEditModal from "@/Components/ProfileEditModal/ProfileEditModal.jsx";
 
-const ProfileCard = ({ firstName, lastName, username, initialDescription }) => {
-    const [isEditing, setIsEditing] = useState(false);
-    const [editedFirstName, setEditedFirstName] = useState(firstName);
-    const [editedLastName, setEditedLastName] = useState(lastName);
-    const [editedDescription, setEditedDescription] = useState(initialDescription);
+const ProfileCard = ({ firstName, lastName, username, initialDescription, initialVisibility }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     
-    const handleSave = () => {
-        console.log("Updated Profile Details:", {
-            firstName: editedFirstName,
-            lastName: editedLastName,
-            description: editedDescription,
-        });
+    const toggleModal = () => setIsModalOpen(!isModalOpen);
 
-        setIsEditing(false);
-    };
-    
-    const renderProfileContent = () => {
-        if (isEditing) {
-            return (
-                <>
-                    <input
-                        type="text"
-                        className="profile-input"
-                        value={editedFirstName}
-                        onChange={(e) => setEditedFirstName(e.target.value)}
-                        placeholder="First Name"
-                    />
-                    <input
-                        type="text"
-                        className="profile-input"
-                        value={editedLastName}
-                        onChange={(e) => setEditedLastName(e.target.value)}
-                        placeholder="Last Name"
-                    />
-                    <textarea
-                        className="profile-textarea"
-                        value={editedDescription}
-                        rows={10}
-                        onChange={(e) => setEditedDescription(e.target.value)}
-                        placeholder="Description"
-                    />
-                </>
-            );
-        } else {
-            return (
-                <>
-                    <h2 className="profile-name">
-                        {firstName} {lastName}
-                    </h2>
-                    <p className="profile-username">@{username}</p>
-                    <p className="profile-description">{initialDescription}</p>
-                </>
-            );
-        }
-    };
+    const renderProfileContent = () => (
+        <>
+            <h2 className="profile-name">
+                {firstName} {lastName}
+            </h2>
+            <p className="profile-username">@{username}</p>
+            <p className="profile-description">{initialDescription}</p>
+        </>
+    );
 
     return (
         <div className="profile-card-container">
@@ -68,17 +28,28 @@ const ProfileCard = ({ firstName, lastName, username, initialDescription }) => {
                     {renderProfileContent()}
                 </div>
                 <div className="profile-footer">
-                    {isEditing ? (
-                        <button className="save-button" onClick={handleSave}>
-                            Save Changes
-                        </button>
-                    ) : (
-                        <button className="edit-button" onClick={() => setIsEditing(true)}>
-                            Edit Profile
-                        </button>
-                    )}
+                    {
+                        username === localStorage.getItem("username") ? (
+                            <button className="profile-button" onClick={toggleModal}>
+                                Edit Profile
+                            </button>
+                        ) : (
+                            <button className="profile-button" onClick={() => {}}>
+                                Follow
+                            </button>
+                        )
+                    }
                 </div>
             </div>
+
+            {isModalOpen && (
+                <ProfileEditModal
+                    firstName={firstName}
+                    lastName={lastName}
+                    initialVisibility={initialVisibility}
+                    toggleModal={toggleModal}
+                />
+            )}
         </div>
     );
 };
