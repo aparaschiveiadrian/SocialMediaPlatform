@@ -1,6 +1,7 @@
 ﻿import React, { useState } from 'react';
 import Media from './Media';
 import CommentSection from './CommentSection';
+import UsersComments from './UsersComments.jsx';
 
 const Post = ({ post }) => {
     return (
@@ -15,10 +16,11 @@ const Post = ({ post }) => {
             </div>
 
             <p className="postContent">{post.content}</p>
-            {post.mediaUrl && <Media mediaUrl={post.mediaUrl} contentType={post.contentType} />}
-            <hr className="postDivider" />
-
-            <CommentSection postId={post.id} />
+            {post.mediaUrl && <Media mediaUrl={post.mediaUrl} contentType={post.contentType}/>}
+            <hr className="postDivider"/>
+            <UsersComments postId={post.id}/>
+            <hr className="postDivider"/>
+            <CommentSection postId={post.id}/>
         </div>
     );
 };

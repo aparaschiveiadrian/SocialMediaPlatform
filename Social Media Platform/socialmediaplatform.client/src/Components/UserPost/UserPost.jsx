@@ -27,8 +27,7 @@ const UserPost = () => {
             setInputValue(""); 
         }
     };
-
-    // Create post request
+    
     const createPost = () => {
         const postData = {
             content: inputValue,

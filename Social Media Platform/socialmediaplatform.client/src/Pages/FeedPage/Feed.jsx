@@ -30,7 +30,7 @@ const Feed = () => {
     useEffect(() => {
         fetchPosts();
     }, []);
-
+    
     return (
         <section className="containerFeed">
             <UserPost />

@@ -40,9 +40,10 @@ public class CommentController  : ControllerBase
     public IActionResult GetComment([FromRoute] int postId)
     {
         var commentList = _commRepo.GetCommentsByPost(postId);
-        if (commentList == null || !commentList.Any()) 
+        if (commentList == null || !commentList.Any())
         {
-            return NotFound();
+            //return NotFound();
+            return NoContent();
         }
         return Ok(commentList);
     }

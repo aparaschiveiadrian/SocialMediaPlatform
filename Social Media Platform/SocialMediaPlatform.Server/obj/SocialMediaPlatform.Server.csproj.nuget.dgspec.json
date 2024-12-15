@@ -1,21 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\amito\\RiderProjects\\SocialMediaPlatform\\Social Media Platform\\SocialMediaPlatform.Server\\SocialMediaPlatform.Server.csproj": {}
+    "C:\\Users\\adria\\RiderProjects\\SocialMediaPlatform\\Social Media Platform\\SocialMediaPlatform.Server\\SocialMediaPlatform.Server.csproj": {}
   },
   "projects": {
-    "C:\\Users\\amito\\RiderProjects\\SocialMediaPlatform\\Social Media Platform\\SocialMediaPlatform.Server\\SocialMediaPlatform.Server.csproj": {
+    "C:\\Users\\adria\\RiderProjects\\SocialMediaPlatform\\Social Media Platform\\SocialMediaPlatform.Server\\SocialMediaPlatform.Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\amito\\RiderProjects\\SocialMediaPlatform\\Social Media Platform\\SocialMediaPlatform.Server\\SocialMediaPlatform.Server.csproj",
+        "projectUniqueName": "C:\\Users\\adria\\RiderProjects\\SocialMediaPlatform\\Social Media Platform\\SocialMediaPlatform.Server\\SocialMediaPlatform.Server.csproj",
         "projectName": "SocialMediaPlatform.Server",
-        "projectPath": "C:\\Users\\amito\\RiderProjects\\SocialMediaPlatform\\Social Media Platform\\SocialMediaPlatform.Server\\SocialMediaPlatform.Server.csproj",
-        "packagesPath": "C:\\Users\\amito\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\amito\\RiderProjects\\SocialMediaPlatform\\Social Media Platform\\SocialMediaPlatform.Server\\obj\\",
+        "projectPath": "C:\\Users\\adria\\RiderProjects\\SocialMediaPlatform\\Social Media Platform\\SocialMediaPlatform.Server\\SocialMediaPlatform.Server.csproj",
+        "packagesPath": "C:\\Users\\adria\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\adria\\RiderProjects\\SocialMediaPlatform\\Social Media Platform\\SocialMediaPlatform.Server\\obj\\",
         "projectStyle": "PackageReference",
-        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
-          "C:\\Users\\amito\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\adria\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
