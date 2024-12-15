@@ -1,16 +1,18 @@
 ﻿import { useEffect, useState } from "react";
 import SVGdownArrow from "@/Components/SVGs/SVGdownArrow.jsx";
+import SVGthreeDots from "@/Components/SVGs/SVGthreeDots.jsx";
 
-
-const UsersComments = ({ postId }) => {
+const UsersComments = ({ postId, reload }) => {
     const [commentList, setCommentList] = useState([]);
     const [loading, setLoading] = useState(true);
     const [errorMessage, setErrorMessage] = useState(null);
     const [visibleComments, setVisibleComments] = useState(2);
-    
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentComment, setCurrentComment] = useState({ id: null, content: "" });
     const [commentIsModified, setCommentIsModified] = useState(false);
+    const [openMenuId, setOpenMenuId] = useState(null); // Tracks which comment's menu is open
+
     const fetchComments = async () => {
         setLoading(true);
         setErrorMessage(null);
@@ -19,17 +21,11 @@ const UsersComments = ({ postId }) => {
             if (response.ok) {
                 const data = await response.json();
                 setCommentList(data);
-                //console.log(data);
             } else {
                 setErrorMessage(`Failed to fetch comments: ${response.status} ${response.statusText}`);
             }
         } catch (error) {
-            if(error.response.status === 404) {
-                setErrorMessage("An error occurred while fetching comments.");
-            }
-            else{
-                setErrorMessage("Comment list is empty.");
-            }
+            //console.log("List is empty");
         } finally {
             setLoading(false);
         }
@@ -81,12 +77,9 @@ const UsersComments = ({ postId }) => {
                 window.alert("You are not authorized to edit this comment.");
             }
         } catch (error) {
-            //console.error(`An error occurred while updating the comment: ${error}`);
             window.alert("An error occurred while updating the comment.");
         }
     };
-
-
 
     const handleCancelEdit = () => {
         setIsModalOpen(false);
@@ -95,10 +88,14 @@ const UsersComments = ({ postId }) => {
 
     useEffect(() => {
         fetchComments();
-    }, [commentIsModified]);
+    }, [commentIsModified, reload]);
 
     const handleViewMore = () => {
         setVisibleComments((prev) => prev + 2);
+    };
+
+    const toggleMenu = (commentId) => {
+        setOpenMenuId((prev) => (prev === commentId ? null : commentId));
     };
 
     return (
@@ -119,11 +116,15 @@ const UsersComments = ({ postId }) => {
                                     {new Date(comment.createdAt).toLocaleString()}
                                 </small>
                                 {comment.isEdited && <small className="postDate">(Edited)</small>}
-                            </div>
-                            <div className="contentContainer">
-                                <p>{comment.content}</p>
-                                {localStorage.getItem("username") === comment.username && (
-                                    <div className="actionButtons">
+                                {comment.username == localStorage.getItem("username") &&
+                                    (<button
+                                    className="commentOptions threeDotsIcon"
+                                    onClick={() => toggleMenu(comment.id)}
+                                >
+                                    <SVGthreeDots/>
+                                </button>)}
+                                {openMenuId === comment.id && (
+                                    <div className="dropdownMenu">
                                         <button
                                             onClick={() => handleEdit(comment.id)}
                                             className="editButton"
@@ -139,6 +140,9 @@ const UsersComments = ({ postId }) => {
                                     </div>
                                 )}
                             </div>
+                            <div className="contentContainer">
+                                <p>{comment.content}</p>
+                            </div>
                         </div>
                     ))}
                     {visibleComments < commentList.length && (
@@ -150,7 +154,7 @@ const UsersComments = ({ postId }) => {
                     )}
                 </>
             ) : (
-                <small style={{color: "gray"}}>Be the first to leave a comment.</small>
+                <small style={{ color: "gray" }}>Be the first to leave a comment.</small>
             )}
 
             {/* Modal */}
@@ -177,7 +181,6 @@ const UsersComments = ({ postId }) => {
             )}
         </div>
     );
-
 };
 
 export default UsersComments;

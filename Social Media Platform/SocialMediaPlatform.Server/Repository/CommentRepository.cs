@@ -26,15 +26,15 @@ public class CommentRepository
         var commentDtos = (from comment in _context.Comments
             join user in _context.Users
                 on comment.UserId equals user.Id
-            where comment.PostId == postId 
+            where comment.PostId == postId
             select new GetCommentDto
             {
                 Id = comment.Id,
                 Content = comment.Content,
                 CreatedAt = comment.CreatedAt,
-                Username = user.UserName ,
+                Username = user.UserName,
                 IsEdited = comment.IsEdited
-            }).ToList();
+            }).OrderBy(comment => comment.CreatedAt).ToList();
         return commentDtos;
         //return _context.Comments.Where(c => c.PostId == postId);
         //var comments = _context.Comments

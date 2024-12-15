@@ -4,6 +4,7 @@ import CommentSection from './CommentSection';
 import UsersComments from './UsersComments.jsx';
 
 const Post = ({ post }) => {
+    const [reload, setReload] = useState(false);
     return (
         <div className="post">
             <div className="postDetails">
@@ -18,9 +19,9 @@ const Post = ({ post }) => {
             <p className="postContent">{post.content}</p>
             {post.mediaUrl && <Media mediaUrl={post.mediaUrl} contentType={post.contentType}/>}
             <hr className="postDivider"/>
-            <UsersComments postId={post.id}/>
+            <UsersComments postId={post.id} reload={reload} />
             <hr className="postDivider"/>
-            <CommentSection postId={post.id}/>
+            <CommentSection postId={post.id} setReload={setReload}/>
         </div>
     );
 };
