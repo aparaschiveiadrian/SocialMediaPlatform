@@ -82,7 +82,7 @@ const ProfilePage = () => {
                                                 postList.map((post) => <Post key={post.id} post={post}/>)
                                             )
                                             : (
-                                                (username == localStorage.getItem('username'))
+                                                (username === localStorage.getItem('username'))
                                                     ? (
                                                         <p style={{color: "white"}}>You haven't posted yet.</p>
                                                     ) 

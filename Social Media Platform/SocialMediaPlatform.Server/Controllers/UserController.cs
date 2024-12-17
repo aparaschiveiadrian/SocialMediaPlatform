@@ -167,4 +167,37 @@ public class UserController : ControllerBase
         }
         return Ok(user);
     }
+    [HttpPut]   
+    [Route("/user/edit")]
+    [Authorize]
+    public async Task<IActionResult> EditUser([FromBody] UserEditDto userEditDto)
+    {
+        var userId = _userManager.GetUserId(User);
+        var user = _userManager.Users.FirstOrDefault(x => x.Id == userId);
+        if (string.IsNullOrWhiteSpace(userEditDto.FirstName) || string.IsNullOrWhiteSpace(userEditDto.LastName))
+        {
+            return BadRequest("Empty fields were not modified!");
+        }
+        if (!string.IsNullOrWhiteSpace(userEditDto.FirstName))
+        {
+            user.FirstName = userEditDto.FirstName;
+        }
+        if (!string.IsNullOrWhiteSpace(userEditDto.LastName))
+        {
+            user.LastName = userEditDto.LastName;
+        }
+        user.Description = userEditDto.Description;
+        var result = await _userManager.UpdateAsync(user);
+        if (!result.Succeeded)
+        {
+            return BadRequest("Failed to update user details.");
+        }
+        return Ok(new UserEditDto()
+        {
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Description = user.Description,
+        });
+        
+    }
 }
