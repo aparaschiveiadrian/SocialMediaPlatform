@@ -25,5 +25,13 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/SocialMediaDB?password=parola&amp;user=postgres</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="SocialMediaDB@localhost [4]" uuid="6a5ccca8-a1ed-4840-a6db-36aae9e66c9b">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <configured-by-url>true</configured-by-url>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/SocialMediaDB?password=parola&amp;user=postgres</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
