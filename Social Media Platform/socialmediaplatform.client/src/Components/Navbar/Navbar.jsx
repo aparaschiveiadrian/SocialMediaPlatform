@@ -2,6 +2,7 @@
 import Cookies from "js-cookie";
 import { Link } from 'react-router-dom';
 import { useEffect } from "react";
+import SearchBar from "@/Components/SearchBar/SearchBar.jsx";
 
 const Navbar = () => {
     useEffect(() => {
@@ -39,8 +40,8 @@ const Navbar = () => {
             <nav>
                 <div className="mainNav">
                     <Link to="/" className="logo">Militan Media</Link>
-
-                    <form className="searchBar">
+                    <SearchBar />
+                    {/*<form className="searchBar">
                         <input
                             type="text"
                             name="searchInput"
@@ -53,7 +54,7 @@ const Navbar = () => {
                                 }
                             }}
                         />
-                    </form>
+                    </form>*/}
 
                     <ul className="navbar">
                         <li className="menuItem">

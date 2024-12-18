@@ -200,4 +200,21 @@ public class UserController : ControllerBase
         });
         
     }
+
+    [HttpGet]
+    [Route("user/allUsers")]
+    public IActionResult GetAllUsers()
+    {
+        var users = _userManager.Users
+            .Select(user => new UserSearchDto()
+            {
+                Username = user.UserName,
+                FirstName = user.FirstName,
+                LastName = user.LastName
+            })
+            .ToList();
+
+        return Ok(users);
+    }
+
 }
