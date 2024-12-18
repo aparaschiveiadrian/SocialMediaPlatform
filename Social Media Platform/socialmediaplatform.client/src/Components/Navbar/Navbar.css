@@ -40,33 +40,7 @@ nav.sticky {
     color: rgb(130, 166, 236);
 }
 
-.searchBar {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    background-color: rgba(255, 255, 255, 0.84);
-    padding: 0.3rem 0.6rem;
-    border-radius: 0.2rem;
-    flex-grow: 1;
-    max-width: 500px;
-    min-width: 180px;
-}
-.searchInput::placeholder{
-    color: var(--backgroundColor);
-}
 
-.searchInput {
-    flex: 1;
-    border: none;
-    background: transparent;
-    color: var(--backgroundColor);
-    font-size: 0.9rem;
-    outline: none;
-    font-style: italic;
-}
-.searchInput:focus {
-    font-style: normal;
-}
 
 .navbar {
     display: flex;
