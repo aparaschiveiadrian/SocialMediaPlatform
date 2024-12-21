@@ -147,6 +147,17 @@ public class UserController : ControllerBase
                  IsPrivate = user.IsPrivate,
              });
     }
+    [HttpGet]
+    [Route("/getUserIdByUsername/{username}")]
+    public IActionResult GetUserIdByUsername([FromRoute] string username)
+    {
+        var user = _userManager.Users.FirstOrDefault(x => x.UserName == username);
+        if (user == null)
+        {
+            return NotFound("A user with this username could not be found!");
+        } 
+        return Ok(user.Id);
+    }
 
     [HttpPut]
     [Route("/changePrivacy")]
