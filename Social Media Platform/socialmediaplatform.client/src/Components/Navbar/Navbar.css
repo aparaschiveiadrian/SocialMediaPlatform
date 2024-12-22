@@ -37,7 +37,7 @@ nav.sticky {
 }
 
 .logo:hover {
-    color: rgb(130, 166, 236);
+    color: rgb(17, 160, 237);
 }
 
 
@@ -67,7 +67,11 @@ a {
 
 .menuLink:hover {
     color: rgba(255, 255, 255, 0.9);
-    background-color: rgba(130, 166, 236, 0.62);
+    background-color: rgb(17, 160, 237);
+}
+.logout:hover,.signin:hover {
+    color: rgba(255, 255, 255, 0.9);
+    background-color: rgb(237, 17, 68);
 }
 
 @media (max-width: 768px) {
