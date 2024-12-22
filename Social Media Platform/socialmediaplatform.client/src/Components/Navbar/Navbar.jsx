@@ -69,13 +69,13 @@ const Navbar = () => {
                                     <Link to={`/profile/${username}`} className="menuLink">{username}</Link>
                                 </li>
                                 <li className="menuItem">
-                                    <a className="menuLink" onClick={logOut}>Logout
+                                    <a className="menuLink logout" onClick={logOut}>Logout
                                     </a>
                                 </li>
                             </>
                         ) : (
                             <li className="menuItem">
-                                <Link to="/register" className="menuLink">Sign in</Link>
+                                <Link to="/register" className="menuLink signin">Sign in</Link>
                             </li>
                         )}
                     </ul>

@@ -4,6 +4,7 @@ import Navbar from "@/Components/Navbar/Navbar.jsx";
 import { useEffect, useState } from "react";
 import ProfileCard from "@/Components/Profile/Profile.jsx";
 import Post from "@/Components/Post/Post.jsx";
+import Following from "../../Components/Following/Following.jsx"; 
 
 const ProfilePage = () => {
     const { username } = useParams();
@@ -65,6 +66,9 @@ const ProfilePage = () => {
                             username={profile.username}
                             initialDescription={profile.description}
                             initialVisibility={profile.isPrivate}
+                        />
+                        <Following
+                            username={username}
                         />
                         <span className="subtitle">User's posts</span>
                         <div className="postList">
