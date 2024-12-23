@@ -156,8 +156,10 @@ public class UserController : ControllerBase
         {
             return NotFound("A user with this username could not be found!");
         } 
-        return Ok(user.Id);
+
+        return Ok(new { userId = user.Id }); 
     }
+
 
     [HttpPut]
     [Route("/changePrivacy")]

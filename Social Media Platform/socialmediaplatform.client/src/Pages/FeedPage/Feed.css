@@ -23,7 +23,7 @@
 .post {
     padding: 2rem;
     border-radius: 0.5rem;
-    background: rgba(6, 44, 57, 0.56);
+    background: rgba(31, 47, 51, 0.56);
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -31,9 +31,10 @@
     word-break: break-word;
     overflow-wrap: break-word;
     transition:  box-shadow 0.3s ease-in-out;
+    
 }
 .post:hover {
-    box-shadow: 0 0 18px 0 rgba(83, 133, 236, 0.87);
+    box-shadow:0 0 5px 2px rgba(70, 143, 255, 0.45) inset;
 }
 
 .postDate {
