@@ -112,23 +112,23 @@ public class UserController : ControllerBase
         });
     }
 
-    // [HttpGet]
-    // [Route("/user/{userId}")]
-    // public IActionResult GetUser([FromRoute] string userId)
-    // {
-    //     var user = _userManager.Users.FirstOrDefault(x => x.Id == userId);
-    //     if (user == null)
-    //     {
-    //         return NotFound("User not found!");
-    //     }
-    //     return Ok(new UserDetailsDto
-    //     {
-    //         Username = user.UserName,
-    //         FirstName = user.FirstName,
-    //         LastName = user.LastName,
-    //         Description = user.Description
-    //     });
-    // }
+     [HttpGet]
+     [Route("/getUserById/{userId}")]
+     public IActionResult GetUserById([FromRoute] string userId)
+     {
+         var user = _userManager.Users.FirstOrDefault(x => x.Id == userId);
+         if (user == null)
+         {
+             return NotFound("User not found!");
+         }
+         return Ok(new UserDetailsDto
+         {
+             Username = user.UserName,
+             FirstName = user.FirstName,
+             LastName = user.LastName,
+             Description = user.Description
+         });
+     }
     [HttpGet]
     [Route("/user/{username}")]
     public IActionResult GetUser([FromRoute] string username)
@@ -156,10 +156,8 @@ public class UserController : ControllerBase
         {
             return NotFound("A user with this username could not be found!");
         } 
-
         return Ok(new { userId = user.Id }); 
     }
-
 
     [HttpPut]
     [Route("/changePrivacy")]

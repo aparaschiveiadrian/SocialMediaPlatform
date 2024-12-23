@@ -75,13 +75,40 @@ public class FollowRepository
          return followerUsernames;
      }
 
-    
-
+     
      public Follow AcceptFollow(Follow followRelation)
      {
          followRelation.IsPending = false;
          _context.Follows.Update(followRelation);
          _context.SaveChanges();
          return followRelation;
+     }
+
+     public Follow DeleteFollowRelation(Follow followRelation)
+     {
+         _context.Follows.Remove(followRelation);
+         _context.SaveChanges();
+         return followRelation;
+     }
+
+     public IEnumerable<string> GetFollowRequests(string userId)
+     {
+         var followRequests = _context.Follows.Where(f => f.FollowingId == userId && f.IsPending == true);
+         List<string> idList = new List<string>();
+         foreach (var f in followRequests)
+         {
+             idList.Add(f.FollowerId);
+         }
+         return idList;
+     }
+     public IEnumerable<Follow> AcceptAllRequests(string userId)
+     {
+         var followRequests = _context.Follows.Where(f => f.FollowingId == userId && f.IsPending == true).ToList();
+         foreach (var f in followRequests)
+         {
+             f.IsPending = false;
+         }
+         _context.SaveChanges();
+         return followRequests;
      }
 }

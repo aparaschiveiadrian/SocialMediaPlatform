@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using SocialMediaPlatform.Server.Migrations;
 using SocialMediaPlatform.Server.Models;
 using SocialMediaPlatform.Server.Repository;
 
@@ -19,7 +21,7 @@ public class FollowController : ControllerBase
         _userManager = userManager;
     }
      [HttpPost]
-     [Route("follow/{followingId}")]
+     [Route("{followingId}")]
      public IActionResult Follow([FromRoute] string followingId)
      {
          var followerId = _userManager.GetUserId(User);
@@ -39,7 +41,7 @@ public class FollowController : ControllerBase
      }
 
      [HttpGet]
-     [Route("GetFollowingsByUser/{targetUserId}")]
+     [Route("getFollowingsByUser/{targetUserId}")]
      public IActionResult GetFollowingsByUser([FromRoute] string targetUserId)
      {
          var currentUserId = _userManager.GetUserId(User);
@@ -70,7 +72,7 @@ public class FollowController : ControllerBase
      }
     
      [HttpGet]
-     [Route("GetFollowersByUser/{targetUserId}")]
+     [Route("getFollowersByUser/{targetUserId}")]
      public IActionResult GetFollowersByUser([FromRoute] string targetUserId)
      {
          var currentUserId = _userManager.GetUserId(User);
@@ -79,7 +81,7 @@ public class FollowController : ControllerBase
          {
              return NotFound("User not found");
          }
-
+        
          
          if (currentUserId == targetUserId)
          {
@@ -106,7 +108,7 @@ public class FollowController : ControllerBase
      [HttpPut]
      [Route("accept/{followerId}")]
      [Authorize]
-     public IActionResult AcceptFollow([FromRoute] string followerId)
+     public IActionResult AcceptRequest([FromRoute] string followerId)
      {
          var userId = _userManager.GetUserId(User);
          if (userId == null)
@@ -128,6 +130,90 @@ public class FollowController : ControllerBase
          {
              return BadRequest("This user already follow you.");
          }
-         
+     }
+
+     [HttpDelete]
+     [Route("delete/follower/{followerId}")]
+     [Authorize]
+     public IActionResult DeleteFollower([FromRoute] string followerId) // asta o sa stearga si follow request si follower
+     {
+         var userId = _userManager.GetUserId(User);
+         if (userId == null)
+         {
+             return NotFound("You are not logged in.");
+         }
+         var followRelation = _followRepo.GetFollowRelation(followerId, userId);
+         if (followRelation == null)
+         {
+             return BadRequest("There is no follow.");
+         }
+         _followRepo.DeleteFollowRelation(followRelation);
+         return Ok(followRelation);
+     }
+     [HttpDelete]
+     [Route("delete/following/{followingId}")]
+     [Authorize]
+     public IActionResult DeleteFollowing([FromRoute] string followingId)
+     {
+         var userId = _userManager.GetUserId(User);
+         if (userId == null)
+         {
+             return NotFound("You are not logged in.");
+         }
+         var followRelation = _followRepo.GetFollowRelation(userId, followingId);
+         if (followRelation == null)
+         {
+             return BadRequest("There is no follow.");
+         }
+         _followRepo.DeleteFollowRelation(followRelation);
+         return Ok(followRelation);
+     }
+
+     [HttpGet]
+     [Route("checkIfFollower/{followingId}")]
+     public IActionResult CheckIfFollower([FromRoute] string followingId) // verifici daca ai la follow un cont
+     {
+         var userId = _userManager.GetUserId(User);
+         if (userId == null)
+         {
+             return BadRequest("You are not logged in.");
+         }
+
+         var followRelation = _followRepo.GetFollowRelation(userId, followingId);
+         if (followRelation == null || followRelation.IsPending)
+         {
+             return BadRequest("You don't follow this user.");
+         }
+         return Ok(followRelation);
+     }
+
+     [HttpGet]
+     [Route("getFollowRequests")]
+     [Authorize]
+     public IActionResult GetFollowRequests()
+     {
+         var userId = _userManager.GetUserId(User);
+         if (userId == null)
+         {
+             return NotFound("You are not logged in.");
+         }
+
+         var followRequests = _followRepo.GetFollowRequests(userId);
+
+         return Ok(followRequests);
+     }
+
+     [HttpGet]
+     [Route("acceptAllRequests")]
+     [Authorize]
+     public IActionResult AcceptAllRequests()
+     {
+         var userId = _userManager.GetUserId(User);
+         if (userId == null)
+         {
+             return NotFound("You are not logged in.");
+         }
+         var followRequests = _followRepo.AcceptAllRequests(userId);
+         return Ok(followRequests);
      }
 }
