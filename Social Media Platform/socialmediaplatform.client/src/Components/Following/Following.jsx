@@ -2,57 +2,81 @@
 import { useState, useEffect } from 'react';
 
 const Following = ({ username }) => {
-    const [following, setFollowing] = useState(0);
-    const [followers, setFollowers] = useState(0);
+    const [userId, setUserId] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [followings, setFollowings] = useState([]);
+    const [followers, setFollowers] = useState([]);
+    
+    const fetchUserId = async () => {
+        setIsLoading(true);
+        setError(null);
 
-    const fetchData = async () => {
         try {
-            const userIdResponse = await fetch(`https://localhost:44354/getUserIdByUsername/${username}`);
-            if (!userIdResponse.ok) {
-                console.error("Failed to fetch user ID");
+            const response = await fetch(`https://localhost:44354/getUserIdByUsername/${username}`);
+
+            if (!response.ok) {
+                console.error(`Failed to fetch user ID for username: ${username}. Status: ${response.status}`);
+                setError("Failed to fetch user ID.");
                 return;
             }
 
-            const { userId } = await userIdResponse.json();
-            
-            const [followersResponse, followingResponse] = await Promise.all([
-                fetch(`https://localhost:44354/follow/GetFollowersByUser/${userId}`),
-                fetch(`https://localhost:44354/follow/GetFollowingsByUser/${userId}`)
-            ]);
+            const rawData = await response.json();
+            setUserId(rawData.userId); 
+            console.log("Fetched User ID:", rawData.userId);
 
-            if (followersResponse.ok) {
-                const followersData = await followersResponse.json();
-                setFollowers(followersData.length);
-            } else {
-                console.error("Failed to fetch followers");
-            }
+        } catch (err) {
+            console.error("Error fetching user ID:", err);
+            setError("Failed to fetch user ID. Please try again later.");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+    
+    const fetchFollowers = async () => {
+        if (!userId) return; 
+        setIsLoading(true);
 
-            if (followingResponse.ok) {
-                const followingData = await followingResponse.json();
-                setFollowing(followingData.length);
-            } else {
-                console.error("Failed to fetch followings");
-            }
-        } catch (error) {
-            console.error("Error fetching data:", error);
+        try {
+            const response = await fetch(`https://localhost:44354/follow/GetFollowersByUser/${userId}`);
+            const data = await response.json();
+            console.log("Fetched Followers:", data);
+            setFollowers(data);
+        } catch (err) {
+            console.error("Error fetching followers:", err);
+            setError("Failed to fetch user followers list. Please try again later.");
+        } finally {
+            setIsLoading(false);
         }
     };
     
     useEffect(() => {
-        if (username) fetchData();
+        if (username) {
+            fetchUserId();
+        }
     }, [username]);
+    
+    useEffect(() => {
+        if (userId) {
+            fetchFollowers();
+        }
+    }, [userId]);
+
+    if (isLoading) {
+        return <div className="followingContainer">Loading...</div>;
+    }
+
+    if (error) {
+        return <div className="followingContainer error">{error}</div>;
+    }
 
     return (
         <div className="followingContainer">
             <div className="followers">
-                <a>
-                    {followers} Followers
-                </a>
+                <a>{followers.length} Followers</a>
             </div>
             <div className="following">
-                <a>
-                    {following} Following
-                </a>
+                <a>{followings.length} Following</a>
             </div>
         </div>
     );

@@ -12,10 +12,6 @@
     transition: box-shadow 0.3s ease;
 }
 
-.followingContainer:hover {
-    box-shadow: 0 6px 15px rgba(17, 160, 237, 0.24); 
-}
-
 .followers, .following {
     display: flex;
     flex-direction: column;
@@ -44,3 +40,21 @@
 .followers a:hover, .following a:hover {
     color: #c7e8ff; 
 }
+
+.followingContainer.error {
+    color: #ff4d4f;
+    background: rgba(255, 77, 79, 0.1);
+    border-color: #ff4d4f;
+}
+
+.followingContainer div {
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+}
+
+.followers:hover,
+.following:hover {
+    background-color: rgba(93, 166, 225, 0.2);
+}
+
