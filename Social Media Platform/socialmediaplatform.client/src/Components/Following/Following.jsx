@@ -38,7 +38,14 @@ const Following = ({ username }) => {
         setIsLoading(true);
 
         try {
-            const response = await fetch(`https://localhost:44354/follow/GetFollowersByUser/${userId}`);
+            const response = await fetch(`https://localhost:44354/follow/getFollowersByUser/${userId}`,{
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                }
+            });
+            
             const data = await response.json();
             console.log("Fetched Followers:", data);
             setFollowers(data);

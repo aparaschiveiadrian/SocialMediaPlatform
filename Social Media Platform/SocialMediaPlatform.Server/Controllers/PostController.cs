@@ -15,7 +15,6 @@ public class PostController : ControllerBase
 {
     private readonly PostRepository _postRepo;
     private readonly UserManager<ApplicationUser> _userManager;
-    
 
     public PostController(PostRepository postRepo, UserManager<ApplicationUser> userManager)
     {
@@ -32,6 +31,7 @@ public class PostController : ControllerBase
         {
             return NotFound();
         }
+
         return Ok(post);
     }
 
@@ -44,6 +44,7 @@ public class PostController : ControllerBase
         {
             return NotFound();
         }
+
         return Ok(posts);
     }
 
@@ -56,6 +57,7 @@ public class PostController : ControllerBase
         {
             return NotFound();
         }
+
         return Ok(posts);
     }
 
@@ -69,8 +71,31 @@ public class PostController : ControllerBase
         {
             return Unauthorized(userId);
         }
+
         var post = postDto.ToPostFromCreateDto(userId);
         _postRepo.CreatePost(post);
         return Ok(post);
     }
+
+    [HttpDelete]
+    [Route("post/delete/{postId}")]
+    [Authorize]
+    public IActionResult DeletePost([FromRoute] int postId)
+    {
+        var userId = _userManager.GetUserId(User);
+        var post = _postRepo.GetPostById(postId);
+        if (post == null)
+        {
+            return NotFound();
+        }
+
+        if (post.UserId != userId)
+        {
+            return Unauthorized(userId);
+        }
+        
+        _postRepo.DeletePost(post);
+        return Ok(post);
+    }
+
 }

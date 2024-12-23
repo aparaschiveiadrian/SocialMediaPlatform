@@ -71,4 +71,16 @@ public class PostRepository
         _context.SaveChanges();
         return post;
     }
+
+    public Post DeletePost(Post post)
+    {
+        _context.Posts.Remove(post);
+        var comments = _context.Comments.Where(c => c.PostId == post.Id);
+        foreach (var comment in comments)
+        {
+            _context.Comments.Remove(comment);
+        }
+        _context.SaveChanges();
+        return post;
+    }
 }
