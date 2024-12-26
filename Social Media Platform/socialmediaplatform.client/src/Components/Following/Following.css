@@ -1,44 +1,47 @@
 ﻿.followingContainer {
-    color: #11a0ed; 
+    color: #11a0ed;
     display: flex;
-    gap: 1.5rem; 
+    gap: 1.5rem;
     padding: 1rem;
-    background: #1e1e2f; 
+    background: #1e1e2f;
     border-radius: 15px;
     border: 1px solid rgba(17, 160, 237, 0.25);
-    align-items: center; 
-    justify-content: space-around; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8); 
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
     transition: box-shadow 0.3s ease;
 }
 
 .followers, .following {
     display: flex;
     flex-direction: column;
-    align-items: center; 
-    font-size: 1.1rem; 
+    align-items: center;
+    font-size: 1.1rem;
     font-weight: bold;
-    cursor: pointer;
-    text-decoration: none;
-    color: #11a0ed; 
+    color: #11a0ed;
     transition: color 0.3s ease;
 }
 
 .followers:hover, .following:hover {
-    color: #5da6e1; 
+    color: #5da6e1;
 }
 
-.followers a, .following a {
+.followers button, .following button {
+    background: none;
+    border: none;
     text-decoration: none;
-    color: inherit; 
-    font-size: 0.9rem; 
-    font-weight: normal;
-    margin-top: 5px;
-    transition: color 0.2s ease;
+    color: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    transition: color 0.3s ease, background-color 0.3s ease;
 }
 
-.followers a:hover, .following a:hover {
-    color: #c7e8ff; 
+.followers button:hover, .following button:hover {
+    color: #c7e8ff;
+    background-color: rgba(93, 166, 225, 0.2);
 }
 
 .followingContainer.error {
@@ -52,9 +55,3 @@
     border-radius: 10px;
     transition: background-color 0.3s;
 }
-
-.followers:hover,
-.following:hover {
-    background-color: rgba(93, 166, 225, 0.2);
-}
-

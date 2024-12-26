@@ -1,0 +1,91 @@
+﻿.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.modalContent {
+    background: #1e2029;
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    width: 90%;
+    max-width: 450px;
+    max-height: 80%;
+    overflow-y: auto;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    animation: scaleUp 0.3s ease;
+    position: relative;
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    color: #ff5555;
+    font-size: 22px;
+    cursor: pointer;
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.closeButton:hover {
+    color: #ff4444;
+    transform: scale(1.2);
+}
+
+h2 {
+    margin-bottom: 20px; 
+    font-size: 1.5rem;
+    color:var(--textColor);
+    text-align: center;
+}
+
+.userList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.userListItem {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 16px;
+    margin: 8px 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.userListItem:hover {
+    background-color: rgba(93, 166, 225, 0.2);
+    transform: translateY(-3px); 
+}
+
+.userLink {
+    text-decoration: none;
+    color: #5da6e1;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.userLink:hover {
+    color: #ffffff;
+}
+
+.userName {
+    font-size: 0.9rem;
+    color: #c7c7c7;
+    margin-top: 4px; 
+}

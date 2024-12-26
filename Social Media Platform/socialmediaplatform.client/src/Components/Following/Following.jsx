@@ -1,5 +1,6 @@
 ﻿import './Following.css';
 import { useState, useEffect } from 'react';
+import ViewFollowingModal from "@/Components/ViewFollowingModal/ViewFollowingModal.jsx";
 
 const Following = ({ username }) => {
     const [userId, setUserId] = useState(null);
@@ -7,24 +8,21 @@ const Following = ({ username }) => {
     const [error, setError] = useState(null);
     const [followings, setFollowings] = useState([]);
     const [followers, setFollowers] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [modalContent, setModalContent] = useState([]);
+    const [listType, setListType] = useState("");
     
     const fetchUserId = async () => {
-        setIsLoading(true);
-        setError(null);
-
         try {
             const response = await fetch(`https://localhost:44354/getUserIdByUsername/${username}`);
-
-            if (!response.ok) {
-                console.error(`Failed to fetch user ID for username: ${username}. Status: ${response.status}`);
+            if (response.ok) {
+                const rawData = await response.json();
+                setUserId(rawData.userId);
+                console.log("Fetched User ID:", rawData.userId);
+                setError(null); 
+            } else {
                 setError("Failed to fetch user ID.");
-                return;
             }
-
-            const rawData = await response.json();
-            setUserId(rawData.userId); 
-            console.log("Fetched User ID:", rawData.userId);
-
         } catch (err) {
             console.error("Error fetching user ID:", err);
             setError("Failed to fetch user ID. Please try again later.");
@@ -32,40 +30,74 @@ const Following = ({ username }) => {
             setIsLoading(false);
         }
     };
-    
-    const fetchFollowers = async () => {
-        if (!userId) return; 
-        setIsLoading(true);
+
+    const fetchFollowersAndFollowings = async () => {
+        if (!userId) return;
 
         try {
-            const response = await fetch(`https://localhost:44354/follow/getFollowersByUser/${userId}`,{
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`,
-                }
-            });
-            
-            const data = await response.json();
-            console.log("Fetched Followers:", data);
-            setFollowers(data);
+            const [followersResponse, followingsResponse] = await Promise.all([
+                fetch(`https://localhost:44354/follow/getFollowersByUser/${userId}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                    },
+                }),
+                fetch(`https://localhost:44354/follow/getFollowingsByUser/${userId}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                    },
+                }),
+            ]);
+
+            if (followersResponse.ok) {
+                const followersData = await followersResponse.json();
+                setFollowers(followersData);
+                console.log("Fetched Followers:", followersData);
+            } else {
+                setError("Failed to fetch followers.");
+            }
+
+            if (followingsResponse.ok) {
+                const followingsData = await followingsResponse.json();
+                setFollowings(followingsData);
+                console.log("Fetched Followings:", followingsData);
+            } else {
+                setError("Failed to fetch followings.");
+            }
         } catch (err) {
-            console.error("Error fetching followers:", err);
-            setError("Failed to fetch user followers list. Please try again later.");
-        } finally {
-            setIsLoading(false);
+            console.error("Error fetching followers or followings:", err);
+            setError("Failed to fetch user followers or followings. Please try again later.");
         }
     };
-    
+
+    const openModal = (contentType) => {
+        if (contentType === 'followers') {
+            setModalContent((prev)=>followers);
+            setListType((prev)=>'Followers List')
+        } else if (contentType === 'followings') {
+            setModalContent((prev)=>followings);
+            setListType((prev)=>'Followings List');
+        }
+        setShowModal(true);
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
+        setModalContent([]); 
+    };
+
     useEffect(() => {
         if (username) {
             fetchUserId();
         }
     }, [username]);
-    
+
     useEffect(() => {
         if (userId) {
-            fetchFollowers();
+            fetchFollowersAndFollowings();
         }
     }, [userId]);
 
@@ -80,11 +112,23 @@ const Following = ({ username }) => {
     return (
         <div className="followingContainer">
             <div className="followers">
-                <a>{followers.length} Followers</a>
+                <button onClick={() => openModal('followers')}>
+                    {followers.length} Followers
+                </button>
             </div>
             <div className="following">
-                <a>{followings.length} Following</a>
+                <button onClick={() => openModal('followings')}>
+                    {followings.length} Following
+                </button>
             </div>
+
+            {showModal && (
+                <ViewFollowingModal
+                    list={listType}
+                    content={modalContent}
+                    onClose={closeModal}
+                />
+            )}
         </div>
     );
 };
