@@ -17,4 +17,7 @@ public class ApplicationUser : IdentityUser
     
     public ICollection<Follow> Following { get; set; }
     public ICollection<Follow> Followers { get; set; }
+    
+    public virtual ICollection<Group> Groups { get; set; }
+    
 }
