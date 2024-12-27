@@ -1,0 +1,56 @@
+﻿.unfollowBtn {
+    width: 120px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: rgb(15, 28, 41);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition-duration: 0.3s;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.31);
+    gap: 0.2rem;
+}
+
+.IconContainer {
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 2;
+    transition-duration: 0.3s;
+}
+
+.text-unfollow {
+    height: 100%;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fe6262;
+    z-index: 1;
+    transition-duration: 0.3s;
+    font-size: 1rem;
+}
+
+.unfollowBtn:hover .IconContainer {
+    width: 90px;
+    transition-duration: 0.3s;
+    font-size: 1.2rem;
+}
+
+.unfollowBtn:hover .text-unfollow {
+    transform: translate(10px);
+    width: 0;
+    font-size: 0;
+    transition-duration: 0.3s;
+}
+
+.unfollowBtn:active {
+    transform: scale(1.5);
+    transition-duration: 0.3s;
+}

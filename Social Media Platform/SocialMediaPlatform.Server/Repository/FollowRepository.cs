@@ -46,7 +46,7 @@ public class FollowRepository
      public IEnumerable <string?> GetFollowingByUser(string followerId)
      {
          var followingList = _context.Follows
-             .Where(f => f.FollowerId == followerId)
+             .Where(f => f.FollowerId == followerId && f.IsPending == false)
              .Select(f => f.FollowingId)
              .ToList();
          var followingUsernames = _context.Users
@@ -63,7 +63,7 @@ public class FollowRepository
      public IEnumerable<string?> GetFollowerByUser(string followedId)
      {
          var followerIds = _context.Follows
-             .Where(f => f.FollowingId == followedId)
+             .Where(f => f.FollowingId == followedId && f.IsPending == false)
              .Select(f => f.FollowerId)
              .ToList();
 
