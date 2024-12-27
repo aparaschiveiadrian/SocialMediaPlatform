@@ -1,6 +1,6 @@
 ﻿import './ViewFollowingModal.css';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom';
 
 const ViewFollowingModal = ({ list, content, onClose }) => {
     const [userDetails, setUserDetails] = useState([]);
@@ -38,6 +38,8 @@ const ViewFollowingModal = ({ list, content, onClose }) => {
     useEffect(() => {
         if (content && content.length > 0) {
             fetchUserDetails();
+        } else {
+            setLoading(false);
         }
     }, [content]);
 
@@ -52,19 +54,27 @@ const ViewFollowingModal = ({ list, content, onClose }) => {
                     <p>Loading...</p>
                 ) : error ? (
                     <p className="error">{error}</p>
+                ) : content.length === 0 ? (
+                    <p>There are no users in the list.</p>
                 ) : (
                     <ul className="userList">
-                        {userDetails.map((user, index) => (
-                            <li key={index} className="userListItem">
-                                <Link to={`/profile/${user.username}`} className="userLink">
-                                    <strong>{user.username}</strong> <br/>
-                                    <span className="userName">{`${user.firstName} ${user.lastName}`}</span>
-                                </Link>
-                            </li>
-                        ))}
+                        {userDetails.length > 0 ? (
+                            userDetails.map((user, index) => (
+                                <li key={index} className="userListItem">
+                                    <Link to={`/profile/${user.username}`} className="userLink">
+                                        <strong>{user.username}</strong> <br />
+                                        <span className="userName">{`${user.firstName} ${user.lastName}`}</span>
+                                    </Link>
+                                </li>
+                            ))
+                        ) : (
+                            <div className="userList">There are no users.</div>
+                        )}
                     </ul>
                 )}
-                {!loading && userDetails.length === 0 && !error && <p>No items to display.</p>}
+                {!loading && userDetails.length === 0 && !error && content.length > 0 && (
+                    <p>No items to display.</p>
+                )}
             </div>
         </div>
     );

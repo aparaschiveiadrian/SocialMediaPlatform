@@ -11,7 +11,7 @@ const ProfilePage = () => {
     const [profile, setProfile] = useState(null);
     const [error, setError] = useState("");
     const [postList, setPostList] = useState([]);
-    const [loading, setLoading] = useState(true); // Unified loading state
+    const [loading, setLoading] = useState(true); 
     const [followStatus, setFollowStatus] = useState("Not Following");
 
     // Fetch follow status
@@ -119,7 +119,7 @@ const ProfilePage = () => {
                             <Following username={username} />
                             <span className="subtitle">User's posts</span>
                             <div className="postList">
-                                {profile.isPrivate && username !== localStorage.getItem('username') ? (
+                                {profile.isPrivate && username !== localStorage.getItem('username') && followStatus!== 'Following' ? (
                                     <>
                                         <p style={{ color: "white" }}>This user's profile is private.</p>
                                         <p style={{ color: "white" }}>You have to be a follower in order to view posts.</p>

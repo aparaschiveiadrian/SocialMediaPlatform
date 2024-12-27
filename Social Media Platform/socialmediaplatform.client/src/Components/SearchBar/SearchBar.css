@@ -57,7 +57,7 @@
 }
 .searchedUser{
     
-    background-color: var(--textColor, #333);
+    background-color: #132239;
 
 }
 .searchedUser a{
@@ -68,7 +68,7 @@ a:focus{
      color: #ffffff;
  }
 .searchedUser:hover{
-    background-color: #b5d3f3;
+    background-color: #2484f1;
 }
 .resultInfo{
     display: flex;
