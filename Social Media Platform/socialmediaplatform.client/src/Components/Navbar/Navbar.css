@@ -1,7 +1,8 @@
 ﻿nav {
-    position: absolute;
+    position: fixed; 
     left: 0;
     right: 0;
+    top: 0; 
     background-color: var(--backgroundColor);
     padding: 1rem 0;
     box-shadow: 0 4px 10px 0 rgba(255, 255, 255, 0.1);
@@ -11,11 +12,12 @@
     transition: background-color 0.5s ease, box-shadow 0.5s ease;
 }
 
+
 nav.sticky {
-    position: fixed;
     background-color: rgb(6, 83, 248);
     box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
 }
+
 
 .mainNav {
     display: flex;
@@ -26,6 +28,7 @@ nav.sticky {
     gap: 1rem;
     padding: 0 1rem;
 }
+
 
 .logo {
     font-size: 1.3rem;
@@ -41,18 +44,20 @@ nav.sticky {
 }
 
 
-
 .navbar {
     display: flex;
     gap: 1.2rem;
+    list-style: none; 
 }
 
 .navbar li {
-    list-style: none;
+    list-style: none; 
 }
 
 a {
-    text-decoration: none;
+    text-decoration: none;  
+    color: var(--textColor);
+    font-size: 1rem; 
 }
 
 .menuLink {
@@ -67,26 +72,35 @@ a {
 
 .menuLink:hover {
     color: rgba(255, 255, 255, 0.9);
-    background-color: rgb(17, 160, 237);
+    background-color: rgba(17, 160, 237, 0.29);
 }
-.logout:hover,.signin:hover {
+
+.logout:hover, .signin:hover {
     color: rgba(255, 255, 255, 0.9);
-    background-color: rgb(237, 17, 68);
+    background-color: rgb(237, 17, 68); 
 }
+
 
 @media (max-width: 768px) {
     .mainNav {
         flex-direction: column;
-        gap: 0.8rem;
+        align-items: flex-start;
     }
 
-    .searchBar {
-        max-width: 100%;
+    .navbar {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    .menuLink {
+        width: 100%;
+        text-align: left;
+        padding: 0.5rem;
     }
 }
 
 @media (max-width: 480px) {
-    .searchInput,
     .menuLink {
         font-size: 0.8rem;
     }

@@ -3,16 +3,21 @@ import Cookies from "js-cookie";
 import { Link } from 'react-router-dom';
 import { useEffect } from "react";
 import SearchBar from "@/Components/SearchBar/SearchBar.jsx";
+import SVGnotifications from "@/Components/SVGs/SVGnotifications.jsx";
 
 const Navbar = () => {
     useEffect(() => {
         const stickyNav = () => {
-            const headerHeight = document.querySelector("header")?.offsetHeight || 0;
+            const header = document.querySelector("header");
             const navbar = document.querySelector("nav");
+
+            if (!header || !navbar) return;
+
+            const headerHeight = header.offsetHeight;
             if (window.scrollY > headerHeight) {
-                navbar?.classList.add("sticky");
+                navbar.classList.add("sticky");
             } else {
-                navbar?.classList.remove("sticky");
+                navbar.classList.remove("sticky");
             }
         };
 
@@ -27,34 +32,19 @@ const Navbar = () => {
     const username = localStorage.getItem("username");
 
     const logOut = () => {
-            
-            Object.keys(localStorage).forEach((key) => {
-                localStorage.removeItem(key);
-            })
-
-        window.location.reload();
+        Object.keys(localStorage).forEach((key) => {
+            localStorage.removeItem(key);
+        });
+        Cookies.remove("session"); 
+        window.location.href = "/"; 
     };
 
     return (
         <header>
             <nav>
                 <div className="mainNav">
-                    <Link to="/" className="logo">Militan Media</Link>
+                    <Link to="/" className="logo">Militan</Link>
                     <SearchBar />
-                    {/*<form className="searchBar">
-                        <input
-                            type="text"
-                            name="searchInput"
-                            placeholder="Search users..."
-                            className="searchInput"
-                            onKeyDown={(e) => {
-                                if (e.key === 'Enter') {
-                                    e.preventDefault();
-                                    console.log(`Searching for: ${e.target.value}`);
-                                }
-                            }}
-                        />
-                    </form>*/}
 
                     <ul className="navbar">
                         <li className="menuItem">
@@ -69,8 +59,12 @@ const Navbar = () => {
                                     <Link to={`/profile/${username}`} className="menuLink">{username}</Link>
                                 </li>
                                 <li className="menuItem">
-                                    <a className="menuLink logout" onClick={logOut}>Logout
-                                    </a>
+                                    <Link to={`/notifications`} className="menuLink">
+                                        <SVGnotifications />
+                                    </Link>
+                                </li>
+                                <li className="menuItem">
+                                    <a className="menuLink logout" onClick={logOut}>Logout</a>
                                 </li>
                             </>
                         ) : (
