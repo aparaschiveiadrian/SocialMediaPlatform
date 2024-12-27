@@ -2,10 +2,21 @@
 import "./Profile.css";
 import SVGprofile from "@/Components/SVGs/SVGprofile.jsx";
 import ProfileEditModal from "@/Components/ProfileEditModal/ProfileEditModal.jsx";
-
-const ProfileCard = ({ firstName, lastName, username, initialDescription, initialVisibility }) => {
+import FollowButton from "@/Components/Buttons/FollowButton/FollowButton.jsx";
+import PendingButton from "@/Components/Buttons/PendingButton/PendingButton.jsx";
+import FollowingButton from "@/Components/Buttons/FollowingButton/FollowingButton.jsx";
+import UnfollowButton from "@/Components/Buttons/UnfollowButton/UnfollowButton.jsx";
+const ProfileCard = ({
+                         firstName,
+                         lastName,
+                         username,
+                         initialDescription,
+                         initialVisibility,
+                         followStatus,
+                         setFollowStatus,
+                     }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    
+
     const toggleModal = () => setIsModalOpen(!isModalOpen);
 
     const renderProfileContent = () => (
@@ -28,17 +39,34 @@ const ProfileCard = ({ firstName, lastName, username, initialDescription, initia
                     {renderProfileContent()}
                 </div>
                 <div className="profile-footer">
-                    {
-                        username === localStorage.getItem("username") ? (
-                            <button className="profile-button" onClick={toggleModal}>
-                                Edit Profile
-                            </button>
-                        ) : (
-                            <button className="profile-button" onClick={() => {}}>
-                                Follow
-                            </button>
-                        )
-                    }
+                    {username === localStorage.getItem("username") ? (
+                        <button className="profile-button" onClick={toggleModal}>
+                            Edit Profile
+                        </button>
+                    ) : (
+                            followStatus === "Following" ? (
+                                <div style={{ display: "flex", gap: "1rem" }}>
+                                    <FollowingButton/>
+                                    <UnfollowButton
+                                    text={'Unfollow'}
+                                    username={username}
+                                    />
+                                </div>
+                            ) : followStatus === "Pending" ? (
+                                <div style={{ display: "flex", gap: "1rem" }}>
+                                    <PendingButton/>
+                                    <UnfollowButton
+                                        text={'Cancel'}
+                                        username={username}
+                                    />
+                                </div>
+                            ) :  (
+                                <FollowButton 
+                                username={username}
+                                />
+                            )
+                    )
+                        }
                 </div>
             </div>
 

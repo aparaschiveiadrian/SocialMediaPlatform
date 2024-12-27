@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Runtime.InteropServices.JavaScript;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using SocialMediaPlatform.Server.Dtos.Follow;
 using SocialMediaPlatform.Server.Migrations;
 using SocialMediaPlatform.Server.Models;
 using SocialMediaPlatform.Server.Repository;
@@ -169,10 +172,18 @@ public class FollowController : ControllerBase
          return Ok(followRelation);
      }
 
+    
      [HttpGet]
-     [Route("checkIfFollower/{followingId}")]
-     public IActionResult CheckIfFollower([FromRoute] string followingId) // verifici daca ai la follow un cont
+     [Route("checkIfFollower/{username}")]
+     public async Task<IActionResult> CheckIfFollower([FromRoute] string username)
      {
+         var following = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == username);
+         if (following == null)
+         {
+             return NotFound("This user doesn't exist.");
+         }
+
+         var followingId = following.Id;
          var userId = _userManager.GetUserId(User);
          if (userId == null)
          {
@@ -180,12 +191,28 @@ public class FollowController : ControllerBase
          }
 
          var followRelation = _followRepo.GetFollowRelation(userId, followingId);
-         if (followRelation == null || followRelation.IsPending)
+         if (followRelation == null)
          {
              return BadRequest("You don't follow this user.");
          }
-         return Ok(followRelation);
+
+         if (followRelation.IsPending)
+         {
+             return StatusCode(202, "The follow request is pending.");
+         }
+
+         var followRelationDto = new FollowRelationDto
+         {
+             FollowerId = followRelation.FollowerId,
+             FollowingId = followRelation.FollowingId,
+             IsPending = followRelation.IsPending
+         };
+
+         return Ok(followRelationDto);
      }
+
+
+
 
      [HttpGet]
      [Route("getFollowRequests")]
