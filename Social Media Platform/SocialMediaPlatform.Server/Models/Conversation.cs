@@ -3,10 +3,10 @@
 public class Conversation
 {
     public int Id { get; set; }
+    public string Name { get; set; }
     public string? ModeratorId { get; set; } = null;
-    public DateTime LastMessageSentAt { get; set; }
-
-    // Direct collections of ApplicationUser
+    public DateTime? LastMessageSentAt { get; set; } = DateTime.UtcNow;
+    
     public virtual ICollection<ApplicationUser> PendingUsers { get; set; } = new List<ApplicationUser>();
     public virtual ICollection<ApplicationUser> SeenUserList { get; set; } = new List<ApplicationUser>();
 

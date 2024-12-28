@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "eBiv/2VrhdxKn7pYxNc7+IH3w5mE7y5CTmhGOCBZsQ0=",
+  "Hash": "Ljynf1RKuYL7xT5h88GCwIK/aEEiNf+FgivUyn9DUyM=",
   "Source": "SocialMediaPlatform.Server",
   "BasePath": "_content/SocialMediaPlatform.Server",
   "Mode": "Default",
@@ -11,10 +11,10 @@
       "Version": 2,
       "Source": "socialmediaplatform.client",
       "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
-      "AdditionalPublishProperties": "",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
       "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
       "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
-      "AdditionalBuildProperties": "",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
       "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
     }
   ],
