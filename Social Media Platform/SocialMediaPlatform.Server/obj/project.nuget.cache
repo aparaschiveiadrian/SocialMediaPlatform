@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GHC7IyISQTo=",
+  "dgSpecHash": "SMdWWIiamJM=",
   "success": true,
-  "projectFilePath": "C:\\Users\\amito\\RiderProjects\\SocialMediaPlatform\\Social Media Platform\\SocialMediaPlatform.Server\\SocialMediaPlatform.Server.csproj",
+  "projectFilePath": "C:\\Users\\amito\\RiderProjects\\SocialMediaPlatform\\Social Media Platform\\socialmediaplatform.server\\SocialMediaPlatform.Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\amito\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\amito\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

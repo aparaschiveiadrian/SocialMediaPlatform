@@ -22,21 +22,6 @@ namespace SocialMediaPlatform.Server.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("ApplicationUserGroup", b =>
-                {
-                    b.Property<int>("GroupsId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("UsersId")
-                        .HasColumnType("text");
-
-                    b.HasKey("GroupsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("ApplicationUserGroup");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -65,13 +50,13 @@ namespace SocialMediaPlatform.Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b4dc92ce-1609-4882-be05-221e23f20ee9",
+                            Id = "494d2613-8e58-4c66-a6c9-45967508cebb",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "44272882-4498-4cbd-b580-fe94d49b007b",
+                            Id = "9dfbb631-3fdb-4e27-a9e3-d13c582c3000",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -181,6 +166,36 @@ namespace SocialMediaPlatform.Server.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("PendingUsers", b =>
+                {
+                    b.Property<int>("ConversationId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
+
+                    b.HasKey("ConversationId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("PendingUsers");
+                });
+
+            modelBuilder.Entity("SeenUsers", b =>
+                {
+                    b.Property<int>("ConversationId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
+
+                    b.HasKey("ConversationId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("SeenUsers");
                 });
 
             modelBuilder.Entity("SocialMediaPlatform.Server.Models.ApplicationUser", b =>
@@ -296,6 +311,25 @@ namespace SocialMediaPlatform.Server.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("SocialMediaPlatform.Server.Models.Conversation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("LastMessageSentAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("ModeratorId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Conversations");
+                });
+
             modelBuilder.Entity("SocialMediaPlatform.Server.Models.Follow", b =>
                 {
                     b.Property<string>("FollowerId")
@@ -314,7 +348,7 @@ namespace SocialMediaPlatform.Server.Migrations
                     b.ToTable("Follows");
                 });
 
-            modelBuilder.Entity("SocialMediaPlatform.Server.Models.Group", b =>
+            modelBuilder.Entity("SocialMediaPlatform.Server.Models.Message", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -322,17 +356,27 @@ namespace SocialMediaPlatform.Server.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ModeratorId")
+                    b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Name")
+                    b.Property<int>("ConversationId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("SentAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Groups");
+                    b.HasIndex("ConversationId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Message");
                 });
 
             modelBuilder.Entity("SocialMediaPlatform.Server.Models.Post", b =>
@@ -368,19 +412,19 @@ namespace SocialMediaPlatform.Server.Migrations
                     b.ToTable("Posts");
                 });
 
-            modelBuilder.Entity("ApplicationUserGroup", b =>
+            modelBuilder.Entity("SocialMediaPlatform.Server.Models.UserConversation", b =>
                 {
-                    b.HasOne("SocialMediaPlatform.Server.Models.Group", null)
-                        .WithMany()
-                        .HasForeignKey("GroupsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
 
-                    b.HasOne("SocialMediaPlatform.Server.Models.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int?>("ConversationId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("UserId", "ConversationId");
+
+                    b.HasIndex("ConversationId");
+
+                    b.ToTable("UserConversations");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -434,6 +478,36 @@ namespace SocialMediaPlatform.Server.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("PendingUsers", b =>
+                {
+                    b.HasOne("SocialMediaPlatform.Server.Models.Conversation", null)
+                        .WithMany()
+                        .HasForeignKey("ConversationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SocialMediaPlatform.Server.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SeenUsers", b =>
+                {
+                    b.HasOne("SocialMediaPlatform.Server.Models.Conversation", null)
+                        .WithMany()
+                        .HasForeignKey("ConversationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SocialMediaPlatform.Server.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("SocialMediaPlatform.Server.Models.Comment", b =>
                 {
                     b.HasOne("SocialMediaPlatform.Server.Models.Post", "Post")
@@ -472,6 +546,25 @@ namespace SocialMediaPlatform.Server.Migrations
                     b.Navigation("Following");
                 });
 
+            modelBuilder.Entity("SocialMediaPlatform.Server.Models.Message", b =>
+                {
+                    b.HasOne("SocialMediaPlatform.Server.Models.Conversation", "Conversation")
+                        .WithMany("Messages")
+                        .HasForeignKey("ConversationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SocialMediaPlatform.Server.Models.ApplicationUser", "User")
+                        .WithMany("Messages")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Conversation");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("SocialMediaPlatform.Server.Models.Post", b =>
                 {
                     b.HasOne("SocialMediaPlatform.Server.Models.ApplicationUser", "User")
@@ -479,6 +572,25 @@ namespace SocialMediaPlatform.Server.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("SocialMediaPlatform.Server.Models.UserConversation", b =>
+                {
+                    b.HasOne("SocialMediaPlatform.Server.Models.Conversation", "Conversation")
+                        .WithMany("UserConversations")
+                        .HasForeignKey("ConversationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SocialMediaPlatform.Server.Models.ApplicationUser", "User")
+                        .WithMany("UserConversations")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Conversation");
 
                     b.Navigation("User");
                 });
@@ -491,7 +603,18 @@ namespace SocialMediaPlatform.Server.Migrations
 
                     b.Navigation("Following");
 
+                    b.Navigation("Messages");
+
                     b.Navigation("Posts");
+
+                    b.Navigation("UserConversations");
+                });
+
+            modelBuilder.Entity("SocialMediaPlatform.Server.Models.Conversation", b =>
+                {
+                    b.Navigation("Messages");
+
+                    b.Navigation("UserConversations");
                 });
 
             modelBuilder.Entity("SocialMediaPlatform.Server.Models.Post", b =>

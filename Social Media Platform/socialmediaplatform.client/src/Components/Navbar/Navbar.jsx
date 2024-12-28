@@ -51,7 +51,7 @@ const Navbar = () => {
                             <Link to="/" className="menuLink">Home</Link>
                         </li>
                         <li className="menuItem">
-                            <Link to="/home" className="menuLink">Groups</Link>
+                            <Link to="/home" className="menuLink">Messages</Link>
                         </li>
                         {authToken ? (
                             <>

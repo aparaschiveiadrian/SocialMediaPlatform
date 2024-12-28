@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.Collections;
+using Microsoft.AspNetCore.Identity;
 
 namespace SocialMediaPlatform.Server.Models;
 
@@ -17,7 +18,8 @@ public class ApplicationUser : IdentityUser
     
     public ICollection<Follow> Following { get; set; }
     public ICollection<Follow> Followers { get; set; }
-    
-    public virtual ICollection<Group> Groups { get; set; }
-    
+
+    public virtual ICollection<UserConversation>? UserConversations { get; set; }
+    public virtual ICollection<Message>? Messages { get; set; }
+
 }
