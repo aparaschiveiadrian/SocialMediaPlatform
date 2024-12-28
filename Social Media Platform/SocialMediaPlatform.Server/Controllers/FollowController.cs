@@ -243,4 +243,23 @@ public class FollowController : ControllerBase
          var followRequests = _followRepo.AcceptAllRequests(userId);
          return Ok(followRequests);
      }
+
+     [HttpGet]
+     [Route("getFollowCounter/{username}")]
+     public IActionResult GetFollowCounter(string username)
+     {
+         var user = _userManager.Users.FirstOrDefault(x => x.UserName == username);
+         if (user == null)
+         {
+             return NotFound("User not found.");
+         }
+         var userId = user.Id;
+         var followerCounter = _followRepo.GetFollowerCounter(userId);
+         var followingCounter = _followRepo.GetFollowingCounter(userId);
+         return Ok(new
+         {
+             followerCounter,
+             followingCounter
+         });
+     }
 }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SocialMediaPlatform.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+46f8a5a563f00cf8211eb24060cb9ef00c19c752")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ab57828c780067585a6dc8c0bf49348dad50076c")]
 [assembly: System.Reflection.AssemblyProductAttribute("SocialMediaPlatform.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SocialMediaPlatform.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

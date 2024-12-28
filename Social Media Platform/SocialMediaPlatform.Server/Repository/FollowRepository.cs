@@ -111,4 +111,15 @@ public class FollowRepository
          _context.SaveChanges();
          return followRequests;
      }
+
+     public int GetFollowerCounter(string userId)
+     {
+         var followerCounter = _context.Follows.Count(x => x.FollowingId == userId && x.IsPending == false);
+         return followerCounter;
+     }
+     public int GetFollowingCounter(string userId)
+     {
+         var followingCounter = _context.Follows.Count(x => x.FollowerId == userId && x.IsPending == false);
+         return followingCounter;
+     }
 }
