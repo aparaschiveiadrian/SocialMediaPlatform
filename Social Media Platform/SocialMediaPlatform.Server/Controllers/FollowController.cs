@@ -230,7 +230,7 @@ public class FollowController : ControllerBase
          return Ok(followRequests);
      }
 
-     [HttpGet]
+     [HttpPost]
      [Route("acceptAllRequests")]
      [Authorize]
      public IActionResult AcceptAllRequests()

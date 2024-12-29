@@ -116,7 +116,11 @@ const ProfilePage = () => {
                                 followStatus={followStatus}
                                 setFollowStatus={setFollowStatus}
                             />
-                            <Following username={username} />
+                            <Following 
+                                username={username}
+                                isPrivate={profile.isPrivate}
+                                isFollowing={followStatus === 'Following'}
+                            />
                             <span className="subtitle">User's posts</span>
                             <div className="postList">
                                 {profile.isPrivate && username !== localStorage.getItem('username') && followStatus!== 'Following' ? (
