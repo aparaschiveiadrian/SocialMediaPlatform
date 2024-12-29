@@ -55,7 +55,7 @@ const ViewFollowingModal = ({ list, content, onClose }) => {
                 ) : error ? (
                     <p className="error">{error}</p>
                 ) : content.length === 0 ? (
-                    <p>There are no users in the list.</p>
+                    <p>There are no users in the list or you must be a follower in order to view.</p>
                 ) : (
                     <ul className="userList">
                         {userDetails.length > 0 ? (

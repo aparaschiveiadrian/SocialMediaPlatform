@@ -15,6 +15,21 @@ const ProfileEditModal = ({
     const [profilePicture, setProfilePicture] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
+    //function that accepts all incoming follow request when a profile is changed from private to public
+    const acceptAllPendingFollowRequest = async () => {
+        try{
+            const response = await fetch("https://localhost:44354/follow/acceptAllRequests", {
+                method: "POST",
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`,
+                }
+            })
+        }
+        catch (e)
+        {
+            console.error('Unable to accept all pending requests');
+        }
+    }
     const changeVisibility = async () => {
         try {
             const response = await fetch("https://localhost:44354/changePrivacy", {
@@ -29,6 +44,9 @@ const ProfileEditModal = ({
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.message || "Failed to update visibility.");
+            }
+            if(response.ok && initialVisibility && !profileVisibility) {
+                await acceptAllPendingFollowRequest();
             }
         } catch (error) {
             setErrorMessage(error.message);
