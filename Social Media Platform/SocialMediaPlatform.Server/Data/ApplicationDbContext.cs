@@ -47,38 +47,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             .WithMany(c => c.UserConversations)
             .HasForeignKey(uc => uc.ConversationId)
             .OnDelete(DeleteBehavior.Cascade);
-
-        // Configure PendingUsers relationship
-        builder.Entity<Conversation>()
-            .HasMany(c => c.PendingUsers)
-            .WithMany()
-            .UsingEntity<Dictionary<string, object>>(
-                "PendingUsers",
-                j => j.HasOne<ApplicationUser>()
-                    .WithMany()
-                    .HasForeignKey("UserId")
-                    .OnDelete(DeleteBehavior.Cascade),
-                j => j.HasOne<Conversation>()
-                    .WithMany()
-                    .HasForeignKey("ConversationId")
-                    .OnDelete(DeleteBehavior.Cascade));
-
-        // Configure SeenUserList relationship
-        builder.Entity<Conversation>()
-            .HasMany(c => c.SeenUserList)
-            .WithMany()
-            .UsingEntity<Dictionary<string, object>>(
-                "SeenUsers",
-                j => j.HasOne<ApplicationUser>()
-                    .WithMany()
-                    .HasForeignKey("UserId")
-                    .OnDelete(DeleteBehavior.Cascade),
-                j => j.HasOne<Conversation>()
-                    .WithMany()
-                    .HasForeignKey("ConversationId")
-                    .OnDelete(DeleteBehavior.Cascade));
-
-
         
     }
 }

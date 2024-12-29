@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SocialMediaPlatform.Server.Data;
@@ -12,9 +13,11 @@ using SocialMediaPlatform.Server.Data;
 namespace SocialMediaPlatform.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241228163609_ConversationNamelll")]
+    partial class ConversationNamelll
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,13 +54,13 @@ namespace SocialMediaPlatform.Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "463b6788-7641-4f77-b8fb-1c70ca8905b2",
+                            Id = "3b67d3c4-4ff0-4a47-8707-286e513790ae",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "ae6c45e2-f66f-4389-b90d-37e18b38994b",
+                            Id = "464df6df-e747-4d2f-b04f-7261558f148a",
                             Name = "User",
                             NormalizedName = "USER"
                         });
