@@ -1,7 +1,7 @@
 ﻿:root {
     --textColor: rgb(237, 239, 243);
     --backgroundColor: #040c1c;
-    --primaryColor: #0653F8FF;
+    --primaryColor: #0067ff;
     --secondaryColor: #b4d2e4;
     --accentColor: #f6f6f6;
 }
@@ -49,4 +49,23 @@ a{
     color: var(--textColor);
     font-weight: 500;
     font-size: 1.6rem;
+}
+
+::-webkit-scrollbar {
+    width: 8px; 
+    height: 8px; 
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #00c3ff; 
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #0074b3;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgba(200, 200, 200, 0.2);
+    border-radius: 10px; 
 }

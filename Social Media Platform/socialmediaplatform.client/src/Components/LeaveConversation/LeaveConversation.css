@@ -1,0 +1,20 @@
+﻿.actionButton {
+    background-color: rgba(255, 69, 58, 0.9); 
+    color: white;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 0.5rem; 
+}
+
+.actionButton:hover {
+    background-color: rgba(255, 69, 58, 1); 
+}
+
+.actionButton:focus {
+    outline: none;
+    box-shadow: 0 0 4px rgba(255, 69, 58, 0.8);
+}
