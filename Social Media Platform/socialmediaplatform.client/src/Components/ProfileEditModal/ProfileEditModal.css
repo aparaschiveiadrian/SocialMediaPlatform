@@ -193,3 +193,23 @@
 .toggle-switch input:checked + .slider::before {
     transform: translateX(30px);
 }
+.picture-preview {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.profile-preview-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc;
+    background-color: #f4f4f4;
+    box-shadow: none;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.profile-preview-image:hover {
+    opacity: 1;
+}

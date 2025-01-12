@@ -1,0 +1,121 @@
+﻿.conversationsPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    color: var(--textColor);
+}
+
+.conversationsLayout {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    height: 80vh; 
+    gap: 1rem;
+    overflow: hidden; 
+}
+
+.groupsPanel {
+    flex: 1;
+    background-color: rgba(31, 31, 31, 0.9);
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: auto; 
+}
+
+.chatPanel {
+    flex: 2;
+    background-color: rgba(31, 31, 31, 0.9);
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+
+
+.groupsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.groupItem {
+    padding: 0.8rem 1rem;
+    border-radius: 6px;
+    background: rgba(47, 47, 47, 0.9);
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    color: var(--textColor);
+}
+
+.groupItem:hover {
+    background-color: rgba(70, 70, 70, 0.9);
+}
+
+.activeGroup {
+    background-color: rgba(70, 143, 255, 0.5);
+    font-weight: bold;
+}
+
+
+.messagesPanel {
+    flex: 2;
+    background-color: rgba(31, 31, 31, 0.9);
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.messagesContainer {
+    margin-top: 1rem;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.messagesList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.messageItem {
+    padding: 1rem;
+    border-radius: 6px;
+    background: rgba(47, 47, 47, 0.9);
+    color: var(--textColor);
+    transition: background-color 0.3s ease;
+}
+
+.messageItem:hover {
+    background-color: rgba(70, 70, 70, 0.9);
+}
+
+.messageContent {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.messageTime {
+    font-size: 0.8rem;
+    color: gray;
+    text-align: right;
+}
+
+.loadingMessage,
+.errorMessage,
+.noMessagesMessage {
+    text-align: center;
+    font-size: 1rem;
+    margin-top: 1rem;
+    color: var(--textColor);
+}
