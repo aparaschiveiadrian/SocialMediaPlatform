@@ -227,5 +227,19 @@ public class UserController : ControllerBase
 
         return Ok(users);
     }
+    [HttpGet("isAdmin")]
+    [Authorize]
+    public IActionResult IsAdmin()
+    {
+        var userId = _userManager.GetUserId(User);
+        var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
+        
+        if (user == null)
+        {
+            return NotFound("User not found.");
+        }
 
+        var isAdmin = _userManager.IsInRoleAsync(user, "Admin").Result; 
+        return Ok(new { IsAdmin = isAdmin });
+    }
 }

@@ -1,6 +1,6 @@
 ﻿namespace SocialMediaPlatform.Server.Models;
 
-public class Conversation
+public class Conversation // e ceva gen grup, tot ce e legat de grup fac aici, dar o sa am si DM-urile
 {
     public int Id { get; set; }
     public string Name { get; set; }

@@ -88,8 +88,10 @@ public class PostController : ControllerBase
         {
             return NotFound();
         }
-
-        if (post.UserId != userId)
+        var user =  _userManager.Users.FirstOrDefault(u => u.Id == userId);
+        var isAdmin = _userManager.IsInRoleAsync(user, "Admin").Result; 
+        
+        if (post.UserId != userId && !isAdmin)
         {
             return Unauthorized(userId);
         }
