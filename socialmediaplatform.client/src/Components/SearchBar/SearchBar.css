@@ -1,0 +1,75 @@
+﻿.searchBar {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    border: solid 1px rgba(11, 175, 207, 0.25);
+    background-color: rgba(19, 27, 53, 0.9);
+    padding: 0.3rem 0.4rem;
+    border-radius: 0.3rem;
+    flex-grow: 1;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.searchInput {
+    flex: 1;
+    border: none;
+    background: transparent;
+    color: #f6f6f6;
+    font-size: 1rem;
+    outline: none;
+    font-style: italic;
+}
+
+.searchInput:focus {
+    font-style: normal;
+}
+
+.searchInput::placeholder {
+    color: var(--placeholderColor, #aaa);
+}
+
+.clearButton {
+    background: transparent;
+    border: none;
+    color: var(--textColor, #333);
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 1;
+    padding: 0 0.2rem;
+    transition: transform 0.2s ease;
+}
+
+.clearButton:hover {
+    transform: scale(1.1);
+}
+.searchedUsersContainer{
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    width: 100%;
+}
+.searchContainer{
+    width: 500px;
+    position: sticky;
+}
+.searchedUsersContainer li{
+    list-style: none;
+}
+.searchedUser{
+    
+    background-color: #132239;
+
+}
+.searchedUser a{
+    width: 100%;
+    padding: 0.6rem;
+}
+a:focus{
+     color: #ffffff;
+ }
+.searchedUser:hover{
+    background-color: #2484f1;
+}
+.resultInfo{
+    display: flex;
+}

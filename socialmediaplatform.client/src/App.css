@@ -1,0 +1,52 @@
+﻿:root {
+    --textColor: rgb(237, 239, 243);
+    --backgroundColor: #040c1c;
+    --primaryColor: #0653F8FF;
+    --secondaryColor: #b4d2e4;
+    --accentColor: #f6f6f6;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background-color: var(--backgroundColor);
+    font-family: "Roboto", sans-serif;
+}
+.headline{
+    color: var(--textColor);
+    font-weight: 500;
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+.btn {
+    font-size: 1.2rem;
+    border-radius: 0.1rem;
+    border: solid white 1px;
+    padding: 0.5rem 1rem;
+    background: none;
+    color: var(--textColor);
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn:hover {
+    cursor: pointer;
+    background-color: var(--accentColor);
+    color: var(--backgroundColor);
+    transform: scale(1.05); 
+    font-weight: 600;
+}
+.errorMessage {
+    color: #f82828;
+}
+a{
+    cursor: pointer;
+}
+.subtitle{
+    color: var(--textColor);
+    font-weight: 500;
+    font-size: 1.6rem;
+}

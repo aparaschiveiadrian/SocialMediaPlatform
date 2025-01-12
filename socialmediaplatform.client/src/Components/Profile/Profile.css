@@ -1,0 +1,133 @@
+﻿.profile-card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+    padding: 1rem;
+    width: 50%;
+}
+
+.profile-card {
+    border-top: 2px solid rgba(17, 160, 237, 0.27);
+    background: #1e1e2f; 
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8); 
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.profile-picture {
+    width: 120px; /* Adjust size as needed */
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden; /* Ensures the image stays within circular boundaries */
+    border: 4px solid #11a0ed; /* Outer border for the image */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 15px; /* Space below the image */
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image fills the circle without distortion */
+    display: block; /* Removes unwanted spacing */
+}
+
+.profile-picture:hover {
+    transform: scale(1.05); /* Slight zoom on hover for interactivity */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.8); /* Enhanced shadow on hover */
+}
+
+
+.profile-header {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-picture svg {
+    fill: #11a0ed; 
+    width: 80px;
+    height: 80px;
+    border: 3px solid #11a0ed;
+    border-radius: 50%;
+    padding: 5px;
+    background: #29293f;
+    transition: transform 0.3s ease;
+}
+.profile-picture:hover svg {
+    transform: scale(1.1);
+}
+
+.profile-name {
+    font-size: 1.8rem;
+    color: #fff; 
+    margin: 0;
+}
+
+.profile-username {
+    font-size: 1.2rem;
+    color: #11a0ed;
+    margin: 5px 0 0;
+}
+
+.profile-description {
+    font-size: 1rem;
+    color: #d3d3d3;
+    margin-top: 10px;
+    
+}
+
+.profile-button {
+    background-color: #29293f;
+    color: #fff;
+    border-radius: 4px;
+    padding: 10px 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    max-width: 250px;
+    border: 1px solid rgba(255, 255, 255, 0.31);
+}
+
+.profile-button:hover {
+    background: #3691ec;
+    transform: scale(1.05);
+}
+
+.profile-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.error-message {
+    margin-top: 80px;
+}
+.profileSection{
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.postList{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+}
+

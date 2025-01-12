@@ -1,0 +1,25 @@
+﻿
+.footer {
+    margin-top: 20rem;
+    background-color: var(--primaryColor);
+    color: var(--textColor);
+    text-align: center;
+    padding: 1rem 0;
+    font-family: "Roboto", sans-serif;
+}
+
+.footer-container {
+    margin-bottom: 1rem;
+}
+
+.footer-logo h2 {
+    font-size: 1.2rem;
+    color: var(--textColor);
+    font-weight: bold;
+}
+
+.footer-bottom p {
+    font-size: 0.9rem;
+    color: var(--textColor);
+    margin: 0;
+}
