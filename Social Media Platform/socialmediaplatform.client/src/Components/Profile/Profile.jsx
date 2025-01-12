@@ -14,12 +14,14 @@ const ProfileCard = ({
                          initialVisibility,
                          followStatus,
                          setFollowStatus,
+                         profilePicture
                      }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const toggleModal = () => setIsModalOpen(!isModalOpen);
 
     const renderProfileContent = () => (
+
         <>
             <h2 className="profile-name">
                 {firstName} {lastName}
@@ -34,7 +36,7 @@ const ProfileCard = ({
             <div className="profile-card">
                 <div className="profile-header">
                     <div className="profile-picture">
-                        <SVGprofile />
+                        <img src={profilePicture || "/../../public/default_profile_picture.png"} alt="Profile"/>
                     </div>
                     {renderProfileContent()}
                 </div>
@@ -44,29 +46,29 @@ const ProfileCard = ({
                             Edit Profile
                         </button>
                     ) : (
-                            followStatus === "Following" ? (
-                                <div style={{ display: "flex", gap: "1rem" }}>
-                                    <FollowingButton/>
-                                    <UnfollowButton
+                        followStatus === "Following" ? (
+                            <div style={{ display: "flex", gap: "1rem" }}>
+                                <FollowingButton/>
+                                <UnfollowButton
                                     text={'Unfollow'}
                                     username={username}
-                                    />
-                                </div>
-                            ) : followStatus === "Pending" ? (
-                                <div style={{ display: "flex", gap: "1rem" }}>
-                                    <PendingButton/>
-                                    <UnfollowButton
-                                        text={'Cancel'}
-                                        username={username}
-                                    />
-                                </div>
-                            ) :  (
-                                <FollowButton 
-                                username={username}
                                 />
-                            )
+                            </div>
+                        ) : followStatus === "Pending" ? (
+                            <div style={{ display: "flex", gap: "1rem" }}>
+                                <PendingButton/>
+                                <UnfollowButton
+                                    text={'Cancel'}
+                                    username={username}
+                                />
+                            </div>
+                        ) :  (
+                            <FollowButton
+                                username={username}
+                            />
+                        )
                     )
-                        }
+                    }
                 </div>
             </div>
 

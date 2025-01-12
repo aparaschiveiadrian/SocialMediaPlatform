@@ -145,6 +145,7 @@ public class UserController : ControllerBase
                  LastName = user.LastName,
                  Description = user.Description,
                  IsPrivate = user.IsPrivate,
+                 ProfilePictureUrl = user.ProfilePictureUrl
              });
     }
     [HttpGet]
@@ -178,39 +179,60 @@ public class UserController : ControllerBase
         }
         return Ok(user);
     }
-    [HttpPut]   
+    [HttpPut]
     [Route("/user/edit")]
     [Authorize]
     public async Task<IActionResult> EditUser([FromBody] UserEditDto userEditDto)
     {
         var userId = _userManager.GetUserId(User);
         var user = _userManager.Users.FirstOrDefault(x => x.Id == userId);
-        if (string.IsNullOrWhiteSpace(userEditDto.FirstName) || string.IsNullOrWhiteSpace(userEditDto.LastName))
+
+        if (user == null)
         {
-            return BadRequest("Empty fields were not modified!");
+            return NotFound("User not found.");
         }
+
+        // Update Profile Picture if provided
+        if (!string.IsNullOrWhiteSpace(userEditDto.ProfilePictureUrl))
+        {
+            user.ProfilePictureUrl = userEditDto.ProfilePictureUrl;
+        }
+
+        // Update First Name if provided
         if (!string.IsNullOrWhiteSpace(userEditDto.FirstName))
         {
             user.FirstName = userEditDto.FirstName;
         }
+
+        // Update Last Name if provided
         if (!string.IsNullOrWhiteSpace(userEditDto.LastName))
         {
             user.LastName = userEditDto.LastName;
         }
-        user.Description = userEditDto.Description;
+
+        // Update Description if provided
+        if (userEditDto.Description != null)
+        {
+            user.Description = userEditDto.Description;
+        }
+
         var result = await _userManager.UpdateAsync(user);
         if (!result.Succeeded)
         {
             return BadRequest("Failed to update user details.");
         }
-        return Ok(new UserEditDto()
+
+        return Ok(new
         {
             FirstName = user.FirstName,
             LastName = user.LastName,
             Description = user.Description,
+            ProfilePictureUrl = user.ProfilePictureUrl
         });
-        
     }
+
+    
+  
 
     [HttpGet]
     [Route("user/allUsers")]
@@ -227,6 +249,37 @@ public class UserController : ControllerBase
 
         return Ok(users);
     }
+    
+    [HttpPut]
+    [Route("/user/edit-profile-picture")]
+    [Authorize]
+    public async Task<IActionResult> EditProfilePicture([FromBody] string profilePictureUrl)
+    {
+        var userId = _userManager.GetUserId(User);
+        var user = _userManager.Users.FirstOrDefault(x => x.Id == userId);
+
+        if (user == null)
+        {
+            return NotFound("User not found.");
+        }
+
+        if (string.IsNullOrWhiteSpace(profilePictureUrl))
+        {
+            return BadRequest("Profile picture URL cannot be empty.");
+        }
+
+        user.ProfilePictureUrl = profilePictureUrl;
+
+        var result = await _userManager.UpdateAsync(user);
+        if (!result.Succeeded)
+        {
+            return BadRequest("Failed to update profile picture.");
+        }
+
+        return Ok(new { ProfilePictureUrl = user.ProfilePictureUrl });
+    }
+
+    
     [HttpGet("isAdmin")]
     [Authorize]
     public IActionResult IsAdmin()

@@ -9,9 +9,9 @@
 
 .profile-card {
     border-top: 2px solid rgba(17, 160, 237, 0.27);
-    background: #1e1e2f; 
+    background: #1e1e2f;
     border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8); 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
     width: 100%;
     max-width: 400px;
     padding: 20px;
@@ -21,6 +21,28 @@
     align-items: center;
     justify-content: space-between;
 
+}
+.profile-picture {
+    width: 120px; 
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden; 
+    border: 4px solid #11a0ed; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.profile-picture:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.8); 
 }
 
 
@@ -33,7 +55,7 @@
 }
 
 .profile-picture svg {
-    fill: #11a0ed; 
+    fill: #11a0ed;
     width: 80px;
     height: 80px;
     border: 3px solid #11a0ed;
@@ -48,7 +70,7 @@
 
 .profile-name {
     font-size: 1.8rem;
-    color: #fff; 
+    color: #fff;
     margin: 0;
 }
 
@@ -62,7 +84,7 @@
     font-size: 1rem;
     color: #d3d3d3;
     margin-top: 10px;
-    
+
 }
 
 .profile-button {
@@ -108,4 +130,3 @@
     align-items: center;
     width: 400px;
 }
-

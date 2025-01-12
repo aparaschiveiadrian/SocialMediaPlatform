@@ -11,7 +11,7 @@ const ProfilePage = () => {
     const [profile, setProfile] = useState(null);
     const [error, setError] = useState("");
     const [postList, setPostList] = useState([]);
-    const [loading, setLoading] = useState(true); 
+    const [loading, setLoading] = useState(true);
     const [followStatus, setFollowStatus] = useState("Not Following");
 
     // Fetch follow status
@@ -115,8 +115,9 @@ const ProfilePage = () => {
                                 initialVisibility={profile.isPrivate}
                                 followStatus={followStatus}
                                 setFollowStatus={setFollowStatus}
+                                profilePicture={profile.profilePictureUrl}
                             />
-                            <Following 
+                            <Following
                                 username={username}
                                 isPrivate={profile.isPrivate}
                                 isFollowing={followStatus === 'Following'}

@@ -1,5 +1,6 @@
 ﻿import React, { useState } from "react";
 import "./ProfileEditModal.css";
+import profile from "@/Components/Profile/Profile.jsx";
 
 const ProfileEditModal = ({
                               firstName,
@@ -13,43 +14,57 @@ const ProfileEditModal = ({
     const [editedDescription, setEditedDescription] = useState(initialDescription);
     const [profileVisibility, setProfileVisibility] = useState(initialVisibility);
     const [profilePicture, setProfilePicture] = useState("");
+    const [previewPicture, setPreviewPicture] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const [isUploading, setIsUploading] = useState(false); //upload status
 
-    //function that accepts all incoming follow request when a profile is changed from private to public
-    const acceptAllPendingFollowRequest = async () => {
-        try{
-            const response = await fetch("https://localhost:44354/follow/acceptAllRequests", {
-                method: "POST",
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem("token")}`,
-                }
-            })
+
+    const handlePictureChange = async (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                setPreviewPicture(reader.result); 
+            };
+            reader.readAsDataURL(file);
+
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("upload_preset", "socialmedia_preset");
+
+            setIsUploading(true);
+            try {
+                const response = await fetch("https://api.cloudinary.com/v1_1/do76h3uvd/image/upload", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                const data = await response.json();
+                setProfilePicture(data.secure_url);
+            } catch (error) {
+                console.error("Failed to upload image:", error);
+            }
+            finally{
+                setIsUploading(false)
+            }
         }
-        catch (e)
-        {
-            console.error('Unable to accept all pending requests');
+    };
+
+
+
+    const handleSave = async () => {
+        if (!editedFirstName || !editedLastName) {
+            setErrorMessage("First and last name cannot be empty.");
+            return;
         }
-    }
-    const changeVisibility = async () => {
+
+        setErrorMessage("");
         try {
-            const response = await fetch("https://localhost:44354/changePrivacy", {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-                body: JSON.stringify({ visibility: profileVisibility }),
-            });
-            
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || "Failed to update visibility.");
-            }
-            if(response.ok && initialVisibility && !profileVisibility) {
-                await acceptAllPendingFollowRequest();
-            }
+            await changeProfileDetails();
+            toggleModal();
+            window.location.reload();
         } catch (error) {
-            setErrorMessage(error.message);
+            console.error("Save failed:", error.message);
         }
     };
 
@@ -65,7 +80,7 @@ const ProfileEditModal = ({
                     firstName: editedFirstName,
                     lastName: editedLastName,
                     description: editedDescription,
-                    profilePicture: profilePicture,
+                    profilePictureUrl: profilePicture,
                 }),
             });
 
@@ -78,25 +93,6 @@ const ProfileEditModal = ({
         }
     };
 
-    const handleSave = async () => {
-        if (!editedFirstName || !editedLastName) {
-            setErrorMessage("First and last name cannot be empty.");
-            return;
-        }
-
-        setErrorMessage(""); 
-        try {
-            if (profileVisibility !== initialVisibility) {
-                await changeVisibility();
-            }
-            await changeProfileDetails();
-            toggleModal(); 
-            window.location.reload();
-        } catch (error) {
-            console.error("Save failed:", error.message);
-        }
-    };
-
     return (
         <div className="modal-overlay">
             <div className="modal-content">
@@ -104,13 +100,21 @@ const ProfileEditModal = ({
 
                 <div className="modal-inputs">
                     <div className="input-field">
-                        <label className="profileLabel">Profile Picture URL</label>
+                        <label className="profileLabel">Profile Picture</label>
                         <input
-                            type="text"
-                            value={profilePicture}
-                            onChange={(e) => setProfilePicture(e.target.value)}
-                            placeholder="Enter URL for profile picture"
+                            type="file"
+                            accept="image/*"
+                            onChange={handlePictureChange}
                         />
+                        {previewPicture && (
+                            <div className="picture-preview">
+                                <img
+                                    src={previewPicture}
+                                    alt="Profile Preview"
+                                    className="profile-preview-image"
+                                />
+                            </div>
+                        )}
                     </div>
                     <div className="input-field">
                         <label className="profileLabel">First Name</label>
@@ -139,43 +143,14 @@ const ProfileEditModal = ({
                             className="description-textarea"
                         />
                     </div>
-                    <div className="input-field">
-                        <label className="profileLabel">Profile Visibility</label>
-                        <div className="visibilityContainer">
-                            <span
-                                className={
-                                    !profileVisibility
-                                        ? "visibilityLabel active"
-                                        : "visibilityLabel"
-                                }
-                            >
-                                Public
-                            </span>
-                            <label className="toggle-switch">
-                                <input
-                                    type="checkbox"
-                                    checked={profileVisibility}
-                                    onChange={() => setProfileVisibility(!profileVisibility)}
-                                />
-                                <span className="slider"></span>
-                            </label>
-                            <span
-                                className={
-                                    profileVisibility
-                                        ? "visibilityLabel active"
-                                        : "visibilityLabel"
-                                }
-                            >
-                                Private
-                            </span>
-                        </div>
-                    </div>
                 </div>
 
                 {errorMessage && <div className="error-message">{errorMessage}</div>}
 
                 <div className="modal-actions">
-                    <button onClick={handleSave}>Save Changes</button>
+                    <button onClick={handleSave} disabled={isUploading}>
+                        {isUploading ? "Uploading..." : "Save Changes"}
+                    </button>
                     <button onClick={toggleModal}>Cancel</button>
                 </div>
             </div>
