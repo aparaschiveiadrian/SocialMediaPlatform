@@ -9,7 +9,7 @@ using SocialMediaPlatform.Server.Repository;
 using SocialMediaPlatform.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-//la post folosim mapper
+// la post folosim mapper
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -42,7 +42,10 @@ builder.Services.AddScoped<PostRepository>();
 builder.Services.AddScoped<CommentRepository>();
 builder.Services.AddScoped<FollowRepository>();
 builder.Services.AddScoped<ConversationRepository>();
+builder.Services.AddScoped<MessageRepository>();
+
 builder.Services.AddScoped<TokenService>();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>

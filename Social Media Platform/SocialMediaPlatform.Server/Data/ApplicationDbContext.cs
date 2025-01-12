@@ -16,6 +16,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Follow> Follows { get; set; }
     public DbSet<Conversation> Conversations { get; set; }
     public DbSet<UserConversation> UserConversations { get; set; }
+    
+    public DbSet<Message> Messages { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -31,8 +33,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             .OnDelete(DeleteBehavior.Cascade);
         builder.Entity<Follow>().HasOne(f => f.Following).WithMany(u => u.Followers).HasForeignKey(f => f.FollowingId)
             .OnDelete(DeleteBehavior.Cascade);
-        
-        
+
+
         builder.Entity<UserConversation>()
             .HasKey(uc => new { uc.UserId, uc.ConversationId });
 
@@ -47,6 +49,5 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             .WithMany(c => c.UserConversations)
             .HasForeignKey(uc => uc.ConversationId)
             .OnDelete(DeleteBehavior.Cascade);
-        
     }
 }

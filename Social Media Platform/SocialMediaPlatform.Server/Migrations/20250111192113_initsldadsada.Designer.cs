@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SocialMediaPlatform.Server.Data;
@@ -12,9 +13,11 @@ using SocialMediaPlatform.Server.Data;
 namespace SocialMediaPlatform.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250111192113_initsldadsada")]
+    partial class initsldadsada
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,13 +54,13 @@ namespace SocialMediaPlatform.Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e341f8ed-1629-4a86-88a8-0f09af93bd7e",
+                            Id = "ff46a127-fed8-456a-98de-f7696a12b21d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "f571524b-061d-461e-b29d-8b386c0cc932",
+                            Id = "5fe8b9fd-3772-44b9-a11f-93cfd1c22130",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -359,7 +362,7 @@ namespace SocialMediaPlatform.Server.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Messages");
+                    b.ToTable("Message");
                 });
 
             modelBuilder.Entity("SocialMediaPlatform.Server.Models.Post", b =>
