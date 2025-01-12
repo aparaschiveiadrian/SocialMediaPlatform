@@ -106,7 +106,7 @@ const Following = ({ username, isPrivate, isFollowing }) => {
     }, [username]);
 
     useEffect(() => {
-        if (userId && (!isPrivate || isFollowing)) {
+        if (userId && (!isPrivate || isFollowing || localStorage.getItem("username") == username)) {
             fetchFollowersAndFollowings();
         }
     }, [userId, isPrivate, isFollowing]);

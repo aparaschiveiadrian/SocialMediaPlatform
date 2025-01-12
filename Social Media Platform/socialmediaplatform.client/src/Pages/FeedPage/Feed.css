@@ -337,3 +337,39 @@
     object-fit: cover;
     outline: none;
 }
+
+.post {
+    position: relative;
+}
+
+.threeDotsIconPost {
+    position: absolute;
+    top: 10px; /* Adjust this value for vertical alignment */
+    right: 10px; /* Adjust this value for horizontal alignment */
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.threeDotsIconPost:hover {
+    fill: white;
+    stroke: white;
+}
+
+.deleteIcon {
+    max-height: 30px;
+    background: none;
+    border: none;
+    color: gray;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+
+

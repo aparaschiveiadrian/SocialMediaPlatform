@@ -134,6 +134,33 @@ public class FollowController : ControllerBase
              return BadRequest("This user already follow you.");
          }
      }
+     
+     [HttpPut]
+     [Route("decline/{followerId}")]
+     [Authorize]
+     public IActionResult DeclineRequest([FromRoute] string followerId)
+     {
+         var userId = _userManager.GetUserId(User);
+         if (userId == null)
+         {
+             return NotFound("You are not logged in.");
+         }
+         var followRelation = _followRepo.GetFollowRelation(followerId, userId);
+         if (followRelation == null)
+         {
+             return BadRequest("There is no follow request.");
+         }
+
+         if (followRelation.IsPending)
+         {
+             _followRepo.DeleteFollowRelation(followRelation);
+             return Ok(followRelation);
+         }
+         else 
+         {
+             return BadRequest("This user already follow you.");
+         }
+     }
 
      [HttpDelete]
      [Route("delete/follower/{followerId}")]

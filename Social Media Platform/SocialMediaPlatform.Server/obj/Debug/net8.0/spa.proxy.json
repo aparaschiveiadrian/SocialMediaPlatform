@@ -3,7 +3,7 @@
 "ServerUrl": "https://localhost:5173",
 "RedirectUrl": "",
 "LaunchCommand": "npm run dev",
-"WorkingDirectory": "C:\\Users\\amito\\RiderProjects\\SocialMediaPlatform\\Social Media Platform\\SocialMediaPlatform.Server\\..\\socialmediaplatform.client",
+"WorkingDirectory": "C:\\Info\\SocialMediaPlatform\\Social Media Platform\\SocialMediaPlatform.Server\\..\\socialmediaplatform.client",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }

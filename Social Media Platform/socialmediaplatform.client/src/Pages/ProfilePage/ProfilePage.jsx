@@ -124,7 +124,7 @@ const ProfilePage = () => {
                             />
                             <span className="subtitle">User's posts</span>
                             <div className="postList">
-                                {profile.isPrivate && username !== localStorage.getItem('username') && followStatus!== 'Following' ? (
+                                {(profile.isPrivate && username !== localStorage.getItem('username') && followStatus!== 'Following') && localStorage.getItem("isAdmin") !== "true" ? (
                                     <>
                                         <p style={{ color: "white" }}>This user's profile is private.</p>
                                         <p style={{ color: "white" }}>You have to be a follower in order to view posts.</p>

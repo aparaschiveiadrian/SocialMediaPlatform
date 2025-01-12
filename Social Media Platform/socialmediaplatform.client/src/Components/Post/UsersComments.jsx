@@ -116,13 +116,13 @@ const UsersComments = ({ postId, reload }) => {
                                     {new Date(comment.createdAt).toLocaleString()}
                                 </small>
                                 {comment.isEdited && <small className="postDate">(Edited)</small>}
-                                {comment.username == localStorage.getItem("username") &&
+                                {(comment.username == localStorage.getItem("username") || localStorage.getItem("isAdmin")=="true") &&
                                     (<button
-                                    className="commentOptions threeDotsIcon"
-                                    onClick={() => toggleMenu(comment.id)}
-                                >
-                                    <SVGthreeDots/>
-                                </button>)}
+                                        className="commentOptions threeDotsIcon"
+                                        onClick={() => toggleMenu(comment.id)}
+                                    >
+                                        <SVGthreeDots/>
+                                    </button>)}
                                 {openMenuId === comment.id && (
                                     <div className="dropdownMenu">
                                         <button
