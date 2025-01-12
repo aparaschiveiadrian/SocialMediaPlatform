@@ -1,12 +1,19 @@
 ﻿import React from 'react';
 
 const Media = ({ mediaUrl, contentType }) => {
-    if (contentType === "photo") {
-        return <img src={mediaUrl} alt="Source" className="postMedia" />;
-    } else if (contentType === "video") {
-        return <video src={mediaUrl} controls className="postMedia" />;
-    }
-    return null;
+    return (
+        <>
+            {contentType === 'image' && (
+                <img src={mediaUrl} alt="Post media" className="mediaImage" />
+            )}
+            {contentType === 'video' && (
+                <video controls className="mediaVideo">
+                    <source src={mediaUrl} type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            )}
+        </>
+    );
 };
 
 export default Media;

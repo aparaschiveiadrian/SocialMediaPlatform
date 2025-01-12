@@ -307,3 +307,33 @@
     gap: 0.6rem;
 }
 
+
+.mediaWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    max-width: 100%; 
+    max-height: 400px; 
+    margin: auto;
+    border-radius: 0.5rem;
+}
+
+
+.mediaImage {
+    width: 100%;
+    max-width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+
+.mediaVideo {
+    width: 100%;
+    max-width: 100%;
+    max-height: 400px;
+    border-radius: 0.5rem;
+    object-fit: cover;
+    outline: none;
+}

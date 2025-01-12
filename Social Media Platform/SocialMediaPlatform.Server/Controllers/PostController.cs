@@ -76,6 +76,35 @@ public class PostController : ControllerBase
         _postRepo.CreatePost(post);
         return Ok(post);
     }
+    
+    [HttpPost]
+    [Route("post/create-media")]
+    [Authorize]
+    public IActionResult CreatePhotoPost([FromBody] CreateMediaPostDto postDto)
+    {
+        var userId = _userManager.GetUserId(User);
+        if (userId == null)
+        {
+            return Unauthorized();
+        }
+
+        if (string.IsNullOrWhiteSpace(postDto.MediaUrl))
+        {
+            return BadRequest("MediaUrl is required for photo posts.");
+        }
+
+        var post = new Post
+        {
+            ContentType = "photo",
+            Content = postDto.Content ?? string.Empty, 
+            MediaUrl = postDto.MediaUrl,
+            CreatedAt = DateTime.UtcNow,
+            UserId = userId
+        };
+
+        _postRepo.CreatePost(post);
+        return Ok(post);
+    }
 
     [HttpDelete]
     [Route("post/delete/{postId}")]

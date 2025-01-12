@@ -7,6 +7,7 @@ import RegisterPage from "@/Pages/RegisterPage/RegisterPage.jsx";
 import ProfilePage from "@/Pages/ProfilePage/ProfilePage.jsx";
 import LoginPage from "@/Pages/LoginPage/LoginPage.jsx";
 import NotificationsPage from "@/Pages/NotificationsPage/NotificationsPage.jsx";
+import ConversationsPage from "@/Pages/ConversationsPage/ConversationsPage.jsx";
 
 const App = () => {
     
@@ -17,6 +18,7 @@ const App = () => {
                 <Route path="login" element={<LoginPage/>}/>
                 <Route path="profile/:username" element={<ProfilePage />} /> {/* Dynamic Route */}
                 <Route path="notifications" element={<NotificationsPage/>} />
+                <Route path="conversations" element={<ConversationsPage/>} />
                 <Route path="/" element={
                     <>
                         <Navbar />

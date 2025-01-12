@@ -7,41 +7,36 @@ const Feed = () => {
     const [postList, setPostList] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const fetchPosts = () => {
-        fetch('https://localhost:44354/posts')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data);
-                setPostList(data);
-            })
-            .catch(error => {
-                console.error('Error fetching posts:', error);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
+    const fetchPosts = async () => {
+        try {
+            const response = await fetch('https://localhost:44354/posts');
+            if (!response.ok) {
+                throw new Error('Failed to fetch posts. Please try again.');
+            }
+            const data = await response.json();
+            setPostList(data);
+        } catch (error) {
+            console.error('Error fetching posts:', error);
+        } finally {
+            setLoading(false);
+        }
     };
 
     useEffect(() => {
         fetchPosts();
     }, []);
-    
+
     return (
         <section className="containerFeed">
             <UserPost />
             <div className="containerPosts">
                 <h2 className="globalPostsInfo">Latest Posts</h2>
                 {loading ? (
-                    <p>Loading posts...</p>
+                    <p className="loadingMessage">Loading posts...</p>
                 ) : postList.length > 0 ? (
-                    postList.map(post => <Post key={post.id} post={post} />)
+                    postList.map((post) => <Post key={post.id} post={post} />)
                 ) : (
-                    <p className={"errorMessage"}>No posts available</p>
+                    <p className="errorMessage">No posts available</p>
                 )}
             </div>
         </section>
