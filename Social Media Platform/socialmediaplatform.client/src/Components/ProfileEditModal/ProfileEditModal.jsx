@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+﻿import React, {useState} from "react";
 import "./ProfileEditModal.css";
 import profile from "@/Components/Profile/Profile.jsx";
 
@@ -24,7 +24,7 @@ const ProfileEditModal = ({
         if (file) {
             const reader = new FileReader();
             reader.onload = () => {
-                setPreviewPicture(reader.result); 
+                setPreviewPicture(reader.result);
             };
             reader.readAsDataURL(file);
 
@@ -43,13 +43,11 @@ const ProfileEditModal = ({
                 setProfilePicture(data.secure_url);
             } catch (error) {
                 console.error("Failed to upload image:", error);
-            }
-            finally{
+            } finally {
                 setIsUploading(false)
             }
         }
     };
-
 
 
     const handleSave = async () => {
@@ -60,6 +58,9 @@ const ProfileEditModal = ({
 
         setErrorMessage("");
         try {
+            if (profileVisibility !== initialVisibility) {
+                await changeVisibility();
+            }
             await changeProfileDetails();
             toggleModal();
             window.location.reload();
@@ -67,7 +68,28 @@ const ProfileEditModal = ({
             console.error("Save failed:", error.message);
         }
     };
+    const changeVisibility = async () => {
+        try {
+            const response = await fetch("https://localhost:44354/changePrivacy", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+                body: JSON.stringify({visibility: profileVisibility}),
+            });
 
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || "Failed to update visibility.");
+            }
+            if (response.ok && initialVisibility && !profileVisibility) {
+                await acceptAllPendingFollowRequest();
+            }
+        } catch (error) {
+            setErrorMessage(error.message);
+        }
+    };
     const changeProfileDetails = async () => {
         try {
             const response = await fetch("https://localhost:44354/user/edit", {
@@ -142,6 +164,38 @@ const ProfileEditModal = ({
                             placeholder="Write something about yourself..."
                             className="description-textarea"
                         />
+                    </div>
+                    <div className="input-field">
+                        <label className="profileLabel">Profile Visibility</label>
+                        <div className="visibilityContainer">
+                            <span
+                                className={
+                                    !profileVisibility
+                                        ? "visibilityLabel active"
+                                        : "visibilityLabel"
+                                }
+                            >
+                                Public
+                            </span>
+                            <label className="toggle-switch">
+                                <input
+                                    type="checkbox"
+                                    checked={profileVisibility}
+                                    onChange={() => setProfileVisibility(!profileVisibility)}
+                                />
+                                <span className="slider"></span>
+                            </label>
+                            <span
+                                className={
+                                    profileVisibility
+                                        ? "visibilityLabel active"
+                                        : "visibilityLabel"
+                                }
+                            >
+                                Private
+                            </span>
+                        </div>
+
                     </div>
                 </div>
 

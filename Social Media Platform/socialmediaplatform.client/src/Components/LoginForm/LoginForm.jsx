@@ -24,7 +24,7 @@ const RegisterForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         setMessage(null); 
-
+        
         try {
             const response = await fetch('https://localhost:44354/login', {
                 method: 'POST',
@@ -45,16 +45,21 @@ const RegisterForm = () => {
                 localStorage.setItem('firstname', data.firstName);
                 localStorage.setItem('lastname', data.lastName);
                 localStorage.setItem('email', data.email);
+                if (data.username == "admin"){
+                    localStorage.setItem('isAdmin', "true");
+                }
+                else {
+                    localStorage.setItem('isAdmin', "false");
+                }
                /* Cookies.set('userId', data.id, { expires: 1, secure: true, sameSite: 'Strict' });
                 Cookies.set('username', data.username, { expires: 1, secure: true, sameSite: 'Strict' });
                 Cookies.set('firstname', data.firstName, { expires: 1, secure: true, sameSite: 'Strict' }); // Expires in 1 day
                 Cookies.set('lastname', data.lastName, { expires: 1, secure: true, sameSite: 'Strict' });
                 Cookies.set('email', data.email, { expires: 1, secure: true, sameSite: 'Strict' });*/
                 console.log(data);
-
                 setMessage({ type: 'success', text: 'Login successful!' });
                 console.log('Login successful:', data);
-
+            
                 navigateTo('/');
 
             }

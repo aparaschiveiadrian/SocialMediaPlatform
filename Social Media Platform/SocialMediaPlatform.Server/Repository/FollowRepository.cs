@@ -83,6 +83,7 @@ public class FollowRepository
          _context.SaveChanges();
          return followRelation;
      }
+     
 
      public Follow DeleteFollowRelation(Follow followRelation)
      {
@@ -94,12 +95,16 @@ public class FollowRepository
      public IEnumerable<string> GetFollowRequests(string userId)
      {
          var followRequests = _context.Follows.Where(f => f.FollowingId == userId && f.IsPending == true);
-         List<string> idList = new List<string>();
-         foreach (var f in followRequests)
-         {
-             idList.Add(f.FollowerId);
-         }
-         return idList;
+         // List<string> idList = new List<string>();
+         // foreach (var f in followRequests)
+         // {
+         //     idList.Add(f.FollowerId);
+         // }
+         var usernames = (from f in _context.Follows
+             join u in _context.Users on f.FollowerId equals u.Id
+             where f.FollowingId == userId && f.IsPending == true
+             select u.UserName).ToList();
+         return usernames;
      }
      public IEnumerable<Follow> AcceptAllRequests(string userId)
      {

@@ -282,17 +282,17 @@ public class UserController : ControllerBase
     
     [HttpGet("isAdmin")]
     [Authorize]
-    public IActionResult IsAdmin()
+    public async Task<IActionResult> IsAdmin()
     {
         var userId = _userManager.GetUserId(User);
-        var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
-        
+        var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
+    
         if (user == null)
         {
             return NotFound("User not found.");
         }
 
-        var isAdmin = _userManager.IsInRoleAsync(user, "Admin").Result; 
+        var isAdmin = await _userManager.IsInRoleAsync(user, "Admin");
         return Ok(new { IsAdmin = isAdmin });
     }
 }

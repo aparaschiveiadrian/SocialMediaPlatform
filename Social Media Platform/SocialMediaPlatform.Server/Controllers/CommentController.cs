@@ -55,12 +55,16 @@ public class CommentController  : ControllerBase
     {
         var userId  = _userManager.GetUserId(User);
         var comment = _commRepo.GetCommentById(commentId);
+        
+        var user = _userManager.Users.FirstOrDefault(u=>u.Id==userId);
+        var isAdmin = _userManager .IsInRoleAsync(user, "Admin").Result;
+        
         if (comment == null)
         {
             return NotFound();
         }
 
-        if (comment.UserId != userId)
+        if (comment.UserId != userId && !isAdmin)
         {
             return Unauthorized("You are not authorized to delete this comment.");
         }
@@ -74,12 +78,15 @@ public class CommentController  : ControllerBase
     {
         var userId  = _userManager.GetUserId(User);
         var comment = _commRepo.GetCommentById(commentId);
+        
+        var user = _userManager.Users.FirstOrDefault(u=>u.Id==userId);
+        var isAdmin = _userManager .IsInRoleAsync(user, "Admin").Result;
         if (comment == null)
         {
             return NotFound();
         }
 
-        if (comment.UserId != userId)
+        if (comment.UserId != userId && !isAdmin)
         {
             return Unauthorized("You are not authorized to edit this comment.");
         }
