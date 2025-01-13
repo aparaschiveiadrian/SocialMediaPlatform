@@ -1,0 +1,8 @@
+﻿.joinCreateContainer{
+    display: flex;
+    
+}
+.createGroupContainer,
+.joinGroupContainer {
+    flex: 1;
+}

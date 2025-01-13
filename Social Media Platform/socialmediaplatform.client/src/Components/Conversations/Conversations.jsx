@@ -1,93 +1,108 @@
-﻿import React, { useEffect, useState } from 'react';
-import './Conversations.css';
-import Chat from "@/Components/Chat/Chat.jsx";
+﻿import React, { useState, useEffect } from "react";
+import Chat from "@/Components/Chat/Chat";
+import "./Conversations.css";
 
-const Conversations = () => {
-    const [groups, setGroups] = useState([]);
-    const [selectedGroup, setSelectedGroup] = useState(null);
-    const [loadingGroups, setLoadingGroups] = useState(true);
-    const [error, setError] = useState(null);
+const Conversations = ({ userId }) => {
+    const [conversations, setConversations] = useState([]);
+    const [selectedConversationId, setSelectedConversationId] = useState(null);
+    const [selectedModeratorId, setSelectedModeratorId] = useState(null); 
+    const [messages, setMessages] = useState([]);
 
-    const fetchGroups = async () => {
+    useEffect(() => {
+        const fetchConversations = async () => {
+            const token = localStorage.getItem("token");
+
+            try {
+                const response = await fetch("https://localhost:44354/user/groups", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error("Failed to fetch conversations");
+                }
+
+                const data = await response.json();
+                setConversations(data);
+            } catch (error) {
+                console.error("Error fetching conversations:", error);
+            }
+        };
+
+        fetchConversations();
+    }, []);
+
+    const handleConversationSelect = async (conversationId) => {
+        setSelectedConversationId(conversationId);
+
+        // Find the selected conversation's moderatorId
+        const selectedConversation = conversations.find(
+            (conversation) => conversation.id === conversationId
+        );
+        setSelectedModeratorId(selectedConversation?.moderatorId || null);
+
+        const token = localStorage.getItem("token");
+
         try {
-            const response = await fetch('https://localhost:44354/user/groups', {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                },
-            });
+            const response = await fetch(
+                `https://localhost:44354/conversation/get/messages/${conversationId}`,
+                {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                    },
+                }
+            );
 
             if (!response.ok) {
-                throw new Error('Failed to fetch groups.');
+                throw new Error("Failed to fetch messages");
             }
 
             const data = await response.json();
-            setGroups(data);
-            if (data.length > 0) {
-                setSelectedGroup(data[0]);
-            }
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setLoadingGroups(false);
+            setMessages(data);
+        } catch (error) {
+            console.error("Error fetching messages:", error);
         }
     };
 
-    const handleGroupClick = (group) => {
-        setSelectedGroup(group);
-    };
-
-    const handleLeaveConversation = () => {
-        setSelectedGroup(null);
-        fetchGroups();
-    };
-
-    const handleViewMembers = () => {
-        console.log('View members clicked');
-       
-    };
-
-    useEffect(() => {
-        fetchGroups();
-    }, []);
-
     return (
-        <div className="conversationsPage">
-            {loadingGroups ? (
-                <p className="loadingMessage">Loading groups...</p>
-            ) : error ? (
-                <p className="errorMessage">{error}</p>
-            ) : (
-                <div className="conversationsLayout">
-                    <div className="groupsPanel">
-                        <h3 className="panelTitle">Your Groups</h3>
-                        <ul className="groupsList">
-                            {groups.map(group => (
-                                <li
-                                    key={group.id}
-                                    className={`groupItem ${selectedGroup?.id === group.id ? 'activeGroup' : ''}`}
-                                    onClick={() => handleGroupClick(group)}
-                                >
-                                    {group.name}
-                                </li>
-                            ))}
-                        </ul>
+        <div className="conversationsContainer">
+            <div className="conversationsList">
+                <h2>Conversations</h2>
+                {conversations.map((conversation) => (
+                    <div
+                        key={conversation.id}
+                        className={`conversationItem ${
+                            selectedConversationId === conversation.id ? "active" : ""
+                        }`}
+                        onClick={() => handleConversationSelect(conversation.id)}
+                    >
+                        <p>{conversation.name} #{conversation.id}</p>
+                        <small>
+                            Last Message:{" "}
+                            {new Date(conversation.lastMessageSentAt).toLocaleString()}
+                        </small>
                     </div>
-
-                    <div className="chatPanel">
-                        {selectedGroup ? (
-                            <Chat
-                                groupId={selectedGroup.id}
-                                groupName={selectedGroup.name}
-                                onLeaveConversation={handleLeaveConversation}
-                                onViewMembers={handleViewMembers}
-                            />
-                        ) : (
-                            <p className="selectGroupMessage">Select a group to view messages.</p>
-                        )}
+                ))}
+            </div>
+            <div className="chatPanel">
+                {selectedConversationId ? (
+                    <Chat
+                        messages={messages}
+                        conversationId={selectedConversationId}
+                        CurrentUserId={userId}
+                        conversationModeratorId={selectedModeratorId}
+                    />
+                ) : (
+                    <div className="noConversationSelected">
+                        <p>Select a conversation to view messages</p>
                     </div>
-                </div>
-            )}
+                )}
+            </div>
         </div>
     );
 };
