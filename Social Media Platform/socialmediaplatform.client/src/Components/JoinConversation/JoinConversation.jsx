@@ -51,7 +51,7 @@ const JoinConversation = () => {
     };
 
     return (
-        <section className="conversationsContainer">
+        <section className="conversationsContainerMain">
             <div className="delimiter"></div>
             <div className="joinGroupContainer">
                 <header className="groupsHeader">
@@ -76,8 +76,8 @@ const JoinConversation = () => {
                         onChange={(e) => setGroupId(e.target.value)}
                     ></textarea>
 
-                    <button type="submit" className="joinGroupButton" disabled={loading}>
-                        {loading ? "Joining..." : "Join Group"}
+                    <button type="submit" className="btn joinGroupButton" disabled={loading}>
+                        {loading ? "Joining..." : "Join"}
                     </button>
 
                     {waitStatus && !error && (

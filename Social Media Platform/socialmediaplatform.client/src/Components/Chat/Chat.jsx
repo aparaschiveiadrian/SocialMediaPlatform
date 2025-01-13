@@ -1,154 +1,121 @@
-﻿import React, { useEffect, useState } from 'react';
-import './Chat.css';
-import LeaveConversation from "@/Components/LeaveConversation/LeaveConversation.jsx";
-import ViewMembersConversation from "@/Components/ViewMembersConversation/ViewMembersConversation.jsx";
+﻿import React, { useState, useEffect } from "react";
+import "./Chat.css";
+import SendConversationMessage from "@/Components/SendConversationMessage/SendConversationMessage";
+import LeaveButton from "@/Components/Buttons/LeaveButton/LeaveButton.jsx";
+import DeleteConversationButton from "@/Components/Buttons/DeleteConversationButton/DeleteConversationButton.jsx";
+import ViewMembersModal from "@/Components/ViewMembersModal/ViewMembersModal.jsx";
+import ShowMembersButton from "@/Components/Buttons/ShowMembersButton/ShowMembersButton.jsx";
+import ConversationRequestsButton from "@/Components/Buttons/ConversationRequestsButton/ConversationRequestsButton.jsx";
 
-const Chat = ({ groupId, groupName, onLeaveConversation }) => {
-    const [messages, setMessages] = useState([]);
-    const [newMessage, setNewMessage] = useState('');
-    const [loadingMessages, setLoadingMessages] = useState(true);
-    const [error, setError] = useState(null);
+const Chat = ({ messages, conversationId, CurrentUserId, conversationModeratorId }) => {
+    const [chatMessages, setChatMessages] = useState(messages);
     const [userCache, setUserCache] = useState({});
-    const [viewingMembers, setViewingMembers] = useState(false);
-
-    const fetchMessages = async () => {
-        try {
-            setLoadingMessages(true);
-            const response = await fetch(`https://localhost:44354/conversation/get/messages/${groupId}`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                },
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to fetch messages.');
-            }
-
-            const data = await response.json();
-            setMessages(data);
-
-            const uniqueUserIds = [...new Set(data.map((message) => message.userId))];
-            await Promise.all(uniqueUserIds.map(fetchUsername));
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setLoadingMessages(false);
-        }
-    };
-
-    const fetchUsername = async (userId) => {
-        if (userCache[userId]) return;
-
-        try {
-            const response = await fetch(`https://localhost:44354/getUserById/${userId}`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                },
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to fetch username.');
-            }
-
-            const data = await response.json();
-            setUserCache((prevCache) => ({ ...prevCache, [userId]: data.username }));
-        } catch (err) {
-            console.error(`Error fetching username for userId ${userId}:`, err);
-        }
-    };
-
-    const sendMessage = async () => {
-        if (!newMessage.trim()) return;
-
-        try {
-            const response = await fetch('https://localhost:44354/message/send', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                },
-                body: JSON.stringify({
-                    content: newMessage,
-                    conversationId: groupId,
-                }),
-            });
-
-            if (!response.ok) {
-                throw new Error(await response.text());
-            }
-
-            const sentMessageContent = await response.text();
-
-            const newMessageObject = {
-                content: sentMessageContent,
-                sentAt: new Date().toISOString(),
-                userId: 'currentUser',
-            };
-
-            setMessages((prevMessages) => [...prevMessages, newMessageObject]);
-            setNewMessage('');
-
-            await fetchUsername('currentUser');
-        } catch (err) {
-            setError(err.message);
-        }
-    };
 
     useEffect(() => {
-        fetchMessages();
-    }, [groupId]);
+        setChatMessages(messages);
+    }, [messages]);
+
+    useEffect(() => {
+        const fetchAllUsers = async () => {
+            const uniqueUserIds = [...new Set(chatMessages.map((msg) => msg.userId))];
+            const token = localStorage.getItem("token");
+
+            const userIdsToFetch = uniqueUserIds.filter((userId) => !userCache[userId]);
+
+            if (userIdsToFetch.length === 0) return;
+
+            try {
+                const fetchPromises = userIdsToFetch.map(async (userId) => {
+                    const response = await fetch(`https://localhost:44354/getUserById/${userId}`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${token}`,
+                        },
+                    });
+
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch user details");
+                    }
+
+                    const data = await response.json();
+                    return { userId, username: data.username };
+                });
+
+                const results = await Promise.all(fetchPromises);
+
+                setUserCache((prevCache) => {
+                    const updatedCache = { ...prevCache };
+                    results.forEach(({ userId, username }) => {
+                        updatedCache[userId] = username;
+                    });
+                    return updatedCache;
+                });
+            } catch (error) {
+                console.error("Error fetching user details:", error);
+            }
+        };
+
+        fetchAllUsers();
+    }, [chatMessages]);
+
+    const handleNewMessage = (newMessage) => {
+        setChatMessages((prevMessages) => [...prevMessages, newMessage]);
+
+        if (newMessage.username) {
+            setUserCache((prevCache) => ({
+                ...prevCache,
+                [newMessage.userId]: newMessage.username,
+            }));
+        }
+    };
 
     return (
         <div className="chatContainer">
-            <div className="chatHeader">
-                <h3 className="chatTitle">Messages for: {groupName}</h3>
-                <div className="chatActions">
-                    <LeaveConversation groupId={groupId} onLeave={onLeaveConversation} />
-                    <button className="actionButton" onClick={() => setViewingMembers(true)}>
-                        View Members
-                    </button>
-                </div>
-            </div>
             <div className="messagesContainer">
-                {loadingMessages ? (
-                    <p className="loadingMessage">Loading messages...</p>
-                ) : messages.length > 0 ? (
-                    <ul className="messagesList">
-                        {messages.map((message, index) => (
-                            <li key={index} className="messageItem">
-                                <div className="messageHeader">
-                                    <a href={`/profile/${userCache[message.userId] || '#'}`} className="messageUsername">
-                                        @{userCache[message.userId] || 'Fetching...'}
-                                    </a>
-                                    <small className="messageTime">
-                                        {new Date(message.sentAt).toLocaleString()}
-                                    </small>
-                                </div>
-                                <p className="messageContent">{message.content}</p>
-                            </li>
-                        ))}
-                    </ul>
+                {chatMessages.length > 0 ? (
+                    chatMessages.map((message) => (
+                        <div key={message.id} className="message">
+                            <p className="messageContent">
+                                <a
+                                    href={`/profile/${
+                                        message.username || userCache[message.userId] || "unknown"
+                                    }`}
+                                    className="messageSender"
+                                >
+                                    @{message.username || userCache[message.userId] || "Unknown"}
+                                </a>
+                                : {message.content}
+                            </p>
+                            <span className="messageTimestamp">
+                                {new Date(message.sentAt).toLocaleString()}
+                            </span>
+                        </div>
+                    ))
                 ) : (
-                    <p className="noMessagesMessage">No messages yet.</p>
+                    <p className="noMessages">No messages yet</p>
                 )}
             </div>
-            <div className="messageInputContainer">
-                <textarea
-                    className="messageInput"
-                    placeholder="Type your message here..."
-                    value={newMessage}
-                    onChange={(e) => setNewMessage(e.target.value)}
-                ></textarea>
-                <button className="sendButton" onClick={sendMessage}>
-                    Send
-                </button>
+
+            <div className="chatButtons">
+                <ShowMembersButton
+                    conversationId={conversationId}
+                    userIsModerator={conversationModeratorId === CurrentUserId}
+                />
+                {conversationModeratorId === CurrentUserId ? (
+                    <>
+                        <ConversationRequestsButton conversationId={conversationId} />
+                        <DeleteConversationButton conversationId={conversationId} />
+                    </>
+                ) : (
+                    <LeaveButton conversationId={conversationId} />
+                )}
             </div>
-            {error && <p className="errorMessage">{error}</p>}
-            {viewingMembers && (
-                <ViewMembersConversation groupId={groupId} onClose={() => setViewingMembers(false)} />
-            )}
+
+            <SendConversationMessage
+                conversationId={conversationId}
+                onMessageSent={handleNewMessage}
+            />
         </div>
     );
 };

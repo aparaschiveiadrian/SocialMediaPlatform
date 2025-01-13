@@ -1,0 +1,92 @@
+﻿.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.modal {
+    background: #1f1f1f;
+    padding: 25px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    color: #fff;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.modal-close:hover {
+    transform: scale(1.2);
+    color: #ff4d4d;
+}
+
+.modal-content-chat {
+    margin-top: 20px;
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.modal-content-chat ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.modal-content-chat li {
+    margin: 10px 0;
+    color: #cfcfcf;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+.modal-content-chat li:hover {
+    color: #fff;
+}
+
+.modal-content-chat a {
+    text-decoration: none;
+    color: #4dabf7;
+    font-weight: bold;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.modal-content-chat a:hover {
+    transform: scale(1.1);
+    color: #79d0ff;
+    text-decoration: underline;
+}
+.kick-btn {
+    padding: 5px 10px;
+    background-color: #ff4d4d;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.kick-btn:hover {
+    background-color: #ff1a1a;
+}

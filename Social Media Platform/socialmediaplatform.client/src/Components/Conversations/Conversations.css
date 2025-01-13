@@ -1,121 +1,57 @@
-﻿.conversationsPage {
+﻿.conversationsContainer {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    color: var(--textColor);
+    height: 100vh;
+    background-color: #121212;
+    color: #ffffff;
 }
 
-.conversationsLayout {
-    display: flex;
-    width: 100%;
-    max-width: 1200px;
-    height: 80vh; 
-    gap: 1rem;
-    overflow: hidden; 
-}
-
-.groupsPanel {
+.conversationsList {
     flex: 1;
-    background-color: rgba(31, 31, 31, 0.9);
-    border-radius: 8px;
-    padding: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    overflow: auto; 
+    border-right: 1px solid #333333;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: #1f1f1f;
+}
+
+.conversationItem {
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #2b2b2b;
+    transition: background-color 0.3s;
+}
+
+.conversationItem:hover {
+    background-color: #3a3a3a;
+}
+
+.conversationItem.active {
+    background-color: #444444;
+}
+
+.conversationItem p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.conversationItem small {
+    font-size: 12px;
+    color: #bbbbbb;
 }
 
 .chatPanel {
     flex: 2;
-    background-color: rgba(31, 31, 31, 0.9);
-    border-radius: 8px;
-    padding: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-}
-
-
-
-.groupsList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.groupItem {
-    padding: 0.8rem 1rem;
-    border-radius: 6px;
-    background: rgba(47, 47, 47, 0.9);
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    text-align: center;
-    color: var(--textColor);
-}
-
-.groupItem:hover {
-    background-color: rgba(70, 70, 70, 0.9);
-}
-
-.activeGroup {
-    background-color: rgba(70, 143, 255, 0.5);
-    font-weight: bold;
-}
-
-
-.messagesPanel {
-    flex: 2;
-    background-color: rgba(31, 31, 31, 0.9);
-    border-radius: 8px;
-    padding: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.messagesContainer {
-    margin-top: 1rem;
-    max-height: 500px;
+    padding: 10px;
     overflow-y: auto;
-}
-
-.messagesList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    background-color: #121212;
 }
 
-.messageItem {
-    padding: 1rem;
-    border-radius: 6px;
-    background: rgba(47, 47, 47, 0.9);
-    color: var(--textColor);
-    transition: background-color 0.3s ease;
-}
-
-.messageItem:hover {
-    background-color: rgba(70, 70, 70, 0.9);
-}
-
-.messageContent {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-}
-
-.messageTime {
-    font-size: 0.8rem;
-    color: gray;
-    text-align: right;
-}
-
-.loadingMessage,
-.errorMessage,
-.noMessagesMessage {
+.noConversationSelected {
     text-align: center;
-    font-size: 1rem;
-    margin-top: 1rem;
-    color: var(--textColor);
+    color: #888888;
+    margin-top: 50px;
 }

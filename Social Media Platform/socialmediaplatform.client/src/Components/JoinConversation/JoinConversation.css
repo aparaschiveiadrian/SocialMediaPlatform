@@ -2,7 +2,8 @@
     margin-top: 40px;
 }
 
-.conversationsContainer {
+.conversationsContainerMain {
+    flex:1;
     display: flex;
     flex-direction: column;
 }
@@ -49,7 +50,7 @@
     font-size: 1rem;
     border: 1px solid var(--secondaryColor);
     border-radius: 5px;
-    width: 40%;
+    width: 90%;
     height: 20px;
     resize: none;
     background-color: rgb(237, 237, 237);
@@ -100,4 +101,7 @@
     flex-direction: column;
     gap: 2rem;
     padding: 1rem;
+}
+.extra-delimiter{
+   padding-top: 20px; 
 }
