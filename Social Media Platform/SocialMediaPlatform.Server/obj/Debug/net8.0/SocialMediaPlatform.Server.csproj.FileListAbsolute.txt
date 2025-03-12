@@ -978,3 +978,6 @@ C:\Info\SocialMediaPlatform\Social Media Platform\SocialMediaPlatform.Server\obj
 C:\Info\SocialMediaPlatform\Social Media Platform\SocialMediaPlatform.Server\obj\Debug\net8.0\SocialMediaPlatform.Server.pdb
 C:\Info\SocialMediaPlatform\Social Media Platform\SocialMediaPlatform.Server\obj\Debug\net8.0\SocialMediaPlatform.Server.genruntimeconfig.cache
 C:\Info\SocialMediaPlatform\Social Media Platform\SocialMediaPlatform.Server\obj\Debug\net8.0\ref\SocialMediaPlatform.Server.dll
+C:\Users\amito\RiderProjects\SocialMediaPlatform\Social Media Platform\SocialMediaPlatform.Server\bin\Debug\net8.0\SocialMediaPlatform.Server.staticwebassets.endpoints.json
+C:\Users\amito\RiderProjects\SocialMediaPlatform\Social Media Platform\SocialMediaPlatform.Server\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\amito\RiderProjects\SocialMediaPlatform\Social Media Platform\SocialMediaPlatform.Server\obj\Debug\net8.0\staticwebassets\msbuild.SocialMediaPlatform.Server.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
